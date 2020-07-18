@@ -12,8 +12,8 @@ export class AuthService {
   private readonly TIMEOUT = 3600 * 1000;
 
   // tslint:disable-next-line:variable-name
-  private readonly _loginEvent$ = new BehaviorSubject<any>(null);
-  readonly loginEvent$ = this._loginEvent$.asObservable();
+  private readonly _loginEvent$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  readonly loginEvent$: Observable<any> = this._loginEvent$.asObservable();
 
   private timerSub: Subscription = null;
 
