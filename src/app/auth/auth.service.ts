@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
+import {retry, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,13 @@ export class AuthService {
   constructor(private readonly httpClient: HttpClient) {
   }
 
+  register(request: any): Observable<any> {
+    const url = this.ROOT_URL + 'register';
+    return this.httpClient.post(url, request).pipe(
+      retry(3)
+    );
+  }
+
   login(username: string, password: string): Observable<any> {
     const url = this.ROOT_URL + 'login';
     const body = {
@@ -27,6 +34,7 @@ export class AuthService {
       password
     };
     return this.httpClient.post(url, body).pipe(
+      retry(3),
       tap((r) => {
         this.setupTimeout(this.TIMEOUT);
         this._loginEvent$.next(r);
