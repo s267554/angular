@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-  <button *ngIf="menuButtonVisible" mat-icon-button (click)="menuButtonEvent.emit($event)">
+  <button *ngIf="login" mat-icon-button (click)="menuClick.emit($event)">
     <mat-icon>dehaze</mat-icon>
   </button>
   <a class="title-text" routerLink="./home">Virtual Labs</a>
   <span class="fill-remaining-space"></span>
-  <button mat-button (click)="loginButtonEvent.emit($event)">
-    {{loginButtonText}}
+  <button mat-button (click)="accountClick.emit($event)">
+    {{login ? 'Logout' : 'Login'}}
   </button>
 </mat-toolbar>

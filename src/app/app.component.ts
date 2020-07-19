@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from './auth/auth.service';
 import {Subscription} from 'rxjs';
-import {VlToolbarComponent} from './widget/vl-toolbar.component';
+import {VlToolbarComponent} from './vltoolbar/vl-toolbar.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('vlToolbar') private readonly vlToolbar: VlToolbarComponent;
   title = 'virtual-labs';
 
@@ -25,9 +25,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+
+  }
+
+  ngAfterViewInit(): void {
     this.loginSub = this.authService.loginEvent$.subscribe((e) => {
-     this.vlToolbar.loginButtonText = e != null ? 'Logout' : 'Login';
-     this.vlToolbar.menuButtonVisible = e != null;
+      this.vlToolbar.login = e !== null;
     });
   }
+
 }

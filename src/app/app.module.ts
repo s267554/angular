@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {VlToolbarComponent} from './widget/vl-toolbar.component';
+import {VlToolbarComponent} from './vltoolbar/vl-toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './auth/auth.service';

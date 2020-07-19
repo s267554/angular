@@ -1,4 +1,6 @@
-<app-vl-toolbar #vlToolbar (menuButtonEvent)="sidenav.toggle()"></app-vl-toolbar>
+<app-vl-toolbar #vlToolbar
+                (menuClick)="sidenav.toggle()">
+</app-vl-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
 
