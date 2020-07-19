@@ -11,11 +11,15 @@ import {AuthService} from './auth/auth.service';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {HomeComponent} from './main/home.component';
+import {PageNotFoundComponent} from './main/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VlToolbarComponent
+    VlToolbarComponent,
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
