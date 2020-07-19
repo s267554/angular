@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {VlToolbarComponent} from './vltoolbar/vl-toolbar.component';
+import {VlToolbarComponent} from './vl-toolbar/vl-toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthService} from './auth/auth.service';
@@ -21,6 +21,10 @@ import {MatInputModule} from '@angular/material/input';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {FormsModule} from '@angular/forms';
 import {AuthGuard} from './auth/auth.guard';
+import {VlSidenavComponent} from './vl-sidenav/vl-sidenav.component';
+import {MatListModule} from '@angular/material/list';
+import {VlService} from './service/vl.service';
+import {VlSidenavContComponent} from './vl-sidenav/vl-sidenav-cont.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,9 @@ import {AuthGuard} from './auth/auth.guard';
     HomeComponent,
     PageNotFoundComponent,
     MainComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    VlSidenavComponent,
+    VlSidenavContComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,8 @@ import {AuthGuard} from './auth/auth.guard';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatListModule
   ],
   entryComponents: [
     LoginDialogComponent
@@ -62,7 +69,8 @@ import {AuthGuard} from './auth/auth.guard';
       multi: true
     },
     AuthGuard,
-    AuthService
+    AuthService,
+    VlService
   ],
   bootstrap: [AppComponent]
 })

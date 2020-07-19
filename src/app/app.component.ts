@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from './auth/auth.service';
 import {Subscription} from 'rxjs';
-import {VlToolbarComponent} from './vltoolbar/vl-toolbar.component';
+import {VlToolbarComponent} from './vl-toolbar/vl-toolbar.component';
 import {LoginDialogComponent} from './login/login-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {VlService} from './service/vl.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('vlToolbar') private readonly vlToolbar: VlToolbarComponent;
   title = 'virtual-labs';
 
-  private loginSub: Subscription = null;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private readonly authService: AuthService, private readonly dialog: MatDialog, private readonly router: Router) {
+  constructor(private readonly vlService: VlService,
+              private readonly authService: AuthService,
+              private readonly dialog: MatDialog,
+              private readonly router: Router) {
   }
 
   private openLoginDialog(url: string) {
@@ -34,17 +38,17 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   toggleLogin(login: boolean) {
     if (login) {
-      this.openLoginDialog('');
+      this.openLoginDialog('kk/courses');
     } else {
       this.authService.logout();
     }
   }
 
   ngOnDestroy(): void {
-    if (this.loginSub !== null) {
-      this.loginSub.unsubscribe();
-      this.loginSub = null;
-    }
+    this.subscriptions.forEach((s) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
   }
 
   ngOnInit(): void {
@@ -53,9 +57,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.loginSub = this.authService.loginEvent$.subscribe((e) => {
-      this.vlToolbar.login = e !== null;
-    });
+    this.subscriptions.push(
+      this.authService.loginEvent$.subscribe((e) => {
+        this.vlToolbar.login = e !== null;
+      })
+    );
+  }
+
+  toggleSidenav() {
+    this.vlService.toggleSidenav();
   }
 
 }

@@ -1,0 +1,9 @@
+<mat-sidenav>
+  <div>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let c of courses" routerLink="./teacher/course/{{c.name}}}/students">
+        {{c.name}}
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</mat-sidenav>

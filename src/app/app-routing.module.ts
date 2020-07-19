@@ -10,10 +10,10 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {
-    path: 'teacher/course', component: MainComponent,
-    children: [
-      {path: '', redirectTo: '/{id}/students', pathMatch: 'full'},
-    ],
+    path: ':username/courses', component: MainComponent,
+    // children: [
+    //   {path: ':courseName/students'}
+    // ],
     canActivate: [AuthGuard]
   },
   {path: '**', component: PageNotFoundComponent}
