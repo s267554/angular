@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Login</h1>
+<mat-dialog-content>
+  <form #loginForm="ngForm">
+    <mat-form-field class="fit-size-input" appearance="legacy">
+      <mat-label>Email</mat-label>
+      <input (ngModelChange)="loginError = false" #emailModel="ngModel" matInput type="email" [(ngModel)]="email"
+             name="email" id="email" required>
+      <mat-error *ngIf="emailModel.invalid">Not a valid email</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="fit-size-input" appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input (ngModelChange)="loginError = false" #passwordModel="ngModel" matInput name="password" id="password"
+             required
+             [type]="hide ? 'password' : 'text'"
+             [(ngModel)]="password">
+      <button mat-icon-button matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordModel.invalid">Insert a valid password</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!loginForm.form.valid"
+          (click)="login()"
+          mat-raised-button
+          routerLink="/home"
+          color="primary">
+    Login
+  </button>
+  <button routerLink="/home" mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+<div *ngIf="loginError">
+  <br>
+  <mat-error>Email not found</mat-error>
+</div>

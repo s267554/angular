@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
 
 @Injectable({
@@ -33,7 +33,13 @@ export class AuthService {
       username,
       password
     };
-    return this.httpClient.post(url, body).pipe(
+    const options = {
+      responseType: 'json' as const,
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpClient.post(url, body, options).pipe(
       retry(3),
       tap((r) => {
         this.setupTimeout(this.TIMEOUT);

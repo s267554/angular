@@ -7,12 +7,25 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class VlToolbarComponent {
 
-  @Output() accountClick = new EventEmitter<any>();
+  @Output() toggleLogin$ = new EventEmitter<boolean>();
 
-  @Output() menuClick = new EventEmitter<any>();
+  @Output() toggleSidenav$ = new EventEmitter<any>();
 
-  @Output() titleClick = new EventEmitter<any>();
+  @Output() homeClick$ = new EventEmitter<any>();
 
   @Input() login = false;
+
+  toggleLogin() {
+    const doLogin = !this.login;
+    this.toggleLogin$.emit(doLogin);
+  }
+
+  toggleSidenav(event: any) {
+    this.toggleSidenav$.emit(event);
+  }
+
+  homeClick(event: any) {
+    this.homeClick$.emit(event);
+  }
 
 }

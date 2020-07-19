@@ -2,6 +2,9 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {AuthService} from './auth/auth.service';
 import {Subscription} from 'rxjs';
 import {VlToolbarComponent} from './vltoolbar/vl-toolbar.component';
+import {LoginDialogComponent} from './login/login-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +17,27 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private loginSub: Subscription = null;
 
-  constructor(private readonly authService: AuthService) {
+  constructor(private readonly authService: AuthService, private readonly dialog: MatDialog, private readonly router: Router) {
+  }
+
+  private openLoginDialog(url: string) {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '25%'
+    });
+    dialogRef.afterClosed().toPromise().then((value) => {
+      const success = value !== null && value !== undefined ? value : false;
+      if (success && url !== null) {
+        return this.router.navigate([url]);
+      }
+    });
+  }
+
+  toggleLogin(login: boolean) {
+    if (login) {
+      this.openLoginDialog('');
+    } else {
+      this.authService.logout();
+    }
   }
 
   ngOnDestroy(): void {
