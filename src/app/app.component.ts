@@ -2,10 +2,10 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {AuthService} from './auth/auth.service';
 import {Subscription} from 'rxjs';
 import {VlToolbarComponent} from './vl-toolbar/vl-toolbar.component';
-import {LoginDialogComponent} from './login/login-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {VlService} from './service/vl.service';
+import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private openLoginDialog(url: string) {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
+    const dialogRef = this.dialog.open(VlLoginDialogComponent, {
       width: '25%'
     });
     dialogRef.afterClosed().toPromise().then((value) => {

@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './main/home.component';
 import {AuthGuard} from './auth/auth.guard';
-import {MainComponent} from './main/main.component';
 import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.component';
+import {VlHomeComponent} from './vl-home/vl-home.component';
+import {VlMainComponent} from './vl-main/vl-main.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: VlHomeComponent},
   {
-    path: ':username/courses', component: MainComponent,
+    path: ':username/courses', component: VlMainComponent,
     // children: [
     //   {path: ':courseName/students'}
     // ],

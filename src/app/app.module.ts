@@ -11,9 +11,6 @@ import {AuthService} from './auth/auth.service';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {HomeComponent} from './main/home.component';
-import {MainComponent} from './main/main.component';
-import {LoginDialogComponent} from './login/login-dialog.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -25,17 +22,20 @@ import {MatListModule} from '@angular/material/list';
 import {VlService} from './service/vl.service';
 import {VlSidenavContComponent} from './vl-sidenav/vl-sidenav-cont.component';
 import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.component';
+import {VlHomeComponent} from './vl-home/vl-home.component';
+import {VlMainComponent} from './vl-main/vl-main.component';
+import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VlToolbarComponent,
-    HomeComponent,
-    MainComponent,
-    LoginDialogComponent,
     VlSidenavComponent,
     VlSidenavContComponent,
-    VlPageNotFoundComponent
+    VlPageNotFoundComponent,
+    VlHomeComponent,
+    VlMainComponent,
+    VlLoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +54,7 @@ import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.com
     MatListModule
   ],
   entryComponents: [
-    LoginDialogComponent
+    VlLoginDialogComponent
   ],
   providers: [
     {
