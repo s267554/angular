@@ -3,6 +3,8 @@ import {VlService} from '../service/vl.service';
 import {Subscription} from 'rxjs';
 import {VlSidenavComponent} from './vl-sidenav.component';
 import {CourseService} from '../service/course.service';
+import {AuthService} from '../auth/auth.service';
+import {Course} from '../model/course.model';
 
 @Component({
   selector: 'app-vl-sidenav-cont',
@@ -14,7 +16,8 @@ export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit 
   private subscriptions: Subscription[] = [];
 
   constructor(private readonly vlService: VlService,
-              readonly courseService: CourseService) {
+              readonly courseService: CourseService,
+              readonly authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,22 @@ export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit 
         this.vlSidenav.toggle();
       })
     );
+  }
+
+  deleteCourse(c: Course) {
+    this.subscriptions.push(
+      this.courseService.deleteCourse(c).subscribe((e) => {
+
+      })
+    );
+  }
+
+  updateCourse(c: Course) {
+
+  }
+
+  createCourse() {
+
   }
 
 }

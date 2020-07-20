@@ -1,0 +1,17 @@
+
+mat-sidenav {
+  width: 20%;
+}
+
+.container {
+  margin: 20px;
+}
+
+.list-item {
+  width: 100%;
+}
+
+.fill-remaining-space {
+  min-width: 10px;
+  flex: 1 1 auto;
+}

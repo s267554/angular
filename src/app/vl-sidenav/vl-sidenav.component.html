@@ -1,8 +1,19 @@
 <mat-sidenav #sidenav mode="side" position="start" opened>
-  <div>
+  <div class="container">
+    <button *ngIf="editable" (click)="create()" class="list-item" mat-raised-button color="accent">
+      Create New Course&nbsp;&nbsp;
+      <mat-icon>add</mat-icon>
+    </button>
     <mat-nav-list>
-      <mat-list-item *ngFor="let c of courses" routerLink="./{{c.name}}}/students">
-        {{c.name}}
+      <mat-list-item class="list-item" *ngFor="let c of courses">
+        <a matLine routerLink="./{{c.name}}}/students">{{c.name}}</a>
+        <span class="fill-remaining-space"></span>
+        <button *ngIf="editable" (click)="update(c)" mat-icon-button>
+          <mat-icon>create</mat-icon>
+        </button>
+        <button *ngIf="editable" (click)="delete(c)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-list-item>
     </mat-nav-list>
   </div>

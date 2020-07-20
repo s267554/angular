@@ -9,7 +9,8 @@ import {User} from '../model/user.model';
 })
 export class AuthService {
 
-  private readonly ROOT_URL = 'http://localhost:8080/';
+  private readonly ROOT_URL = 'http://localhost:8080/auth/';
+
   private readonly OPTIONS = {
     responseType: 'json' as const,
     headers: new HttpHeaders({

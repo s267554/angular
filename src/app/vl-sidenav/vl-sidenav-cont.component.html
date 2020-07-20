@@ -1,4 +1,8 @@
 <app-vl-sidenav #sidenav
+                (create$)="createCourse()"
+                (delete$)="deleteCourse($event)"
+                (update$)="updateCourse($event)"
+                [user]="authService.loginEvent$ | async"
                 [courses]="courseService.courses$ | async">
 
 </app-vl-sidenav>
