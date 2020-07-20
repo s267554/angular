@@ -1,1 +1,4 @@
-<app-vl-sidenav #sidenav></app-vl-sidenav>
+<app-vl-sidenav #sidenav
+                [courses]="courseService.courses$ | async">
+
+</app-vl-sidenav>

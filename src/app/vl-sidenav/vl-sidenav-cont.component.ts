@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {VlService} from '../service/vl.service';
 import {Subscription} from 'rxjs';
 import {VlSidenavComponent} from './vl-sidenav.component';
+import {CourseService} from '../service/course.service';
 
 @Component({
   selector: 'app-vl-sidenav-cont',
@@ -10,9 +11,10 @@ import {VlSidenavComponent} from './vl-sidenav.component';
 })
 export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sidenav') private readonly vlSidenav: VlSidenavComponent;
-  private sub: Subscription = null;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private readonly vlService: VlService) {
+  constructor(private readonly vlService: VlService,
+              readonly courseService: CourseService) {
   }
 
   ngOnInit(): void {
@@ -20,16 +22,18 @@ export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnDestroy(): void {
-    if (this.sub !== null) {
-      this.sub.unsubscribe();
-      this.sub = null;
-    }
+    this.subscriptions.forEach((s) => {
+      s.unsubscribe();
+    });
+    this.subscriptions = [];
   }
 
   ngAfterViewInit(): void {
-    this.sub = this.vlService.sidenav$.subscribe(() => {
-      this.vlSidenav.toggle();
-    });
+    this.subscriptions.push(
+      this.vlService.sidenav$.subscribe(() => {
+        this.vlSidenav.toggle();
+      })
+    );
   }
 
 }

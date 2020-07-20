@@ -22,8 +22,8 @@ export class VlLoginDialogComponent implements OnInit {
 
   login() {
     this.authService.login(this.email, this.password).subscribe(
-      () => {
-        this.dialogRef.close(true);
+      (user) => {
+        this.dialogRef.close(user);
       },
       () => {
         this.loginError = true;

@@ -1,10 +1,9 @@
 export interface User {
-  id: string;
-  email: string;
-  token: string;
-  photoUrl: string;
-  name: string;
-  surname: string;
-  role: string;
-  expiry: number;
+  readonly username: string;
+  readonly token: string;
+  readonly photoUrl: string;
+  readonly name: string;
+  readonly surname: string;
+  readonly expiry: number;
+  readonly roles: string[];
 }

@@ -9,7 +9,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 })
 export class VlSidenavComponent implements OnInit {
   @ViewChild('sidenav') private readonly sidenav: MatSidenav;
-  @Input() courses: Course[] = [{name: 'Applicazioni Internet'}, {name: 'Mobile Application'}];
+  @Input() courses: Course[] = [];
 
   constructor() {
   }

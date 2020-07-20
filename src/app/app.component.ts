@@ -24,21 +24,22 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
               private readonly router: Router) {
   }
 
-  private openLoginDialog(url: string) {
+  private openVlLoginDialog(url: string) {
     const dialogRef = this.dialog.open(VlLoginDialogComponent, {
       width: '25%'
     });
     dialogRef.afterClosed().toPromise().then((value) => {
-      const success = value !== null && value !== undefined ? value : false;
-      if (success && url !== null) {
-        return this.router.navigate([url]);
+      const user = value !== null && value !== undefined ? value : null;
+      if (user !== null) {
+        const path = url !== null && url !== undefined ? url : user.username + '/courses';
+        return this.router.navigate([path]);
       }
     });
   }
 
   toggleLogin(login: boolean) {
     if (login) {
-      this.openLoginDialog('kk/courses');
+      this.openVlLoginDialog(null);
     } else {
       this.authService.logout();
     }
@@ -52,8 +53,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-
-
   }
 
   ngAfterViewInit(): void {

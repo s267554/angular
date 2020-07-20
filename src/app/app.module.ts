@@ -25,6 +25,9 @@ import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.com
 import {VlHomeComponent} from './vl-home/vl-home.component';
 import {VlMainComponent} from './vl-main/vl-main.component';
 import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
+import { VlSidenavContentComponent } from './vl-sidenav-content/vl-sidenav-content.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {CourseService} from './service/course.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.componen
     VlPageNotFoundComponent,
     VlHomeComponent,
     VlMainComponent,
-    VlLoginDialogComponent
+    VlLoginDialogComponent,
+    VlSidenavContentComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.componen
     MatInputModule,
     MatDialogModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
   entryComponents: [
     VlLoginDialogComponent
@@ -70,7 +75,8 @@ import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.componen
     },
     AuthGuard,
     AuthService,
-    VlService
+    VlService,
+    CourseService
   ],
   bootstrap: [AppComponent]
 })
