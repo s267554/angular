@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './main/home.component';
-import {PageNotFoundComponent} from './main/page-not-found.component';
 import {AuthGuard} from './auth/auth.guard';
 import {MainComponent} from './main/main.component';
+import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.component';
 
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
     // ],
     canActivate: [AuthGuard]
   },
-  {path: '**', component: PageNotFoundComponent}
+  {path: '**', component: VlPageNotFoundComponent}
 ];
 
 @NgModule({

@@ -12,7 +12,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {HomeComponent} from './main/home.component';
-import {PageNotFoundComponent} from './main/page-not-found.component';
 import {MainComponent} from './main/main.component';
 import {LoginDialogComponent} from './login/login-dialog.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
@@ -25,17 +24,18 @@ import {VlSidenavComponent} from './vl-sidenav/vl-sidenav.component';
 import {MatListModule} from '@angular/material/list';
 import {VlService} from './service/vl.service';
 import {VlSidenavContComponent} from './vl-sidenav/vl-sidenav-cont.component';
+import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VlToolbarComponent,
     HomeComponent,
-    PageNotFoundComponent,
     MainComponent,
     LoginDialogComponent,
     VlSidenavComponent,
-    VlSidenavContComponent
+    VlSidenavContComponent,
+    VlPageNotFoundComponent
   ],
   imports: [
     BrowserModule,
