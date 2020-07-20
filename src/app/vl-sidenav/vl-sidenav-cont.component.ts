@@ -1,24 +1,22 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {VlService} from '../service/vl.service';
 import {Subscription} from 'rxjs';
-import {MatSidenav} from '@angular/material/sidenav';
+import {VlSidenavComponent} from './vl-sidenav.component';
 
 @Component({
   selector: 'app-vl-sidenav-cont',
   templateUrl: './vl-sidenav-cont.component.html',
   styleUrls: ['./vl-sidenav-cont.component.css']
 })
-export class VlSidenavContComponent implements OnInit, OnDestroy {
-  @ViewChild('sidenav') private readonly sidenav: MatSidenav;
+export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('sidenav') private readonly vlSidenav: VlSidenavComponent;
   private sub: Subscription = null;
 
   constructor(private readonly vlService: VlService) {
   }
 
   ngOnInit(): void {
-    this.sub = this.vlService.sidenav$.subscribe(() => {
-      this.sidenav.toggle().then();
-    });
+
   }
 
   ngOnDestroy(): void {
@@ -26,6 +24,12 @@ export class VlSidenavContComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
       this.sub = null;
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.sub = this.vlService.sidenav$.subscribe(() => {
+      this.vlSidenav.toggle();
+    });
   }
 
 }

@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {EventEmitter, Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 export class VlService {
 
 // tslint:disable-next-line:variable-name
-  private readonly _sidenav$ = new BehaviorSubject<any>(null);
+  private readonly _sidenav$ = new EventEmitter<any>();
   readonly sidenav$ = this._sidenav$.asObservable();
 
   constructor() {

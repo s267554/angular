@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
+import {User} from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,16 @@ import {retry, tap} from 'rxjs/operators';
 export class AuthService {
 
   private readonly ROOT_URL = 'http://localhost:8080/';
-  private readonly TIMEOUT = 3600 * 1000;
+  private readonly OPTIONS = {
+    responseType: 'json' as const,
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   // tslint:disable-next-line:variable-name
-  private readonly _loginEvent$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  readonly loginEvent$: Observable<any> = this._loginEvent$.asObservable();
+  private readonly _loginEvent$ = new BehaviorSubject<User>(null);
+  readonly loginEvent$ = this._loginEvent$.asObservable();
 
   private timerSub: Subscription = null;
 
@@ -22,28 +28,22 @@ export class AuthService {
 
   register(request: any): Observable<any> {
     const url = this.ROOT_URL + 'register';
-    return this.httpClient.post(url, request).pipe(
+    return this.httpClient.post(url, request, this.OPTIONS).pipe(
       retry(3)
     );
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<User> {
     const url = this.ROOT_URL + 'login';
     const body = {
       username,
       password
     };
-    const options = {
-      responseType: 'json' as const,
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.httpClient.post(url, body, options).pipe(
+    return this.httpClient.post<User>(url, body, this.OPTIONS).pipe(
       retry(3),
-      tap((r) => {
-        this.setupTimeout(this.TIMEOUT);
-        this._loginEvent$.next(r);
+      tap((u) => {
+        this.setupTimeout(u.expiry);
+        this._loginEvent$.next(u);
       })
     );
   }
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   getToken(): string {
-    return this._loginEvent$.getValue();
+    return this._loginEvent$.getValue()?.token;
   }
 
   private stopTimer() {

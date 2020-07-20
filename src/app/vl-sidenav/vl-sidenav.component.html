@@ -1,7 +1,7 @@
-<mat-sidenav>
+<mat-sidenav #sidenav mode="side" position="start" opened>
   <div>
     <mat-nav-list>
-      <mat-list-item *ngFor="let c of courses" routerLink="./teacher/course/{{c.name}}}/students">
+      <mat-list-item *ngFor="let c of courses" routerLink="./{{c.name}}}/students">
         {{c.name}}
       </mat-list-item>
     </mat-nav-list>

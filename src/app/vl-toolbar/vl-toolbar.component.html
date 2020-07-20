@@ -2,7 +2,7 @@
   <button *ngIf="login" mat-icon-button (click)="toggleSidenav($event)">
     <mat-icon>dehaze</mat-icon>
   </button>
-  <a class="title-text" (click)="homeClick($event)">Virtual Labs</a>
+  <a class="title-text" (click)="titleClick($event)">Virtual Labs</a>
   <span class="fill-remaining-space"></span>
   <button mat-button (click)="toggleLogin()">
     {{login ? 'Logout' : 'Login'}}

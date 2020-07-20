@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Course} from '../model/course.model';
+import {MatSidenav} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-vl-sidenav',
@@ -7,13 +8,17 @@ import {Course} from '../model/course.model';
   styleUrls: ['./vl-sidenav.component.css']
 })
 export class VlSidenavComponent implements OnInit {
-
-  @Input() courses: Course[] = [];
+  @ViewChild('sidenav') private readonly sidenav: MatSidenav;
+  @Input() courses: Course[] = [{name: 'Applicazioni Internet'}, {name: 'Mobile Application'}];
 
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  toggle() {
+    this.sidenav.toggle().then();
   }
 
 }

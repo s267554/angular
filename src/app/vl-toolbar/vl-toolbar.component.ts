@@ -7,25 +7,31 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class VlToolbarComponent {
 
-  @Output() toggleLogin$ = new EventEmitter<boolean>();
+  // tslint:disable-next-line:variable-name
+  private readonly _toggleLogin$ = new EventEmitter<boolean>();
+  @Output() readonly toggleLogin$ = this._toggleLogin$.asObservable();
 
-  @Output() toggleSidenav$ = new EventEmitter<any>();
+  // tslint:disable-next-line:variable-name
+  private readonly _toggleSidenav$ = new EventEmitter<any>();
+  @Output() readonly toggleSidenav$ = this._toggleSidenav$.asObservable();
 
-  @Output() homeClick$ = new EventEmitter<any>();
+  // tslint:disable-next-line:variable-name
+  private readonly _titleClick$ = new EventEmitter<any>();
+  @Output() readonly titleClick$ = this._titleClick$.asObservable();
 
   @Input() login = false;
 
   toggleLogin() {
     const doLogin = !this.login;
-    this.toggleLogin$.emit(doLogin);
+    this._toggleLogin$.emit(doLogin);
   }
 
   toggleSidenav(event: any) {
-    this.toggleSidenav$.emit(event);
+    this._toggleSidenav$.emit(event);
   }
 
-  homeClick(event: any) {
-    this.homeClick$.emit(event);
+  titleClick(event: any) {
+    this._titleClick$.emit(event);
   }
 
 }
