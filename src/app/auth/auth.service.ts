@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
-import {User} from '../model/user.model';
+import {User} from './user.model';
 
 @Injectable({
   providedIn: 'root'

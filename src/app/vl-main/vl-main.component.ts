@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {CourseService} from '../service/course.service';
+import {CourseService} from '../course/course.service';
 
 @Component({
   selector: 'app-vl-main',

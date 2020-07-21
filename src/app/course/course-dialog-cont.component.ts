@@ -1,8 +1,8 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Course} from '../model/course.model';
-import {CourseService} from '../service/course.service';
+import {Course} from './course.model';
+import {CourseService} from './course.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

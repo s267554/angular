@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {VlService} from '../service/vl.service';
+import {VlService} from '../vl.service';
 import {Subscription} from 'rxjs';
 import {VlSidenavComponent} from './vl-sidenav.component';
-import {CourseService} from '../service/course.service';
+import {CourseService} from '../course/course.service';
 import {AuthService} from '../auth/auth.service';
-import {Course} from '../model/course.model';
+import {Course} from '../course/course.model';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {CourseDialogContComponent} from '../course/course-dialog-cont.component';

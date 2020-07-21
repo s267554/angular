@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Course} from '../model/course.model';
+import {Course} from '../course/course.model';
 import {MatSidenav} from '@angular/material/sidenav';
-import {User} from '../model/user.model';
+import {User} from '../auth/user.model';
 
 @Component({
     selector: 'app-vl-sidenav',

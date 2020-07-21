@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Course} from '../model/course.model';
+import {Course} from './course.model';
 
 @Component({
   selector: 'app-course-dialog',

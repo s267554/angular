@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 import {VlToolbarComponent} from './vl-toolbar/vl-toolbar.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {VlService} from './service/vl.service';
+import {VlService} from './vl.service';
 import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
 
 @Component({

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Course} from '../model/course.model';
+import {Course} from './course.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
