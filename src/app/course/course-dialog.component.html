@@ -9,22 +9,22 @@
     </mat-form-field>
     <mat-form-field class="fit-size-input" appearance="legacy">
       <mat-label>Acronym</mat-label>
-      <input #acronymModel="ngModel" matInput type="text" [(ngModel)]="acronym"
+      <input [disabled]="!isNew" #acronymModel="ngModel" matInput type="text" [(ngModel)]="acronym"
              name="acronym" id="acronym" required>
       <mat-error *ngIf="acronymModel.invalid">Not a acronym</mat-error>
     </mat-form-field>
     <div class="row-container">
-      <mat-form-field class="max-container">
-        <mat-label>Max</mat-label>
-        <input #maxModel="ngModel" matInput type="number" [(ngModel)]="max"
-               name="max" id="max" required>
-        <mat-error *ngIf="maxModel.invalid">Not a number</mat-error>
-      </mat-form-field>
       <mat-form-field class="min-container">
         <mat-label>Min</mat-label>
         <input #minModel="ngModel" matInput type="number" [(ngModel)]="min"
                name="min" id="min" required>
         <mat-error *ngIf="minModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="max-container">
+        <mat-label>Max</mat-label>
+        <input #maxModel="ngModel" matInput type="number" [(ngModel)]="max"
+               name="max" id="max" required>
+        <mat-error *ngIf="maxModel.invalid">Not a number</mat-error>
       </mat-form-field>
     </div>
     <mat-checkbox name="enabled" id="enabled" [(ngModel)]="enabled">Enable/disable course</mat-checkbox>

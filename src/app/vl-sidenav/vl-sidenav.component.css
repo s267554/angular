@@ -1,6 +1,7 @@
 
 mat-sidenav {
-  width: 20%;
+  min-width: 20%;
+  max-width: 30%;
 }
 
 .container {
