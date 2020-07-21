@@ -25,9 +25,13 @@ import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.com
 import {VlHomeComponent} from './vl-home/vl-home.component';
 import {VlMainComponent} from './vl-main/vl-main.component';
 import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
-import { VlSidenavContentComponent } from './vl-sidenav-content/vl-sidenav-content.component';
+import {VlSidenavContentComponent} from './vl-sidenav-content/vl-sidenav-content.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CourseService} from './service/course.service';
+import {CourseDialogComponent} from './course/course-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {CourseDialogContComponent} from './course/course-dialog-cont.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,9 @@ import {CourseService} from './service/course.service';
     VlHomeComponent,
     VlMainComponent,
     VlLoginDialogComponent,
-    VlSidenavContentComponent
+    VlSidenavContentComponent,
+    CourseDialogComponent,
+    CourseDialogContComponent
   ],
   imports: [
     BrowserModule,
@@ -56,10 +62,12 @@ import {CourseService} from './service/course.service';
     MatDialogModule,
     FormsModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   entryComponents: [
-    VlLoginDialogComponent
+    VlLoginDialogComponent,
+    CourseDialogContComponent
   ],
   providers: [
     {
@@ -76,7 +84,8 @@ import {CourseService} from './service/course.service';
     AuthGuard,
     AuthService,
     VlService,
-    CourseService
+    CourseService,
+    MatSnackBar
   ],
   bootstrap: [AppComponent]
 })

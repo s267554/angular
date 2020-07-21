@@ -1,0 +1,25 @@
+.fit-size-input {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.max-container {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.min-container {
+  width: 100%;
+  margin-left: 10px;
+}

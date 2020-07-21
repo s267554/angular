@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Edit Course</h1>
+<mat-dialog-content>
+  <form #courseForm="ngForm" class="form-container">
+    <mat-form-field class="fit-size-input" appearance="legacy">
+      <mat-label>Name</mat-label>
+      <input [disabled]="!isNew" #nameModel="ngModel" matInput type="text" [(ngModel)]="name"
+             name="name" id="name" required>
+      <mat-error *ngIf="nameModel.invalid">Not a name</mat-error>
+    </mat-form-field>
+    <mat-form-field class="fit-size-input" appearance="legacy">
+      <mat-label>Acronym</mat-label>
+      <input #acronymModel="ngModel" matInput type="text" [(ngModel)]="acronym"
+             name="acronym" id="acronym" required>
+      <mat-error *ngIf="acronymModel.invalid">Not a acronym</mat-error>
+    </mat-form-field>
+    <div class="row-container">
+      <mat-form-field class="max-container">
+        <mat-label>Max</mat-label>
+        <input #maxModel="ngModel" matInput type="number" [(ngModel)]="max"
+               name="max" id="max" required>
+        <mat-error *ngIf="maxModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="min-container">
+        <mat-label>Min</mat-label>
+        <input #minModel="ngModel" matInput type="number" [(ngModel)]="min"
+               name="min" id="min" required>
+        <mat-error *ngIf="minModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-checkbox name="enabled" id="enabled" [(ngModel)]="enabled">Enable/disable course</mat-checkbox>
+  </form>
+  <mat-dialog-actions>
+    <button [disabled]="!courseForm.form.valid"
+            (click)="save()"
+            mat-raised-button
+            color="primary">
+      Save
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

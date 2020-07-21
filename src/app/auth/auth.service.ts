@@ -54,8 +54,9 @@ export class AuthService {
     this._loginEvent$.next(null);
   }
 
-  getToken(): string {
-    return this._loginEvent$.getValue()?.token;
+  getToken(): string | null {
+    const user = this._loginEvent$.getValue();
+    return user !== null ? user.token : null;
   }
 
   private stopTimer() {
