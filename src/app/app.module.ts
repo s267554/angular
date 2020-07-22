@@ -35,6 +35,7 @@ import {StudentTableComponent} from './student/student-table.component';
 import {StudentTableContComponent} from './student/student-table-cont.component';
 import {VlTabNavBarComponent} from './vl-tab-nav-bar/vl-tab-nav-bar.component';
 import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.component';
+import {StudentService} from './student/student.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.com
     AuthService,
     VlService,
     CourseService,
-    MatSnackBar
+    MatSnackBar,
+    StudentService
   ],
   bootstrap: [AppComponent]
 })
