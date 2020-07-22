@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {VlSidenavContentComponent} from './vl-sidenav-content.component';
+import {VlTabNavBarContComponent} from './vl-tab-nav-bar-cont.component';
 
-describe('VlSidenavContentComponent', () => {
-  let component: VlSidenavContentComponent;
-  let fixture: ComponentFixture<VlSidenavContentComponent>;
+describe('VlTabNavBarContComponent', () => {
+  let component: VlTabNavBarContComponent;
+  let fixture: ComponentFixture<VlTabNavBarContComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VlSidenavContentComponent]
+      declarations: [VlTabNavBarContComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VlSidenavContentComponent);
+    fixture = TestBed.createComponent(VlTabNavBarContComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

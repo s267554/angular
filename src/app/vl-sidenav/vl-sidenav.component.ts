@@ -1,60 +1,50 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Course} from '../course/course.model';
-import {MatSidenav} from '@angular/material/sidenav';
-import {User} from '../auth/user.model';
+import {isAdmin, User} from '../auth/user.model';
 
 @Component({
-    selector: 'app-vl-sidenav',
-    templateUrl: './vl-sidenav.component.html',
-    styleUrls: ['./vl-sidenav.component.css']
+  selector: 'app-vl-sidenav',
+  templateUrl: './vl-sidenav.component.html',
+  styleUrls: ['./vl-sidenav.component.css']
 })
 export class VlSidenavComponent implements OnInit {
 
-    @ViewChild('sidenav') private readonly sidenav: MatSidenav;
+  // tslint:disable-next-line:variable-name
+  private readonly _delete$ = new EventEmitter<Course>();
+  @Output() readonly delete$ = this._delete$.asObservable();
 
-    // tslint:disable-next-line:variable-name
-    private readonly _delete$ = new EventEmitter<Course>();
-    @Output() readonly delete$ = this._delete$.asObservable();
+  // tslint:disable-next-line:variable-name
+  private readonly _create$ = new EventEmitter<any>();
+  @Output() readonly create$ = this._create$.asObservable();
 
-    // tslint:disable-next-line:variable-name
-    private readonly _create$ = new EventEmitter<any>();
-    @Output() readonly create$ = this._create$.asObservable();
+  // tslint:disable-next-line:variable-name
+  private readonly _update$ = new EventEmitter<Course>();
+  @Output() readonly update$ = this._update$.asObservable();
 
-    // tslint:disable-next-line:variable-name
-    private readonly _update$ = new EventEmitter<Course>();
-    @Output() readonly update$ = this._update$.asObservable();
+  @Input() courses: Course[] = [];
 
-    @Input() courses: Course[] = [];
+  @Input() set user(user: User | null) {
+    this.editable = isAdmin(user);
+  }
 
-    @Input() set user(user: User | null) {
-        this.editable = user !== null &&
-            user.roles.find((r) => {
-                return r === 'ROLE_ADMIN';
-            }) !== undefined;
-    }
+  @Input() editable = false;
 
-    @Input() editable = false;
+  constructor() {
+  }
 
-    constructor() {
-    }
+  ngOnInit(): void {
+  }
 
-    ngOnInit(): void {
-    }
+  update(c: Course) {
+    this._update$.emit(c);
+  }
 
-    toggle() {
-        this.sidenav.toggle().then();
-    }
+  create() {
+    this._create$.emit(null);
+  }
 
-    update(c: Course) {
-        this._update$.emit(c);
-    }
-
-    create() {
-        this._create$.emit(null);
-    }
-
-    delete(c: Course) {
-        this._delete$.emit(c);
-    }
+  delete(c: Course) {
+    this._delete$.emit(c);
+  }
 
 }

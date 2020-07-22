@@ -1,12 +1,13 @@
-<mat-sidenav-content>
+<mat-toolbar><h1>{{title}}</h1></mat-toolbar>
+<div>
   <nav mat-tab-nav-bar>
     <a mat-tab-link
        *ngFor="let tab of tabs"
-       routerLink="{{tab.path}}"
+       routerLink="{{'./' + tab.path}}"
        routerLinkActive #rla="routerLinkActive"
        [active]="rla.isActive">
       {{tab.title}}
     </a>
   </nav>
   <router-outlet></router-outlet>
-</mat-sidenav-content>
+</div>

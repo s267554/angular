@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     dialogRef.afterClosed().toPromise().then((value) => {
       const user = value !== null && value !== undefined ? value : null;
       if (user !== null) {
-        const path = url !== null && url !== undefined ? url : user.username + '/courses';
+        const path = url !== null && url !== undefined ? url : user.username + '/courses/';
         return this.router.navigate([path]);
       }
     });

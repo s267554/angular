@@ -1,7 +1,5 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {VlService} from '../vl.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {VlSidenavComponent} from './vl-sidenav.component';
 import {CourseService} from '../course/course.service';
 import {AuthService} from '../auth/auth.service';
 import {Course} from '../course/course.model';
@@ -14,12 +12,11 @@ import {CourseDialogContComponent} from '../course/course-dialog-cont.component'
   templateUrl: './vl-sidenav-cont.component.html',
   styleUrls: ['./vl-sidenav-cont.component.css']
 })
-export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('sidenav') private readonly vlSidenav: VlSidenavComponent;
+export class VlSidenavContComponent implements OnInit, OnDestroy {
+
   private subscriptions: Subscription[] = [];
 
-  constructor(private readonly vlService: VlService,
-              private readonly dialog: MatDialog,
+  constructor(private readonly dialog: MatDialog,
               private readonly snackBar: MatSnackBar,
               readonly courseService: CourseService,
               readonly authService: AuthService) {
@@ -34,14 +31,6 @@ export class VlSidenavContComponent implements OnInit, OnDestroy, AfterViewInit 
       s.unsubscribe();
     });
     this.subscriptions = [];
-  }
-
-  ngAfterViewInit(): void {
-    this.subscriptions.push(
-      this.vlService.sidenav$.subscribe(() => {
-        this.vlSidenav.toggle();
-      })
-    );
   }
 
   deleteCourse(c: Course) {

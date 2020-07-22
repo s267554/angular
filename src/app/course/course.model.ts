@@ -1,8 +1,8 @@
 
 export interface Course {
-  name: string;
-  acronym: string;
-  max: number;
-  min: number;
-  enabled: boolean;
+  readonly name: string;
+  readonly acronym: string;
+  readonly max: number;
+  readonly min: number;
+  readonly enabled: boolean;
 }

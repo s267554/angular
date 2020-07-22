@@ -1,38 +1,29 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {CourseService} from '../course/course.service';
+import {VlService} from '../vl.service';
+import {MatSidenav} from '@angular/material/sidenav';
+
 
 @Component({
   selector: 'app-vl-main',
   templateUrl: './vl-main.component.html',
   styleUrls: ['./vl-main.component.css']
 })
-export class VlMainComponent implements OnInit, OnDestroy {
+export class VlMainComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  @ViewChild('sidenav') private readonly sidenav: MatSidenav;
 
   private subs: Subscription[] = [];
 
-  title = '';
-
   constructor(private readonly courseService: CourseService,
-              private readonly route: ActivatedRoute,
-              private readonly router: Router) {
-    this.subs.push(
-      this.route.params.subscribe((params) => {
-        this.title = params.courseName;
-      })
-    );
+              readonly vlService: VlService) {
+
   }
 
   ngOnInit(): void {
     this.subs.push(
-      this.courseService.getCourses().subscribe((courses) => {
-        const c = courses !== null && courses !== undefined && courses.length > 0 ? courses[0] : null;
-        if (c !== null) {
-          const url = './' + c.name + '/students';
-         // this.router.navigate([url]).then();
-        }
-      })
+      this.courseService.getCourses().subscribe()
     );
   }
 
@@ -41,6 +32,14 @@ export class VlMainComponent implements OnInit, OnDestroy {
       s.unsubscribe();
     });
     this.subs = [];
+  }
+
+  ngAfterViewInit(): void {
+    this.subs.push(
+      this.vlService.sidenav$.subscribe(() => {
+        this.sidenav.toggle().then();
+      })
+    );
   }
 
 }
