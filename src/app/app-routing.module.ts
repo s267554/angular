@@ -17,7 +17,6 @@ const routes: Routes = [
       {
         path: ':courseName', component: VlTabNavBarContComponent,
         children: [
-          {path: '', redirectTo: '/students', pathMatch: 'full'},
           {path: 'students', component: StudentTableContComponent}
         ]
       },

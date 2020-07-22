@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Student} from './student.model';
 
 @Component({
   selector: 'app-student-table-cont',
@@ -6,6 +8,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./student-table-cont.component.css']
 })
 export class StudentTableContComponent implements OnInit {
+
+  readonly students$: Observable<Student[]>;
 
   constructor() {
   }
