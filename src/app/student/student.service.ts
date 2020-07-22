@@ -40,7 +40,7 @@ export class StudentService {
 
   getNotEnrolledStudents(courseName: string): Observable<Student[]> {
     this._notEnrolledStudents$.next([]);
-    const url = this.ROOT_URL + courseName + 'enrolled';
+    const url = this.ROOT_URL + courseName + 'notEnrolled';
     return this.httpClient.get<Student[]>(url, this.OPTIONS).pipe(
       tap((r) => {
         this._notEnrolledStudents$.next(r);

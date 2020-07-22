@@ -47,9 +47,11 @@ export class CourseService {
     const url = this.ROOT_URL + 'courses/' + course.name;
     return this.httpClient.delete(url, this.OPTIONS).pipe(
       retry(3),
-      tap(null, (e) => {
-        this._courses$.next(oldList);
-      })
+      tap(() => {
+        },
+        () => {
+          this._courses$.next(oldList);
+        })
     );
   }
 
@@ -67,9 +69,11 @@ export class CourseService {
     const url = this.ROOT_URL + 'courses';
     return this.httpClient.put(url, course, this.OPTIONS).pipe(
       retry(3),
-      tap(null, (e) => {
-        this._courses$.next(oldList);
-      })
+      tap(() => {
+        },
+        () => {
+          this._courses$.next(oldList);
+        })
     );
   }
 
@@ -84,9 +88,11 @@ export class CourseService {
     const url = this.ROOT_URL + 'courses';
     return this.httpClient.post(url, course, this.OPTIONS).pipe(
       retry(3),
-      tap(null, (e) => {
-        this._courses$.next(oldList);
-      })
+      tap(() => {
+        },
+        () => {
+          this._courses$.next(oldList);
+        })
     );
   }
 
