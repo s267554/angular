@@ -1,6 +1,7 @@
-<app-student-tab (enrollOne$)="studentViewModel.enrollOne($event)"
-                 (dropOutAll$)="studentViewModel.dropOutAll($event)"
-                 (search$)="studentViewModel.getNotEnrolled($event)"
+<app-student-tab (search$)="search($event)"
+                 (enrollOne$)="enrollOne($event)"
+                 (dropOutAll$)="dropOutAll($event)"
                  [searchResult]="studentViewModel.notEnrolledStudents$ | async"
                  [enrolled]="studentViewModel.enrolledStudents$ | async">
 </app-student-tab>
+<mat-spinner *ngIf="studentViewModel.dataLoading | async"></mat-spinner>

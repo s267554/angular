@@ -15,29 +15,67 @@ export class StudentViewModel {
   private readonly _notEnrolledStudents$ = new BehaviorSubject<Student[]>([]);
   readonly notEnrolledStudents$ = this._notEnrolledStudents$.asObservable();
 
-  private courseName = null;
+  // tslint:disable-next-line:variable-name
+  private readonly _dataLoading$ = new BehaviorSubject<boolean>(false);
+  readonly dataLoading = this._dataLoading$.asObservable();
+
+  private courseName: string = null;
+
+  private queryText: string = null;
 
   constructor(private readonly studentService: StudentService) {
   }
 
   getEnrolled(courseName: string): Observable<any> {
     this.courseName = courseName;
+    this._dataLoading$.next(true);
     return this.studentService.getEnrolledStudents(courseName).pipe(
-      tap((r) => {
-        this._enrolledStudents$.next(r);
-      })
+      tap(
+        (r) => {
+          this._dataLoading$.next(false);
+          this._enrolledStudents$.next(r);
+        },
+        () => {
+          this._dataLoading$.next(false);
+        }
+      )
     );
   }
 
   getNotEnrolled(query: string): Observable<Student[]> {
+    if (this._dataLoading$.getValue() === true) {
+      return EMPTY;
+    }
+
     const courseName = this.courseName;
     if (courseName === null) {
       return EMPTY;
     }
-    return this.studentService.getNotEnrolledStudents(courseName);
+
+    if (this.queryText === query) {
+      return EMPTY;
+    }
+    this.queryText = query;
+
+    this._dataLoading$.next(true);
+    return this.studentService.getNotEnrolledStudents(courseName).pipe(
+      tap(
+        (r) => {
+          this._dataLoading$.next(false);
+          this._notEnrolledStudents$.next(r);
+        },
+        () => {
+          this._dataLoading$.next(false);
+        }
+      )
+    );
   }
 
   enrollOne(student: Student): Observable<any> {
+    if (this._dataLoading$.getValue() === true) {
+      return EMPTY;
+    }
+
     const courseName = this.courseName;
     if (courseName === null) {
       return EMPTY;
@@ -49,27 +87,19 @@ export class StudentViewModel {
     oldEnrolledList.forEach((s) => {
       newEnrolledList.push(s);
     });
-    oldEnrolledList.push(student);
+    newEnrolledList.push(student);
 
     this._enrolledStudents$.next(newEnrolledList);
 
-    // const oldNoEnrolledList = this._notEnrolledStudents$.getValue();
-    // const newNotEnrolledList = [];
-    //
-    // oldNoEnrolledList.forEach((s) => {
-    //   if (s.id !== student.id) {
-    //     newNotEnrolledList.push(s);
-    //   }
-    // });
-    //
-    // this._notEnrolledStudents$.next(newNotEnrolledList);
-
+    this._dataLoading$.next(true);
     return this.studentService.enrollStudent(courseName, student).pipe(
       tap(
         () => {
+          this._dataLoading$.next(false);
+          this._notEnrolledStudents$.next([]);
         },
         () => {
-          // this._notEnrolledStudents$.next(oldNoEnrolledList);
+          this._dataLoading$.next(false);
           this._enrolledStudents$.next(oldEnrolledList);
         }
       )
@@ -77,6 +107,11 @@ export class StudentViewModel {
   }
 
   dropOutAll(students: Student[]) {
+
+    if (this._dataLoading$.getValue() === true) {
+      return EMPTY;
+    }
+
     const courseName = this.courseName;
     if (courseName === null) {
       return EMPTY;
@@ -85,33 +120,23 @@ export class StudentViewModel {
     const oldEnrolledList = this._enrolledStudents$.getValue();
     const newEnrolledList = [];
 
-    oldEnrolledList.forEach((s) => {
-      newEnrolledList.push(s);
-    });
-
-    students.forEach((s) => {
-      newEnrolledList.push(s);
+    oldEnrolledList.forEach((s1) => {
+      const remove = students.find((s2) => s1 === s2) !== undefined;
+      if (!remove) {
+        newEnrolledList.push(s1);
+      }
     });
 
     this._enrolledStudents$.next(newEnrolledList);
 
-    // const oldNoEnrolledList = this._notEnrolledStudents$.getValue();
-    // const newNotEnrolledList = [];
-    //
-    // oldNoEnrolledList.forEach((s1) => {
-    //   if (students.find((s2) => s1.id === s2.id) === undefined) {
-    //     newNotEnrolledList.push(s1);
-    //   }
-    // });
-    //
-    // this._notEnrolledStudents$.next(newNotEnrolledList);
-
+    this._dataLoading$.next(true);
     return this.studentService.dropOutStudents(courseName, students).pipe(
       tap(
         () => {
+          this._dataLoading$.next(false);
         },
         () => {
-          // this._notEnrolledStudents$.next(oldNoEnrolledList);
+          this._dataLoading$.next(false);
           this._enrolledStudents$.next(oldEnrolledList);
         }
       )
@@ -119,3 +144,4 @@ export class StudentViewModel {
   }
 
 }
+

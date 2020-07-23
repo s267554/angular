@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {StudentDataSource} from './student.data-source';
 import {MatTable} from '@angular/material/table';
 import {Subscription} from 'rxjs';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-student-table',
@@ -23,14 +24,14 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() set students(students: Student[]) {
     this.dataSource.emit(students);
-    this.selected.clear();
+    this.selection.clear();
   }
 
   @Input() columns = ['select', 'id', 'name', 'surname'];
 
-  readonly dataSource = new StudentDataSource();
+  readonly selection = new SelectionModel<Student>(true, []);
 
-  private selected = new Set<Student>();
+  readonly dataSource = new StudentDataSource();
 
   private subs: Subscription[] = [];
 
@@ -59,63 +60,30 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private onPageChange(page: Student[]) {
-    this.selected.forEach((value, key, set) => {
-      const remove = page.find((s) => {
-        return s.id === value.id;
+    this.selection.selected.forEach((s1) => {
+      const remove = page.find((s2) => {
+        return s1 === s2;
       }) === undefined;
       if (remove) {
-        set.delete(key);
+        this.selection.deselect(s1);
       }
     });
   }
 
-  isOneSelected(student: Student): boolean {
-    return this.selected.has(student);
+  isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.getPage().length;
+    return numSelected === numRows;
   }
 
-  areAllSelected(): boolean {
-
-    let areAllSelected = true;
-
-    const students = this.dataSource.getPage();
-    let index = 0;
-
-    while (areAllSelected && index < students.length) {
-      const student = students[index++];
-      areAllSelected = areAllSelected && this.selected.has(student);
-    }
-
-    return areAllSelected;
-  }
-
-  toggleOne(student: Student, checked: boolean) {
-    if (!checked) {
-      this.selected.delete(student);
-    } else {
-      this.selected.add(student);
-    }
-  }
-
-  toggleAll(checked: boolean) {
-    if (checked) {
-      const students = this.dataSource.getPage();
-      students.forEach((s) => {
-        this.selected.add(s);
-      });
-    } else {
-      this.selected.clear();
-    }
-  }
-
-  isIndeterminate(): boolean {
-    const size = this.selected.size;
-    const maxSize = this.dataSource.getPage().length;
-    return size > 0 && size < maxSize;
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.getPage().forEach(row => this.selection.select(row));
   }
 
   deleteAllSelected() {
-    const students = [];
-    this.selected.forEach((s) => students.push(s));
+    const students = this.selection.selected;
     this._deleteAll.emit(students);
   }
 
