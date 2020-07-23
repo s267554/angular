@@ -8,7 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class StudentService {
 
-  private readonly ROOT_URL = 'http://localhost:8080/api/courses';
+  private readonly ROOT_URL = 'http://localhost:8080/api/courses/';
   private readonly OPTIONS = {
     responseType: 'json' as const,
     headers: new HttpHeaders({

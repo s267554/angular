@@ -5,7 +5,7 @@ import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.com
 import {VlHomeComponent} from './vl-home/vl-home.component';
 import {VlMainComponent} from './vl-main/vl-main.component';
 import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.component';
-import {StudentTableComponent} from './student/student-table.component';
+import {StudentTabContComponent} from './student/student-tab-cont.component';
 
 
 const routes: Routes = [
@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: ':courseName', component: VlTabNavBarContComponent,
         children: [
-          {path: 'students', component: StudentTableComponent}
+          {path: 'students', component: StudentTabContComponent}
         ]
       },
       {path: '', component: VlHomeComponent},

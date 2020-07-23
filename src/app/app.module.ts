@@ -30,8 +30,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {StudentTableComponent} from './student/student-table.component';
 import {VlTabNavBarComponent} from './vl-tab-nav-bar/vl-tab-nav-bar.component';
 import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.component';
-import { StudentTabComponent } from './student/student-tab.component';
-import { StudentTabContComponent } from './student/student-tab-cont.component';
+import {StudentTabComponent} from './student/student-tab.component';
+import {StudentTabContComponent} from './student/student-tab-cont.component';
+import {StudentAutocompleteComponent} from './student/student-autocomplete.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -49,26 +53,30 @@ import { StudentTabContComponent } from './student/student-tab-cont.component';
     VlTabNavBarComponent,
     VlTabNavBarContComponent,
     StudentTabComponent,
-    StudentTabContComponent
+    StudentTabContComponent,
+    StudentAutocompleteComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    FormsModule,
-    MatListModule,
-    MatTabsModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
+        FormsModule,
+        MatListModule,
+        MatTabsModule,
+        MatCheckboxModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule
+    ],
   entryComponents: [
     VlLoginDialogComponent,
     CourseDialogContComponent

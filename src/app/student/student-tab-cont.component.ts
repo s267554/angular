@@ -12,15 +12,18 @@ import {switchMap} from 'rxjs/operators';
 })
 export class StudentTabContComponent implements OnInit, OnDestroy {
 
+  private readonly parentRoute: ActivatedRoute;
+
   private subs: Subscription[] = [];
 
   constructor(readonly studentViewModel: StudentViewModel,
-              private readonly route: ActivatedRoute) {
+              route: ActivatedRoute) {
+    this.parentRoute = route.parent;
   }
 
   ngOnInit(): void {
     this.subs.push(
-      this.route.params.pipe(
+      this.parentRoute.params.pipe(
         switchMap((p) => {
           return this.studentViewModel.getEnrolled(p.courseName);
         })

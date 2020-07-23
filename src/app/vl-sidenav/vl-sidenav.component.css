@@ -13,6 +13,6 @@ mat-sidenav {
 }
 
 .fill-remaining-space {
-  min-width: 10px;
+  margin-left: 10px;
   flex: 1 1 auto;
 }

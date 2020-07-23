@@ -1,2 +1,4 @@
-<app-student-tab [enrolled]="studentViewModel.enrolledStudents$ | async">
+<app-student-tab (enrollOne$)="studentViewModel.enrollOne($event)"
+                 (dropOutAll$)="studentViewModel.dropOutAll($event)"
+                 [enrolled]="studentViewModel.enrolledStudents$ | async">
 </app-student-tab>
