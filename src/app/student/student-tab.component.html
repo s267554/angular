@@ -1,9 +1,10 @@
 <div class="mat-elevation-z8 table-container">
   <div class="header-container">
-    <form>
-      <h3>Elenco studenti iscritti al corso</h3>
-      <app-student-autocomplete></app-student-autocomplete>
-    </form>
+    <h3>Elenco studenti iscritti al corso</h3>
+    <app-student-autocomplete [students]="searchResult"
+                              (search$)="search($event)"
+                              (add$)="enrollOne($event)">
+    </app-student-autocomplete>
   </div>
   <app-student-table [students]="enrolled"
                      (deleteAll)="dropOutAll($event)">

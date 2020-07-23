@@ -11,9 +11,9 @@ export class StudentViewModel {
   private readonly _enrolledStudents$ = new BehaviorSubject<Student[]>([]);
   readonly enrolledStudents$ = this._enrolledStudents$.asObservable();
 
-  // // tslint:disable-next-line:variable-name
-  // private readonly _notEnrolledStudents$ = new BehaviorSubject<Student[]>([]);
-  // readonly notEnrolledStudents$ = this._notEnrolledStudents$.asObservable();
+  // tslint:disable-next-line:variable-name
+  private readonly _notEnrolledStudents$ = new BehaviorSubject<Student[]>([]);
+  readonly notEnrolledStudents$ = this._notEnrolledStudents$.asObservable();
 
   private courseName = null;
 
@@ -29,7 +29,7 @@ export class StudentViewModel {
     );
   }
 
-  getNotEnrolled(): Observable<Student[]> {
+  getNotEnrolled(query: string): Observable<Student[]> {
     const courseName = this.courseName;
     if (courseName === null) {
       return EMPTY;

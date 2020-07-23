@@ -69,7 +69,7 @@ export class StudentDataSource extends DataSource<Student> {
       const isAsc = this.sort.direction === 'asc';
       const prop1 = a[this.sort.active];
       const prop2 = b[this.sort.active];
-      if (prop1 !== undefined && prop2 !== undefined) {
+      if (isStringOrNumber(prop1) && isStringOrNumber(prop2)) {
         return compare(prop1, prop2, isAsc);
       } else {
         return 0;
@@ -77,6 +77,10 @@ export class StudentDataSource extends DataSource<Student> {
     });
   }
 
+}
+
+function isStringOrNumber(value: any): boolean {
+  return typeof value === 'string' || typeof value === 'number';
 }
 
 function compare(a: string | number, b: string | number, isAsc: boolean) {

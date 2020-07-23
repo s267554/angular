@@ -1,4 +1,6 @@
 <app-student-tab (enrollOne$)="studentViewModel.enrollOne($event)"
                  (dropOutAll$)="studentViewModel.dropOutAll($event)"
+                 (search$)="studentViewModel.getNotEnrolled($event)"
+                 [searchResult]="studentViewModel.notEnrolledStudents$ | async"
                  [enrolled]="studentViewModel.enrolledStudents$ | async">
 </app-student-tab>

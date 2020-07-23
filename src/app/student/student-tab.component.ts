@@ -35,4 +35,12 @@ export class StudentTabComponent implements OnInit {
     this._dropOutAll$.emit(students);
   }
 
+  enrollOne(student: Student) {
+    this._enrollOne$.emit(student);
+  }
+
+  search(query: string) {
+    this._search$.emit(query);
+  }
+
 }

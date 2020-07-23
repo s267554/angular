@@ -36,6 +36,7 @@ import {StudentAutocompleteComponent} from './student/student-autocomplete.compo
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -56,27 +57,28 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     StudentTabContComponent,
     StudentAutocompleteComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDialogModule,
-        FormsModule,
-        MatListModule,
-        MatTabsModule,
-        MatCheckboxModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    FormsModule,
+    MatListModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatAutocompleteModule
+  ],
   entryComponents: [
     VlLoginDialogComponent,
     CourseDialogContComponent

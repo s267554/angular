@@ -40,11 +40,7 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(
       this.dataSource.page$.subscribe((p) => {
-        this.selected.forEach((value, key, set) => {
-          if (p.find((s) => s.id === value.id) === undefined) {
-            set.delete(key);
-          }
-        });
+        this.onPageChange(p);
       })
     );
   }
@@ -53,6 +49,24 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.table.dataSource = this.dataSource;
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => {
+      s.unsubscribe();
+    });
+    this.subs = [];
+  }
+
+  private onPageChange(page: Student[]) {
+    this.selected.forEach((value, key, set) => {
+      const remove = page.find((s) => {
+        return s.id === value.id;
+      }) === undefined;
+      if (remove) {
+        set.delete(key);
+      }
+    });
   }
 
   isOneSelected(student: Student): boolean {
@@ -103,13 +117,6 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
     const students = [];
     this.selected.forEach((s) => students.push(s));
     this._deleteAll.emit(students);
-  }
-
-  ngOnDestroy(): void {
-    this.subs.forEach((s) => {
-      s.unsubscribe();
-    });
-    this.subs = [];
   }
 
 }
