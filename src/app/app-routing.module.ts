@@ -4,8 +4,8 @@ import {AuthGuard} from './auth/auth.guard';
 import {VlPageNotFoundComponent} from './vl-page-not-found/vl-page-not-found.component';
 import {VlHomeComponent} from './vl-home/vl-home.component';
 import {VlMainComponent} from './vl-main/vl-main.component';
-import {StudentTableContComponent} from './student/student-table-cont.component';
 import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.component';
+import {StudentTableComponent} from './student/student-table.component';
 
 
 const routes: Routes = [
@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: ':courseName', component: VlTabNavBarContComponent,
         children: [
-          {path: 'students', component: StudentTableContComponent}
+          {path: 'students', component: StudentTableComponent}
         ]
       },
       {path: '', component: VlHomeComponent},

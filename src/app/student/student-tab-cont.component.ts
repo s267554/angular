@@ -1,27 +1,28 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {StudentService} from './student.service';
 import {Subscription} from 'rxjs';
+import {StudentViewModel} from './student.view-model';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-student-table-cont',
-  templateUrl: './student-table-cont.component.html',
-  styleUrls: ['./student-table-cont.component.css']
+  selector: 'app-student-tab-cont',
+  templateUrl: './student-tab-cont.component.html',
+  styleUrls: ['./student-tab-cont.component.css'],
+  providers: [StudentViewModel]
 })
-export class StudentTableContComponent implements OnInit, OnDestroy {
+export class StudentTabContComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(readonly studentService: StudentService,
+  constructor(readonly studentViewModel: StudentViewModel,
               private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.subs.push(
       this.route.params.pipe(
-        switchMap((params) => {
-          return this.studentService.getEnrolledStudents(params.courseName);
+        switchMap((p) => {
+          return this.studentViewModel.getEnrolled(p.courseName);
         })
       ).subscribe()
     );
