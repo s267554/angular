@@ -52,7 +52,7 @@ export class StudentTabContComponent implements OnInit, OnDestroy {
 
   search(query: string) {
     this.subs.push(
-      this.studentViewModel.getNotEnrolled(query).subscribe()
+      this.studentViewModel.search(query).subscribe()
     );
   }
 

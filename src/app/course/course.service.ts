@@ -4,9 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CourseService {
 
   private readonly ROOT_URL = 'http://localhost:8080/api/';

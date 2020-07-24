@@ -58,12 +58,3 @@ export class StudentAutocompleteComponent implements OnInit {
 
 }
 
-function filter(list: Student[], query: string): Student[] {
-  const students: Student[] = [];
-  list.forEach((s) => {
-    if (s.name.startsWith(query) || s.surname.startsWith(query) || s.id.startsWith(query)) {
-      students.push(s);
-    }
-  });
-  return students;
-}
