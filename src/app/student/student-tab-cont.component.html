@@ -4,4 +4,3 @@
                  [searchResult]="studentViewModel.notEnrolledStudents$ | async"
                  [enrolled]="studentViewModel.enrolledStudents$ | async">
 </app-student-tab>
-<mat-spinner *ngIf="studentViewModel.dataLoading | async"></mat-spinner>

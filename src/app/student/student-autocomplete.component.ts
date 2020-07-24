@@ -16,7 +16,17 @@ export class StudentAutocompleteComponent implements OnInit {
   private readonly _search$ = new EventEmitter<string>();
   @Output() readonly search$ = this._search$.asObservable();
 
-  @Input() students: Student[] = [];
+  // tslint:disable-next-line:variable-name
+  private _students: Student[] = [];
+
+  get students(): Student[] {
+    return this._students;
+  }
+
+  @Input() set students(students: Student[]) {
+    this._students = students;
+    this.student = null;
+  }
 
   private student: Student = null;
 
@@ -30,7 +40,6 @@ export class StudentAutocompleteComponent implements OnInit {
     const student = this.student;
     if (student !== null) {
       this._add$.emit(student);
-      this.student = null;
     }
   }
 
@@ -39,7 +48,7 @@ export class StudentAutocompleteComponent implements OnInit {
   }
 
   display(student: Student): string {
-    return '<' + student.name + '> <' + student.surname + '> <' + student.id + '>';
+    return student.id + ' ' + student.name + ' ' + student.surname;
   }
 
   search(event: KeyboardEvent) {
@@ -47,4 +56,14 @@ export class StudentAutocompleteComponent implements OnInit {
     this._search$.emit(query);
   }
 
+}
+
+function filter(list: Student[], query: string): Student[] {
+  const students: Student[] = [];
+  list.forEach((s) => {
+    if (s.name.startsWith(query) || s.surname.startsWith(query) || s.id.startsWith(query)) {
+      students.push(s);
+    }
+  });
+  return students;
 }

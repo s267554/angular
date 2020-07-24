@@ -37,7 +37,6 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -78,8 +77,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatAutocompleteModule
   ],
   entryComponents: [
     VlLoginDialogComponent,

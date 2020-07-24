@@ -27,7 +27,7 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selection.clear();
   }
 
-  @Input() columns = ['select', 'id', 'name', 'surname'];
+  @Input() columns = ['select', 'id', 'name', 'surname', 'team'];
 
   readonly selection = new SelectionModel<Student>(true, []);
 
