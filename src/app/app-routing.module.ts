@@ -6,6 +6,7 @@ import {VlHomeComponent} from './vl-home/vl-home.component';
 import {VlMainComponent} from './vl-main/vl-main.component';
 import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.component';
 import {StudentTabContComponent} from './student/student-tab-cont.component';
+import {TeamTabContComponent} from './team/team-tab-cont.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
       {
         path: ':courseName', component: VlTabNavBarContComponent,
         children: [
-          {path: 'students', component: StudentTabContComponent}
+          {path: 'students', component: StudentTabContComponent},
+          {path: 'groups', component: TeamTabContComponent}
         ]
       },
       {path: '', component: VlHomeComponent},

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Course} from './course.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {retry, tap} from 'rxjs/operators';
+import {shareReplay, tap} from 'rxjs/operators';
 
 @Injectable()
 export class CourseService {
@@ -26,10 +26,10 @@ export class CourseService {
     this._courses$.next([]);
     const url = this.ROOT_URL + 'courses';
     return this.httpClient.get<Course[]>(url, this.OPTIONS).pipe(
-      retry(3),
       tap((c) => {
         this._courses$.next(c);
-      })
+      }),
+      shareReplay()
     );
   }
 
@@ -44,12 +44,14 @@ export class CourseService {
     this._courses$.next(newList);
     const url = this.ROOT_URL + 'courses/' + course.name;
     return this.httpClient.delete(url, this.OPTIONS).pipe(
-      retry(3),
-      tap(() => {
+      tap(
+        () => {
         },
         () => {
           this._courses$.next(oldList);
-        })
+        }
+      ),
+      shareReplay()
     );
   }
 
@@ -66,12 +68,14 @@ export class CourseService {
     this._courses$.next(newList);
     const url = this.ROOT_URL + 'courses';
     return this.httpClient.put(url, course, this.OPTIONS).pipe(
-      retry(3),
-      tap(() => {
+      tap(
+        () => {
         },
         () => {
           this._courses$.next(oldList);
-        })
+        }
+      ),
+      shareReplay()
     );
   }
 
@@ -85,12 +89,14 @@ export class CourseService {
     this._courses$.next(newList);
     const url = this.ROOT_URL + 'courses';
     return this.httpClient.post(url, course, this.OPTIONS).pipe(
-      retry(3),
-      tap(() => {
+      tap(
+        () => {
         },
         () => {
           this._courses$.next(oldList);
-        })
+        }
+      ),
+      shareReplay()
     );
   }
 

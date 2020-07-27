@@ -37,6 +37,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { TeamTabContComponent } from './team/team-tab-cont.component';
+import { TeamTabComponent } from './team/team-tab.component';
+import { TeamTableComponent } from './team/team-table.component';
+import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -55,30 +59,34 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     VlTabNavBarContComponent,
     StudentTabComponent,
     StudentTabContComponent,
-    StudentAutocompleteComponent
+    StudentAutocompleteComponent,
+    TeamTabContComponent,
+    TeamTabComponent,
+    TeamTableComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    FormsModule,
-    MatListModule,
-    MatTabsModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatAutocompleteModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
+        FormsModule,
+        MatListModule,
+        MatTabsModule,
+        MatCheckboxModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatAutocompleteModule,
+        MatRippleModule
+    ],
   entryComponents: [
     VlLoginDialogComponent,
     CourseDialogContComponent

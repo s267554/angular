@@ -19,7 +19,6 @@ export class VlMainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private readonly courseService: CourseService,
               readonly vlService: VlService) {
-
   }
 
   ngOnInit(): void {
