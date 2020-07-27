@@ -41,6 +41,8 @@ import {TeamTabContComponent} from './team/team-tab-cont.component';
 import {TeamTabComponent} from './team/team-tab.component';
 import {TeamTableComponent} from './team/team-table.component';
 import {MatRippleModule} from '@angular/material/core';
+import {TeamDialogComponent} from './team/team-dialog.component';
+import {TeamDialogContComponent} from './team/team-dialog-cont.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import {MatRippleModule} from '@angular/material/core';
     StudentAutocompleteComponent,
     TeamTabContComponent,
     TeamTabComponent,
-    TeamTableComponent
+    TeamTableComponent,
+    TeamDialogComponent,
+    TeamDialogContComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,8 @@ import {MatRippleModule} from '@angular/material/core';
   ],
   entryComponents: [
     VlLoginDialogComponent,
-    CourseDialogContComponent
+    CourseDialogContComponent,
+    TeamDialogContComponent
   ],
   providers: [
     {

@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TeamStore} from './team-store';
 import {Team} from './team.model';
-import {Subscription} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {TeamDialogContComponent} from './team-dialog-cont.component';
 
 @Component({
   selector: 'app-team-tab-cont',
@@ -10,16 +11,8 @@ import {Subscription} from 'rxjs';
 })
 export class TeamTabContComponent implements OnInit, OnDestroy {
 
-  // tslint:disable-next-line:variable-name
-  private _updateSub: Subscription = null;
-  private set updateSub(sub: Subscription | null) {
-    if (this._updateSub !== null) {
-      this._updateSub.unsubscribe();
-    }
-    this._updateSub = sub;
-  }
-
-  constructor(readonly teamStore: TeamStore) {
+  constructor(private readonly dialog: MatDialog,
+              readonly teamStore: TeamStore) {
   }
 
   ngOnInit(): void {
@@ -27,11 +20,11 @@ export class TeamTabContComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.updateSub = null;
+
   }
 
   update(team: Team) {
-    this.updateSub = this.teamStore.updateTeam(team).subscribe();
+    this.dialog.open(TeamDialogContComponent, {data: team});
   }
 
 }

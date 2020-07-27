@@ -19,14 +19,8 @@ export class TeamService {
   constructor(private readonly httpClient: HttpClient) {
   }
 
-  prova = 0;
-
   getTeams(courseName: string): Observable<Team[]> {
-    let url = this.ROOT_URL + courseName + '/teams';
-    if (this.prova % 2 === 0) {
-      url += 'd';
-    }
-    this.prova++;
+    const url = this.ROOT_URL + courseName + '/teams';
     return this.httpClient.get<Team[]>(url, this.OPTIONS);
   }
 

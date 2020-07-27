@@ -60,7 +60,7 @@ export class TeamTableComponent implements OnInit {
   }
 
   update(team: Team) {
-
+    this._update$.emit(team);
   }
 
 }
