@@ -25,7 +25,7 @@ export class TeamService {
   }
 
   updateTeam(courseName: string, team: Team): Observable<any> {
-    const url = this.ROOT_URL + courseName + '/teams';
+    const url = this.ROOT_URL + courseName + '/teams/' + team.name;
     return this.httpClient.put(url, team, this.OPTIONS);
   }
 

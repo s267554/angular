@@ -1,1 +1,54 @@
-<p>team-dialog works!</p>
+<h1 mat-dialog-title>Edit Team</h1>
+<mat-dialog-content>
+  <form #teamForm="ngForm" class="form-container">
+    <mat-form-field class="fit-size-input" appearance="legacy">
+      <mat-label>Name</mat-label>
+      <input disabled #nameModel="ngModel" matInput type="text" [(ngModel)]="name"
+             name="name" id="name" required>
+      <mat-error *ngIf="nameModel.invalid">Not a name</mat-error>
+    </mat-form-field>
+    <div class="row-container">
+      <mat-form-field class="left-container">
+        <mat-label>Vcpu</mat-label>
+        <input #vcpuModel="ngModel" matInput type="number" [(ngModel)]="vcpu"
+               name="vcpu" id="vcpu" required>
+        <mat-error *ngIf="vcpuModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="center-container">
+        <mat-label>Ram</mat-label>
+        <input #ramModel="ngModel" matInput type="number" [(ngModel)]="ram"
+               name="ram" id="ram" required>
+        <mat-error *ngIf="ramModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="right-container">
+        <mat-label>Space</mat-label>
+        <input #spaceModel="ngModel" matInput type="number" [(ngModel)]="space"
+               name="space" id="space" required>
+        <mat-error *ngIf="spaceModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row-container">
+      <mat-form-field class="left-container">
+        <mat-label>MaxVMsActive</mat-label>
+        <input #maxVMsActiveModel="ngModel" matInput type="number" [(ngModel)]="maxVMsActive"
+               name="maxVMsActive" id="maxVMsActive" required>
+        <mat-error *ngIf="maxVMsActiveModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="right-container">
+        <mat-label>MaxVMs</mat-label>
+        <input #maxVMsModel="ngModel" matInput type="number" [(ngModel)]="maxVMs"
+               name="maxVMs" id="maxVMs" required>
+        <mat-error *ngIf="maxVMsModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <button [disabled]="!teamForm.form.valid"
+            (click)="save()"
+            mat-raised-button
+            color="primary">
+      Save
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</mat-dialog-content>
