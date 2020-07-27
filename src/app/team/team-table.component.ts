@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Team} from './team.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -29,8 +29,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class TeamTableComponent implements OnInit {
 
-  constructor() {
-  }
+  @Input() displayedColumns = ['name', 'edit'];
+
+  // tslint:disable-next-line:variable-name
+  private readonly _update$ = new EventEmitter<Team>();
+  @Output() readonly update$ = this._update$.asObservable();
 
   // tslint:disable-next-line:variable-name
   private _teams = [];
@@ -44,9 +47,10 @@ export class TeamTableComponent implements OnInit {
     this._teams = rows;
   }
 
-  @Input() columns = ['name', 'edit'];
-
   expandedElement: any;
+
+  constructor() {
+  }
 
   isExpansionDetailRow(i: number, row: any) {
     return row.hasOwnProperty('detailRow');
@@ -55,7 +59,7 @@ export class TeamTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  update(t: Team) {
+  update(team: Team) {
 
   }
 

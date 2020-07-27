@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TeamStore} from './team-store';
-import {Observable, Subscription} from 'rxjs';
 import {Team} from './team.model';
-import {retry, tap} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-team-tab-cont',
@@ -12,15 +11,15 @@ import {retry, tap} from 'rxjs/operators';
 export class TeamTabContComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:variable-name
-  private _sub: Subscription;
-
-  readonly teams$: Observable<Team[]>;
+  private _updateSub: Subscription = null;
+  private set updateSub(sub: Subscription | null) {
+    if (this._updateSub !== null) {
+      this._updateSub.unsubscribe();
+    }
+    this._updateSub = sub;
+  }
 
   constructor(readonly teamStore: TeamStore) {
-    this.teams$ = teamStore.teams$.pipe(
-      retry(2),
-      tap(t => console.log(t))
-    );
   }
 
   ngOnInit(): void {
@@ -28,6 +27,11 @@ export class TeamTabContComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.updateSub = null;
+  }
+
+  update(team: Team) {
+    this.updateSub = this.teamStore.updateTeam(team).subscribe();
   }
 
 }
