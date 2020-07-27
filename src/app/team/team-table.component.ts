@@ -32,7 +32,17 @@ export class TeamTableComponent implements OnInit {
   constructor() {
   }
 
-  @Input() teams: Team[] = [];
+  // tslint:disable-next-line:variable-name
+  private _teams = [];
+  get teams(): Team[] {
+    return this._teams;
+  }
+
+  @Input() set teams(teams: Team[]) {
+    const rows = [];
+    teams.forEach(element => rows.push(element, {detailRow: true, element}));
+    this._teams = rows;
+  }
 
   @Input() columns = ['name', 'edit'];
 

@@ -32,6 +32,8 @@ export class TeamStore {
       () => courseName !== null,
       this.teamService.getTeams(courseName),
       of([])
+    ).pipe(
+      shareReplay()
     );
   }
 

@@ -1,18 +1,10 @@
-<div class="example-container mat-elevation-z8">
+<div class="full-width-table mat-elevation-z8">
   <mat-table [dataSource]="teams">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-    </ng-container>
-
-    <!-- Expanded Content Column - The detail row is made up of this one column -->
-    <ng-container matColumnDef="expandedDetail">
-      <mat-cell *matCellDef="let detail">
-        <!-- -->
-        Expanded
-      </mat-cell>
     </ng-container>
 
     <!-- Edit Column -->
@@ -25,17 +17,25 @@
       </mat-cell>
     </ng-container>
 
+    <!-- Expanded Content Column - The detail row is made up of this one column -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let detail">
+        <!-- -->
+       Expanded
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
 
     <mat-row *matRowDef="let row; columns: columns;"
              matRipple
              class="element-row"
-             [class.expanded]="expandedElement === row"
+             [class.expanded]="expandedElement == row"
              (click)="expandedElement = row">
     </mat-row>
 
     <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
-             [@detailExpand]="row.element === expandedElement ? 'expanded' : 'collapsed'"
+             [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
              style="overflow: hidden">
     </mat-row>
 
