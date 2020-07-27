@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TeamService} from './team.service';
-import {BehaviorSubject, EMPTY, iif, merge, Observable, of, Subject} from 'rxjs';
+import {EMPTY, iif, merge, Observable, of, Subject} from 'rxjs';
 import {Team} from './team.model';
 import {VlService} from '../vl.service';
 import {map, shareReplay, switchMap} from 'rxjs/operators';
@@ -15,8 +15,6 @@ export class TeamStore {
   private readonly _update$ = new Subject<Team>();
   readonly update$ = this._update$.asObservable();
 
-  // tslint:disable-next-line:variable-name
-  private readonly _teams$ = new BehaviorSubject<Team[]>([]);
   readonly teams$: Observable<Team[]>;
 
   constructor(private readonly teamService: TeamService,
