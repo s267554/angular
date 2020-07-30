@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
 import {User} from './user.model';
 
@@ -8,15 +8,6 @@ import {User} from './user.model';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private readonly ROOT_URL = 'http://localhost:8080/auth/';
-
-  private readonly OPTIONS = {
-    responseType: 'json' as const,
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
 
   // tslint:disable-next-line:variable-name
   private readonly _loginEvent$ = new BehaviorSubject<User>(null);
@@ -28,19 +19,19 @@ export class AuthService {
   }
 
   register(request: any): Observable<any> {
-    const url = this.ROOT_URL + 'register';
-    return this.httpClient.post(url, request, this.OPTIONS).pipe(
+    const url = 'auth/register';
+    return this.httpClient.post(url, request).pipe(
       retry(3)
     );
   }
 
   login(username: string, password: string): Observable<User> {
-    const url = this.ROOT_URL + 'login';
+    const url = 'auth/login';
     const body = {
       username,
       password
     };
-    return this.httpClient.post<User>(url, body, this.OPTIONS).pipe(
+    return this.httpClient.post<User>(url, body).pipe(
       retry(3),
       tap((u) => {
         this.setupTimeout(u.expiry);

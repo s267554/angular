@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Team} from './team.model';
 
@@ -8,25 +8,19 @@ import {Team} from './team.model';
 })
 export class TeamService {
 
-  private readonly ROOT_URL = 'http://localhost:8080/api/courses/';
-  private readonly OPTIONS = {
-    responseType: 'json' as const,
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  private readonly URL = 'api/courses/';
 
   constructor(private readonly httpClient: HttpClient) {
   }
 
   getTeams(courseName: string): Observable<Team[]> {
-    const url = this.ROOT_URL + courseName + '/teams';
-    return this.httpClient.get<Team[]>(url, this.OPTIONS);
+    const url = this.URL + courseName + '/teams';
+    return this.httpClient.get<Team[]>(url);
   }
 
   updateTeam(courseName: string, team: Team): Observable<any> {
-    const url = this.ROOT_URL + courseName + '/teams/' + team.name;
-    return this.httpClient.put(url, team, this.OPTIONS);
+    const url = this.URL + courseName + '/teams/' + team.name;
+    return this.httpClient.put(url, team);
   }
 
 

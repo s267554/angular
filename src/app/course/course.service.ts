@@ -1,19 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Course} from './course.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {shareReplay, tap} from 'rxjs/operators';
 
 @Injectable()
 export class CourseService {
 
-  private readonly ROOT_URL = 'http://localhost:8080/api/';
-  private readonly OPTIONS = {
-    responseType: 'json' as const,
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  private readonly URL = 'api/courses/';
 
   // tslint:disable-next-line:variable-name
   private readonly _courses$ = new BehaviorSubject<Course[]>([]);
@@ -24,8 +18,7 @@ export class CourseService {
 
   getCourses(): Observable<Course[]> {
     this._courses$.next([]);
-    const url = this.ROOT_URL + 'courses';
-    return this.httpClient.get<Course[]>(url, this.OPTIONS).pipe(
+    return this.httpClient.get<Course[]>(this.URL).pipe(
       tap((c) => {
         this._courses$.next(c);
       }),
@@ -42,8 +35,8 @@ export class CourseService {
       }
     });
     this._courses$.next(newList);
-    const url = this.ROOT_URL + 'courses/' + course.name;
-    return this.httpClient.delete(url, this.OPTIONS).pipe(
+    const url = this.URL + course.name;
+    return this.httpClient.delete(url).pipe(
       tap(
         () => {
         },
@@ -66,8 +59,7 @@ export class CourseService {
       }
     });
     this._courses$.next(newList);
-    const url = this.ROOT_URL + 'courses';
-    return this.httpClient.put(url, course, this.OPTIONS).pipe(
+    return this.httpClient.put(this.URL, course).pipe(
       tap(
         () => {
         },
@@ -87,8 +79,7 @@ export class CourseService {
     });
     newList.push(course);
     this._courses$.next(newList);
-    const url = this.ROOT_URL + 'courses';
-    return this.httpClient.post(url, course, this.OPTIONS).pipe(
+    return this.httpClient.post(this.URL, course).pipe(
       tap(
         () => {
         },

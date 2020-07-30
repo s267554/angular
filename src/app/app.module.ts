@@ -43,6 +43,9 @@ import {TeamTableComponent} from './team/team-table.component';
 import {MatRippleModule} from '@angular/material/core';
 import {TeamDialogComponent} from './team/team-dialog.component';
 import {TeamDialogContComponent} from './team/team-dialog-cont.component';
+import {VmsTableComponent} from './vms/vms-table.component';
+import {VmsTableContComponent} from './vms/vms-table-cont.component';
+import {ApiInterceptor} from './api/api.interceptor';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,9 @@ import {TeamDialogContComponent} from './team/team-dialog-cont.component';
     TeamTabComponent,
     TeamTableComponent,
     TeamDialogComponent,
-    TeamDialogContComponent
+    TeamDialogContComponent,
+    VmsTableComponent,
+    VmsTableContComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +111,11 @@ import {TeamDialogContComponent} from './team/team-dialog-cont.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
       multi: true
     },
     {

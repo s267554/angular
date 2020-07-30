@@ -15,10 +15,6 @@ const ADMIN_TABS: Tab[] = [
   {
     title: 'Groups',
     path: '/groups'
-  },
-  {
-    title: 'VMs',
-    path: '/vms'
   }
 ];
 
