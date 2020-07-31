@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {VmsService} from './vms.service';
+import {VmsService} from '../vms.service';
 import {Observable} from 'rxjs';
-import {VirtualMachine} from './virtual-machine';
+import {VirtualMachine} from '../virtual-machine';
 import {retry, shareReplay, switchMap} from 'rxjs/operators';
-import {VlService} from '../vl.service';
+import {VlService} from '../../vl.service';
 
 @Component({
   selector: 'app-vms-table-cont',

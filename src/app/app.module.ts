@@ -39,12 +39,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TeamTabContComponent} from './team/team-tab-cont.component';
 import {TeamTabComponent} from './team/team-tab.component';
-import {TeamTableComponent} from './team/team-table.component';
+import {TeamTableComponent} from './team/team-table/team-table.component';
 import {MatRippleModule} from '@angular/material/core';
 import {TeamDialogComponent} from './team/team-dialog.component';
 import {TeamDialogContComponent} from './team/team-dialog-cont.component';
-import {VmsTableComponent} from './vms/vms-table.component';
-import {VmsTableContComponent} from './vms/vms-table-cont.component';
+import {VmsTableComponent} from './vms/vms-table/vms-table.component';
+import {VmsTableContComponent} from './vms/vms-table-cont/vms-table-cont.component';
 import {ApiInterceptor} from './api/api.interceptor';
 
 @NgModule({

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {VirtualMachine} from './virtual-machine';
+import {VirtualMachine} from '../virtual-machine';
 
 @Component({
   selector: 'app-vms-table',

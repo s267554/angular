@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Team} from './team.model';
+import {Team} from '../team.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -29,7 +29,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class TeamTableComponent implements OnInit {
 
-  @Input() displayedColumns = ['id', 'name', 'empty', 'edit'];
+  @Input() displayedColumns = ['id', 'name'];
 
   // tslint:disable-next-line:variable-name
   private readonly _update$ = new EventEmitter<Team>();
