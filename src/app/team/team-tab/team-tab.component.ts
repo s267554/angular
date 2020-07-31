@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Team} from './team.model';
+import {Team} from '../team.model';
 
 @Component({
   selector: 'app-team-tab',

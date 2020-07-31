@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {TeamStore} from './team-store';
-import {Team} from './team.model';
+import {TeamStore} from '../team-store';
+import {Team} from '../team.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
 

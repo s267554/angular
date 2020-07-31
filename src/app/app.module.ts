@@ -37,15 +37,17 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {TeamTabContComponent} from './team/team-tab-cont.component';
-import {TeamTabComponent} from './team/team-tab.component';
+import {TeamTabContComponent} from './team/team-tab-cont/team-tab-cont.component';
+import {TeamTabComponent} from './team/team-tab/team-tab.component';
 import {TeamTableComponent} from './team/team-table/team-table.component';
 import {MatRippleModule} from '@angular/material/core';
-import {TeamDialogComponent} from './team/team-dialog.component';
-import {TeamDialogContComponent} from './team/team-dialog-cont.component';
+import {TeamDialogComponent} from './team/team-dialog/team-dialog.component';
+import {TeamDialogContComponent} from './team/team-dialog-cont/team-dialog-cont.component';
 import {VmsTableComponent} from './vms/vms-table/vms-table.component';
 import {VmsTableContComponent} from './vms/vms-table-cont/vms-table-cont.component';
 import {ApiInterceptor} from './api/api.interceptor';
+import {VmTabComponent} from './vms/vm-tab/vm-tab.component';
+import {VmTabContComponent} from './vms/vm-tab-cont/vm-tab-cont.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import {ApiInterceptor} from './api/api.interceptor';
     TeamDialogComponent,
     TeamDialogContComponent,
     VmsTableComponent,
-    VmsTableContComponent
+    VmsTableContComponent,
+    VmTabComponent,
+    VmTabContComponent
   ],
   imports: [
     BrowserModule,

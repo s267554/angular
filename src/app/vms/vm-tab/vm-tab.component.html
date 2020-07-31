@@ -1,0 +1,23 @@
+<div class="main-container mat-elevation-z8">
+  <div class="detail-container">
+    <div class="detail-header">
+      <h4>Details</h4>
+    </div>
+    <mat-list class="detail-content">
+      <mat-list-item>
+        <span class="detail-item">VCpu</span> {{vm.vcpu}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <span class="detail-item">Space</span> {{vm.space}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <span class="detail-item">RAM</span> {{vm.ram}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </div>
+  <h4>Owners</h4>
+  <app-student-table [students]="owners"></app-student-table>
+</div>

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TeamStore} from './team-store';
-import {Team} from './team.model';
+import {TeamStore} from '../team-store';
+import {Team} from '../team.model';
 import {MatDialog} from '@angular/material/dialog';
-import {TeamDialogContComponent} from './team-dialog-cont.component';
+import {TeamDialogContComponent} from '../team-dialog-cont/team-dialog-cont.component';
 
 @Component({
   selector: 'app-team-tab-cont',
