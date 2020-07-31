@@ -10,13 +10,13 @@
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.active ? 'ON' : 'OFF'}} </mat-cell>
     </ng-container>
 
     <!-- Url Column -->
     <ng-container matColumnDef="url">
       <mat-header-cell *matHeaderCellDef>Url</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.url}} </mat-cell>
+      <mat-cell *matCellDef="let row"><a href="{{row.url}}">connect</a></mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

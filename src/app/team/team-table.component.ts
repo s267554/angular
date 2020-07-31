@@ -41,9 +41,10 @@ export class TeamTableComponent implements OnInit {
     return this._teams;
   }
 
-  @Input() set teams(teams: Team[]) {
+  @Input() set teams(teams: Team[] | null) {
     const rows = [];
-    teams.forEach(element => rows.push(element, {detailRow: true, element}));
+    const ref = teams !== null ? teams : [];
+    ref.forEach(element => rows.push(element, {detailRow: true, element}));
     this._teams = rows;
   }
 

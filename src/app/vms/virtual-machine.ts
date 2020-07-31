@@ -1,8 +1,8 @@
-export class VirtualMachine {
+export interface VirtualMachine {
   id: number;
   url: string;
   vcpu: number;
   space: number;
   ram: number;
-  status: string;
+  active: boolean;
 }
