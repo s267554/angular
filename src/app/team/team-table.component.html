@@ -1,10 +1,22 @@
 <div class="full-width-table mat-elevation-z8">
   <mat-table [dataSource]="teams">
 
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Empty Column -->
+    <ng-container matColumnDef="empty">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row"></mat-cell>
     </ng-container>
 
     <!-- Edit Column -->
@@ -20,7 +32,24 @@
     <!-- Expanded Content Column - The detail row is made up of this one column -->
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let detail">
-        <app-vms-table-cont [teamName]="detail.element.name"></app-vms-table-cont>
+        <div class="cell-container">
+          <mat-divider></mat-divider>
+          <h4>Details</h4>
+          <div class="detail-container">
+            <mat-label><b>Vcpu:</b> {{detail.element.vcpu}}</mat-label>
+            <br>
+            <mat-label><b>Space:</b> {{detail.element.space}}</mat-label>
+            <br>
+            <mat-label><b>Ram:</b> {{detail.element.ram}}</mat-label>
+            <br>
+            <mat-label><b>Max VMs Active:</b> {{detail.element.maxVMsActive}}</mat-label>
+            <br>
+            <mat-label><b>Max VMs:</b> {{detail.element.maxVMs}}</mat-label>
+          </div>
+          <mat-divider></mat-divider>
+          <h4>Virtual Machines</h4>
+          <app-vms-table-cont [teamName]="detail.element.name"></app-vms-table-cont>
+        </div>
       </mat-cell>
     </ng-container>
 

@@ -85,7 +85,6 @@ import {ApiInterceptor} from './api/api.interceptor';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule,
     FormsModule,
     MatListModule,
     MatTabsModule,

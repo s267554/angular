@@ -29,7 +29,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class TeamTableComponent implements OnInit {
 
-  @Input() displayedColumns = ['name', 'edit'];
+  @Input() displayedColumns = ['id', 'name', 'empty', 'edit'];
 
   // tslint:disable-next-line:variable-name
   private readonly _update$ = new EventEmitter<Team>();

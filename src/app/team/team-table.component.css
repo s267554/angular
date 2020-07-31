@@ -4,10 +4,6 @@
   flex-direction: column;
 }
 
-.mat-column-name {
-  flex: 0 0 90%;
-}
-
 .mat-table {
   overflow: auto;
 }
@@ -28,11 +24,14 @@
   border-bottom-color: transparent;
 }
 
-app-vms-table-cont {
+.cell-container {
+  flex-direction: column;
+  align-items: start;
   width: 100%;
   margin-bottom: 20px;
-  margin-top: 20px;
 }
 
-
+.detail-container {
+  margin-bottom: 20px;
+}
 

@@ -15,6 +15,7 @@ export class TeamDialogComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   private _team: Team;
   @Input() set team(team: Team) {
+    this.id = team.id;
     this.name = team.name;
     this.vcpu = team.vcpu;
     this.ram = team.ram;
@@ -23,6 +24,8 @@ export class TeamDialogComponent implements OnInit {
     this.maxVMs = team.maxVMs;
     this._team = team;
   }
+
+  id: number;
 
   name: string;
 
@@ -44,6 +47,7 @@ export class TeamDialogComponent implements OnInit {
 
   save() {
     const t: Team = {
+      id: this.id,
       name: this.name,
       courseName: this._team.courseName,
       vcpu: this.vcpu,
