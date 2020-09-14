@@ -13,7 +13,6 @@ export class VmTabComponent implements OnInit {
 
   @Input() owners: Student[] = [];
 
-
   constructor() {
   }
 

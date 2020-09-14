@@ -37,7 +37,6 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {TeamTabContComponent} from './team/team-tab-cont/team-tab-cont.component';
 import {TeamTabComponent} from './team/team-tab/team-tab.component';
 import {TeamTableComponent} from './team/team-table/team-table.component';
 import {MatRippleModule} from '@angular/material/core';
@@ -48,6 +47,7 @@ import {VmsTableContComponent} from './vms/vms-table-cont/vms-table-cont.compone
 import {ApiInterceptor} from './api/api.interceptor';
 import {VmTabComponent} from './vms/vm-tab/vm-tab.component';
 import {VmTabContComponent} from './vms/vm-tab-cont/vm-tab-cont.component';
+import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,6 @@ import {VmTabContComponent} from './vms/vm-tab-cont/vm-tab-cont.component';
     StudentTabComponent,
     StudentTabContComponent,
     StudentAutocompleteComponent,
-    TeamTabContComponent,
     TeamTabComponent,
     TeamTableComponent,
     TeamDialogComponent,
@@ -75,7 +74,8 @@ import {VmTabContComponent} from './vms/vm-tab-cont/vm-tab-cont.component';
     VmsTableComponent,
     VmsTableContComponent,
     VmTabComponent,
-    VmTabContComponent
+    VmTabContComponent,
+    TeamTableContComponent
   ],
   imports: [
     BrowserModule,

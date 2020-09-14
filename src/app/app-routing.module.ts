@@ -6,9 +6,9 @@ import {VlHomeComponent} from './vl-home/vl-home.component';
 import {VlMainComponent} from './vl-main/vl-main.component';
 import {VlTabNavBarContComponent} from './vl-tab-nav-bar/vl-tab-nav-bar-cont.component';
 import {StudentTabContComponent} from './student/student-tab-cont.component';
-import {TeamTabContComponent} from './team/team-tab-cont/team-tab-cont.component';
-import {TeamTableComponent} from './team/team-table/team-table.component';
 import {VmTabContComponent} from './vms/vm-tab-cont/vm-tab-cont.component';
+import {TeamTabComponent} from './team/team-tab/team-tab.component';
+import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.component';
 
 
 const routes: Routes = [
@@ -22,9 +22,9 @@ const routes: Routes = [
         children: [
           {path: 'students', component: StudentTabContComponent},
           {
-            path: 'groups', component: TeamTabContComponent,
+            path: 'groups', component: TeamTabComponent,
             children: [
-              {path: '', component: TeamTableComponent},
+              {path: '', component: TeamTableContComponent},
               {path: ':teamName/vms/:id', component: VmTabContComponent}
             ]
           }

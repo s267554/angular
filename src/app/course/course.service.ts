@@ -4,7 +4,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {shareReplay, tap} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CourseService {
 
   private readonly URL = 'api/courses/';
