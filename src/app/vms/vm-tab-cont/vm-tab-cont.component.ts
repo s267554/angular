@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {VmsService} from '../vms.service';
 import {Student} from '../../student/student.model';
 import {Observable} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
-import {map, retry, switchMap} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
+import {retry, switchMap} from 'rxjs/operators';
 import {VirtualMachine} from '../virtual-machine';
 
 @Component({
@@ -15,19 +15,18 @@ export class VmTabContComponent implements OnInit {
 
   owners$: Observable<Student[]>;
 
-  vm$: Observable<VirtualMachine>;
+  vm: VirtualMachine;
 
   constructor(private readonly vmsService: VmsService,
-              private readonly route: ActivatedRoute) {
+              private readonly route: ActivatedRoute,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
+    this.vm = this.router.getCurrentNavigation().extras.state as VirtualMachine;
     this.owners$ = this.route.params.pipe(
       switchMap(p => this.vmsService.getOwners(p.vmId)),
       retry(3)
-    );
-    this.vm$ = this.route.data.pipe(
-      map(d => d as VirtualMachine)
     );
   }
 

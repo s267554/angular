@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {VirtualMachine} from '../virtual-machine';
 import {retry, shareReplay, switchMap} from 'rxjs/operators';
 import {VlService} from '../../vl.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-vms-table-cont',
@@ -17,7 +18,9 @@ export class VmsTableContComponent implements OnInit {
   vms$: Observable<VirtualMachine[]>;
 
   constructor(private readonly vmsService: VmsService,
-              private readonly vlService: VlService) {
+              private readonly vlService: VlService,
+              private readonly activatedRoute: ActivatedRoute,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,6 +28,13 @@ export class VmsTableContComponent implements OnInit {
       switchMap(name => this.vmsService.getVms(name, this.teamName)),
       shareReplay(1),
       retry(3)
+    );
+  }
+
+  selectVM(vm: VirtualMachine): Promise<boolean> {
+    return this.router.navigate(
+      ['./', this.teamName, 'vms', vm.id],
+      {relativeTo: this.activatedRoute, state: vm}
     );
   }
 

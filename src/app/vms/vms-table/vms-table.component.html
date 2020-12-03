@@ -21,8 +21,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"
-             [routerLink]="['./prova', 'vms', row.id]"
-             [state]="row">
+             (click)="selectVM(row)">
     </mat-row>
 
   </mat-table>

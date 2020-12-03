@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {VirtualMachine} from '../virtual-machine';
 
 @Component({
@@ -12,10 +12,18 @@ export class VmsTableComponent implements OnInit {
 
   @Input() vms: VirtualMachine[] = [];
 
+  // tslint:disable-next-line:variable-name
+  private readonly _selectVM$ = new EventEmitter<VirtualMachine>();
+  @Output() readonly selectVM$ = this._selectVM$.asObservable();
+
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  selectVM(vm: VirtualMachine) {
+    this._selectVM$.emit(vm);
   }
 
 }
