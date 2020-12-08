@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Login</h1>
 <mat-dialog-content>
-  <form #loginForm="ngForm">
+  <form #loginForm="ngForm" (keyup.enter)="loginForm.form.valid ? login() : null">
     <mat-form-field class="fit-size-input" appearance="legacy">
       <mat-label>Email</mat-label>
       <input (ngModelChange)="loginError = false" #emailModel="ngModel" matInput type="email" [(ngModel)]="email"
@@ -15,6 +15,7 @@
              [type]="hide ? 'password' : 'text'"
              [(ngModel)]="password">
       <button mat-icon-button matSuffix
+              type="button"
               (click)="hide = !hide"
               [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide">
@@ -36,5 +37,5 @@
 </mat-dialog-actions>
 <div *ngIf="loginError">
   <br>
-  <mat-error>Email not found</mat-error>
+  <mat-error>Incorrect email or password</mat-error>
 </div>
