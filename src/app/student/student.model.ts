@@ -4,4 +4,5 @@ export interface Student {
   readonly surname: string;
   readonly email: string;
   readonly teamName: string;
+  readonly tempTempName: string;
 }

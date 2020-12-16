@@ -7,4 +7,6 @@ export interface Team {
   courseName: string;
   maxVMsActive: number;
   maxVMs: number;
+  enabled: boolean;
+  creator: string;
 }

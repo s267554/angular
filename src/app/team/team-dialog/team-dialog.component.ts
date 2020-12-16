@@ -39,6 +39,10 @@ export class TeamDialogComponent implements OnInit {
 
   maxVMs: number;
 
+  enabled: boolean;
+
+  creator: string;
+
   constructor() {
   }
 
@@ -54,7 +58,9 @@ export class TeamDialogComponent implements OnInit {
       ram: this.ram,
       space: this.space,
       maxVMsActive: this.maxVMsActive,
-      maxVMs: this.maxVMs
+      maxVMs: this.maxVMs,
+      enabled: this.enabled,
+      creator: this.creator
     };
     this._update$.emit(t);
   }
