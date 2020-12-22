@@ -1,0 +1,20 @@
+<div class="table-container">
+  <div class="header-container">
+    <h3>Crea un gruppo</h3>
+  </div>
+  <app-student-table [students]="this.myTeamStore.myStudents$ | async"
+                     [columns]="['select', 'id', 'name', 'surname']"
+                     (deleteAll)="proposeAll($event)">
+  </app-student-table>
+</div>
+<div class="table-container">
+  <div class="header-container">
+    <h3>I miei gruppi</h3>
+  </div>
+  <app-myteam-table
+    (action$)="action($event.teamName, $event.actionName)"
+    [myTeams]="myTeamStore.myTeams$ | async"
+    [userId]="username">
+  </app-myteam-table>
+</div>
+

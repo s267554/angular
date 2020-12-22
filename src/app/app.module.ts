@@ -39,6 +39,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TeamTabComponent} from './team/team-tab/team-tab.component';
 import {TeamTableComponent} from './team/team-table/team-table.component';
+import {MyTeamTabComponent} from './myteam/myteam-tab/myteam-tab.component';
+import {MyTeamTableComponent} from './myteam/myteam-table/myteam-table.component';
 import {MatRippleModule} from '@angular/material/core';
 import {TeamDialogComponent} from './team/team-dialog/team-dialog.component';
 import {TeamDialogContComponent} from './team/team-dialog-cont/team-dialog-cont.component';
@@ -48,6 +50,9 @@ import {ApiInterceptor} from './api/api.interceptor';
 import {VmTabComponent} from './vms/vm-tab/vm-tab.component';
 import {VmTabContComponent} from './vms/vm-tab-cont/vm-tab-cont.component';
 import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.component';
+import {MyTeamTableContComponent} from './myteam/myteam-table-cont/myteam-table-cont.component';
+import { ProposeDialogComponent } from './myteam/propose-dialog/propose-dialog.component';
+import { ProposeDialogContComponent } from './myteam/propose-dialog-cont/propose-dialog-cont.component';
 
 @NgModule({
   declarations: [
@@ -71,11 +76,16 @@ import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.com
     TeamTableComponent,
     TeamDialogComponent,
     TeamDialogContComponent,
+    MyTeamTabComponent,
+    MyTeamTableComponent,
     VmsTableComponent,
     VmsTableContComponent,
     VmTabComponent,
     VmTabContComponent,
-    TeamTableContComponent
+    TeamTableContComponent,
+    MyTeamTableContComponent,
+    ProposeDialogComponent,
+    ProposeDialogContComponent
   ],
   imports: [
     BrowserModule,

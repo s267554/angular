@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Propose Team</h1>
+<mat-dialog-content>
+  <form #teamForm="ngForm">
+    <mat-form-field class="fit-size-input" appearance="legacy">
+      <mat-label>Name</mat-label>
+      <input #nameModel="ngModel" matInput type="text" [(ngModel)]="teamName"
+             name="name" id="name" required>
+      <mat-error *ngIf="nameModel.invalid">Not a name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Timeout</mat-label>
+      <input #timeoutModel="ngModel" matInput type="number" [(ngModel)]="timeout"
+             name="timeout" id="timeout" required>
+      <mat-error *ngIf="timeoutModel.invalid">Not a number</mat-error>
+    </mat-form-field>
+  </form>
+  <p>Current size: {{_students.length + 1}}</p>
+  <p> Range is get range from course!!!</p>
+  <mat-list class="detail-container">
+    <mat-list-item *ngFor="let student of _students">
+      <div mat-line>{{student.id}}</div>
+      <div mat-line> {{student.name}} {{student.surname}}</div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+  <mat-dialog-actions>
+    <button [disabled]="!teamForm.form.valid"
+            (click)="propose()"
+            mat-raised-button
+            color="primary">
+      Propose
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</mat-dialog-content>
