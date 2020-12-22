@@ -50,6 +50,11 @@ export class AuthService {
     return user !== null ? user.token : null;
   }
 
+  getUserId(): string | null {
+    const user = this._loginEvent$.getValue();
+    return user !== null ? user.username.split('@')[0] : null;
+  }
+
   private stopTimer() {
     if (this.timerSub !== null) {
       this.timerSub.unsubscribe();
