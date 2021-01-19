@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {MyTeam, Proposal} from './myteam.model';
 import {Student} from '../student/student.model';
 import {Team} from '../team/team.model';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,16 @@ export class MyTeamService {
 
   private readonly URL = 'api/courses/';
 
+  myTeam: MyTeam;
+
   constructor(private readonly httpClient: HttpClient) {
   }
 
   getTeamsWithStudent(courseName: string, studentId: string): Observable<MyTeam[]> {
     const url = this.URL + courseName + '/teams';
     const params = new HttpParams().set('studentId', studentId); // Create new HttpParams
-    return this.httpClient.get<MyTeam[]>(url, {params});
+    return this.httpClient.get<MyTeam[]>(url, {params})
+      .pipe(tap((t) => this.myTeam = t.find(value => value.enabled)));
   }
 
   actionTeam(courseName: string, teamName: string, action: string): Observable<any> {
