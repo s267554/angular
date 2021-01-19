@@ -22,9 +22,11 @@ export class StudentTableComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly _deleteAll = new EventEmitter<Student[]>();
   @Output() readonly deleteAll = this._deleteAll.asObservable();
 
-  @Input() set students(students: Student[]) {
-    this.dataSource.emit(students);
-    this.selection.clear();
+  @Input() set students(students: Student[] | null) {
+    if (students != null) {
+      this.dataSource.emit(students);
+      this.selection.clear();
+    }
   }
 
   @Input() columns = ['select', 'id', 'name', 'surname', 'team'];
