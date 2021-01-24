@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Create Virtual Machine</h1>
+<mat-dialog-content>
+  <form #teamForm="ngForm" class="form-container">
+    <div class="row-container">
+      <mat-form-field class="left-container">
+        <mat-label>Vcpu</mat-label>
+        <input #vcpuModel="ngModel" matInput type="number" [(ngModel)]="vcpu"
+               name="vcpu" id="vcpu" required>
+        <mat-error *ngIf="vcpuModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="center-container">
+        <mat-label>Ram</mat-label>
+        <input #ramModel="ngModel" matInput type="number" [(ngModel)]="ram"
+               name="ram" id="ram" required>
+        <mat-error *ngIf="ramModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+      <mat-form-field class="right-container">
+        <mat-label>Space</mat-label>
+        <input #spaceModel="ngModel" matInput type="number" [(ngModel)]="space"
+               name="space" id="space" required>
+        <mat-error *ngIf="spaceModel.invalid">Not a number</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <button [disabled]="!teamForm.form.valid"
+            (click)="save()"
+            mat-raised-button
+            color="primary">
+      Create
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

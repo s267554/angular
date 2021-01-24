@@ -53,6 +53,9 @@ import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.com
 import {MyTeamTableContComponent} from './myteam/myteam-table-cont/myteam-table-cont.component';
 import { ProposeDialogComponent } from './myteam/propose-dialog/propose-dialog.component';
 import { ProposeDialogContComponent } from './myteam/propose-dialog-cont/propose-dialog-cont.component';
+import { VmsStudTabComponent } from './vms/vms-stud-tab/vms-stud-tab.component';
+import { VmDialogComponent } from './vms/vm-dialog/vm-dialog.component';
+import { VmDialogContComponent } from './vms/vm-dialog-cont/vm-dialog-cont.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +88,10 @@ import { ProposeDialogContComponent } from './myteam/propose-dialog-cont/propose
     TeamTableContComponent,
     MyTeamTableContComponent,
     ProposeDialogComponent,
-    ProposeDialogContComponent
+    ProposeDialogContComponent,
+    VmsStudTabComponent,
+    VmDialogComponent,
+    VmDialogContComponent
   ],
   imports: [
     BrowserModule,

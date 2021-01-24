@@ -24,4 +24,14 @@ export class VmsService {
     return this.httpClient.get<Student[]>(url);
   }
 
+  createVM(courseName: string, teamName: string, virtualMachine: VirtualMachine): Observable<VirtualMachine> {
+    const url = `${this.URL + courseName}/teams/${teamName}/createVM`;
+    return this.httpClient.post<VirtualMachine>(url, virtualMachine);
+  }
+
+  updateVM(courseName: string, teamName: string, virtualMachine: VirtualMachine): Observable<VirtualMachine> {
+    const url = `${this.URL + courseName}/teams/${teamName}/vms/${virtualMachine.id}`;
+    return this.httpClient.post<VirtualMachine>(url, virtualMachine);
+  }
+
 }

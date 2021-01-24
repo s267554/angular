@@ -11,7 +11,7 @@ import {TeamTabComponent} from './team/team-tab/team-tab.component';
 import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.component';
 import {MyTeamTabComponent} from './myteam/myteam-tab/myteam-tab.component';
 import {MyTeamTableContComponent} from './myteam/myteam-table-cont/myteam-table-cont.component';
-import {VmsTableContComponent} from './vms/vms-table-cont/vms-table-cont.component';
+import {VmsStudTabComponent} from './vms/vms-stud-tab/vms-stud-tab.component';
 
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'vms', component: VmsTableContComponent
+            path: 'vms', component: VmsStudTabComponent
           }
         ]
       },

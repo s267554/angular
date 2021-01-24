@@ -13,11 +13,13 @@ export class MyTeamService {
 
   private readonly URL = 'api/courses/';
 
+  // TODO: make observable
   myTeam: MyTeam;
 
   constructor(private readonly httpClient: HttpClient) {
   }
 
+  // TODO: find better way to update current team
   getTeamsWithStudent(courseName: string, studentId: string): Observable<MyTeam[]> {
     const url = this.URL + courseName + '/teams';
     const params = new HttpParams().set('studentId', studentId); // Create new HttpParams
