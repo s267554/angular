@@ -6,6 +6,8 @@ import {retry, shareReplay, switchMap} from 'rxjs/operators';
 import {VlService} from '../../vl.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MyTeamService} from '../../myteam/myteam.service';
+import {VmDialogContComponent} from '../vm-dialog-cont/vm-dialog-cont.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-vms-table-cont',
@@ -16,13 +18,16 @@ export class VmsTableContComponent implements OnInit {
 
   @Input() teamName: string;
 
+  @Input() columns: string[] = ['id', 'status', 'url'];
+
   vms$: Observable<VirtualMachine[]>;
 
   constructor(private readonly vmsService: VmsService,
               private readonly vlService: VlService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly router: Router,
-              private readonly teamService: MyTeamService) {
+              private readonly teamService: MyTeamService,
+              private readonly dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -31,6 +36,7 @@ export class VmsTableContComponent implements OnInit {
       if ( team != null) {
         this.teamName = team.name;
       }
+      this.columns.push('edit');
     }
     if (this.teamName != null) {
       this.vms$ = this.vlService.course$.pipe(
@@ -46,6 +52,10 @@ export class VmsTableContComponent implements OnInit {
       ['./', this.teamName, 'vms', vm.id],
       {relativeTo: this.activatedRoute, state: vm}
     );
+  }
+
+  updateVM($event: VirtualMachine) {
+    this.dialog.open(VmDialogContComponent, {data: $event});
   }
 
 }

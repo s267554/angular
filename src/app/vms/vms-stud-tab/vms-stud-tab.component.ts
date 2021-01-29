@@ -19,8 +19,4 @@ export class VmsStudTabComponent implements OnInit {
     this.dialog.open(VmDialogContComponent, {data: null});
   }
 
-  updateVM($event: VirtualMachine) {
-    this.dialog.open(VmDialogContComponent, {data: $event});
-  }
-
 }

@@ -1,3 +1,5 @@
 <app-vms-table [vms]="vms$ | async"
-               (selectVM$)="selectVM($event)">
+               (selectVM$)="selectVM($event)"
+               (updateVM$)="updateVM($event)"
+               [displayedColumns]="columns">
 </app-vms-table>

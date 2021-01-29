@@ -19,6 +19,13 @@
       <mat-cell *matCellDef="let row"><a href="{{row.url}}">connect</a></mat-cell>
     </ng-container>
 
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let row"><button (click)="updateVM(row)" >edit</button></mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"
              (click)="selectVM(row)">
