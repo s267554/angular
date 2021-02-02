@@ -34,4 +34,9 @@ export class VmsService {
     return this.httpClient.put<VirtualMachine>(url, virtualMachine);
   }
 
+  deleteVM(courseName: string, teamName: string, virtualMachine: VirtualMachine): Observable<VirtualMachine> {
+    const url = `${this.URL + courseName}/teams/${teamName}/vms/${virtualMachine.id}`;
+    return this.httpClient.delete<VirtualMachine>(url);
+  }
+
 }

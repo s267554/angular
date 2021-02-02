@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {VmsService} from '../vms.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {VirtualMachine} from '../virtual-machine';
-import {retry, shareReplay, switchMap, map} from 'rxjs/operators';
+import {retry, shareReplay, switchMap, map, filter} from 'rxjs/operators';
 import {VlService} from '../../vl.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MyTeamService} from '../../myteam/myteam.service';
@@ -47,7 +47,7 @@ export class VmsTableContComponent implements OnInit {
       if ( team != null) {
         this.teamName = team.name;
       }
-      this.columns.push('edit');
+      this.columns.push('edit', 'power', 'delete');
       this.team = this.teamService.myTeam;
       this.isUser = true;
     }
@@ -91,6 +91,9 @@ export class VmsTableContComponent implements OnInit {
 
   updateVM($event: VirtualMachine) {
     this.dialog.open(VmDialogContComponent, {data: $event}).afterClosed()
+      .pipe(
+        filter(value => (value as VirtualMachine).vcpu !== undefined)
+      )
       .subscribe(result => this._vms$.next(this._vms$.value.map(old => {
         return old.id === result.id ? result : old;
       })));
@@ -98,7 +101,26 @@ export class VmsTableContComponent implements OnInit {
 
   createVM() {
     this.dialog.open(VmDialogContComponent, {data: null}).afterClosed()
-      .subscribe(result => this._vms$.next(this._vms$.getValue().concat(result)));
+      .pipe(
+        filter(value => (value as VirtualMachine).vcpu !== undefined)
+      )
+      .subscribe(result => {console.log(result); this._vms$.next(this._vms$.getValue().concat(result)); });
+  }
+
+  powerVM($event: VirtualMachine) {
+    const vm = $event;
+    vm.active = !vm.active;
+    this.vmsService.updateVM(this.vlService.getCourse(), this.team.name, vm)
+      .subscribe(result => this._vms$.next(this._vms$.value.map(old => {
+      return old.id === result.id ? result : old;
+    })),
+        error => console.log(error));
+  }
+
+  deleteVM($event: VirtualMachine) {
+    this.vmsService.deleteVM(this.vlService.getCourse(), this.team.name, $event)
+      .subscribe(result => this._vms$.next(this._vms$.value.filter(value => value.id !== $event.id)),
+        error => console.log(error));
   }
 
 }

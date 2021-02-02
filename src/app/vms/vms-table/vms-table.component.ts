@@ -20,6 +20,14 @@ export class VmsTableComponent implements OnInit {
   private readonly _updateVM$ = new EventEmitter<VirtualMachine>();
   @Output() readonly updateVM$ = this._updateVM$.asObservable();
 
+  // tslint:disable-next-line:variable-name
+  private readonly _powerVM$ = new EventEmitter<VirtualMachine>();
+  @Output() readonly powerVM$ = this._powerVM$.asObservable();
+
+  // tslint:disable-next-line:variable-name
+  private readonly _deleteVM$ = new EventEmitter<VirtualMachine>();
+  @Output() readonly deleteVM$ = this._deleteVM$.asObservable();
+
   constructor() {
   }
 
@@ -32,6 +40,14 @@ export class VmsTableComponent implements OnInit {
 
   updateVM(vm: VirtualMachine) {
     this._updateVM$.emit(vm);
+  }
+
+  powerVM(vm: VirtualMachine) {
+    this._powerVM$.emit(vm);
+  }
+
+  deleteVM(vm: VirtualMachine) {
+    this._deleteVM$.emit(vm);
   }
 
 }
