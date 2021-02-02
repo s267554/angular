@@ -35,8 +35,8 @@ export class VmDialogContComponent implements OnInit, OnDestroy {
       observable = this.vmsService.updateVM(this.vlService.getCourse(), this.teamService.myTeam.name, vm);
     }
     this.sub = observable.subscribe(
-      () => {
-        this.dialog.close();
+      (value) => {
+        this.dialog.close(value);
       },
       () => {
         this.snackBar.open('Something went wrong');

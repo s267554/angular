@@ -40,6 +40,8 @@ export class VmDialogComponent implements OnInit {
 
   creator: string;
 
+  id: number;
+
   team: MyTeam;
 
   private setupNew() {
@@ -52,6 +54,7 @@ export class VmDialogComponent implements OnInit {
     this.vcpu = vm.vcpu;
     this.ram = vm.ram;
     this.space = vm.space;
+    this.id = vm.id;
   }
 
   save() {
@@ -59,7 +62,7 @@ export class VmDialogComponent implements OnInit {
       vcpu: this.vcpu,
       ram: this.ram,
       space: this.space,
-      id: 0,
+      id: this.id,
       url: 'http://google.com',
       active: true
     };

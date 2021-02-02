@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-content>
+    <h4>VCPUs: {{totcpu}}/{{team.vcpu}}</h4>
+    <mat-progress-bar mode="determinate" value="{{totcpu/team.vcpu*100}}"></mat-progress-bar>
+    <h4>RAM: {{totram}}/{{team.ram}}</h4>
+    <mat-progress-bar mode="determinate" value="{{totram/team.ram*100}}"></mat-progress-bar>
+    <h4>Space: {{totspace}}/{{team.space}}</h4>
+    <mat-progress-bar mode="determinate" value="{{totspace/team.space*100}}"></mat-progress-bar>
+  </mat-card-content>
+</mat-card>

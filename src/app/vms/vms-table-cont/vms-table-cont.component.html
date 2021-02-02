@@ -1,4 +1,11 @@
-<app-vms-table [vms]="vms$ | async"
+<app-team-resources
+  [totcpu]="totcpu$ | async"
+  [totram]="totram$ | async"
+  [totspace]="totspace$ | async"
+  [team]="team">
+</app-team-resources>
+<button *ngIf="isUser" (click)="createVM()"> Crea VM</button>
+<app-vms-table [vms]="this.vms$ | async"
                (selectVM$)="selectVM($event)"
                (updateVM$)="updateVM($event)"
                [displayedColumns]="columns">

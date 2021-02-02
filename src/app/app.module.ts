@@ -56,6 +56,9 @@ import { ProposeDialogContComponent } from './myteam/propose-dialog-cont/propose
 import { VmsStudTabComponent } from './vms/vms-stud-tab/vms-stud-tab.component';
 import { VmDialogComponent } from './vms/vm-dialog/vm-dialog.component';
 import { VmDialogContComponent } from './vms/vm-dialog-cont/vm-dialog-cont.component';
+import { TeamResourcesComponent } from './vms/team-resources/team-resources.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,8 @@ import { VmDialogContComponent } from './vms/vm-dialog-cont/vm-dialog-cont.compo
     ProposeDialogContComponent,
     VmsStudTabComponent,
     VmDialogComponent,
-    VmDialogContComponent
+    VmDialogContComponent,
+    TeamResourcesComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +117,9 @@ import { VmDialogContComponent } from './vms/vm-dialog-cont/vm-dialog-cont.compo
     MatSortModule,
     MatPaginatorModule,
     MatAutocompleteModule,
-    MatRippleModule
+    MatRippleModule,
+    MatProgressBarModule,
+    MatCardModule
   ],
   entryComponents: [
     VlLoginDialogComponent,
