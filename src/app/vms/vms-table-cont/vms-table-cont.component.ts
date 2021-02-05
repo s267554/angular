@@ -108,7 +108,8 @@ export class VmsTableContComponent implements OnInit {
   }
 
   powerVM($event: VirtualMachine) {
-    const vm = $event;
+    // copy
+    const vm = {...$event};
     vm.active = !vm.active;
     this.vmsService.updateVM(this.vlService.getCourse(), this.team.name, vm)
       .subscribe(result => this._vms$.next(this._vms$.value.map(old => {
