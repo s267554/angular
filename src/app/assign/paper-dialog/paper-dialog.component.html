@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Paper</h1>
+<mat-dialog-content>
+  <form #paperForm="ngForm" class="form-container">
+    <div class="row-container">
+      <mat-form-field>
+        <mat-label>Vote</mat-label>
+        <input #voteModel="ngModel" matInput type="number" [(ngModel)]="vote"
+               name="vote" id="vote" min="0" max="33">
+        <mat-error *ngIf="voteModel.invalid">Not a number between 0 and 33</mat-error>
+        <mat-error *ngIf="(voteModel.status === 'PENDING' || voteModel.status === 'INVALID') && final">You must assign a vote to make a paper final</mat-error>
+      </mat-form-field>
+        <mat-label>Final</mat-label>
+        <mat-checkbox [(ngModel)]="final" #enabledModel="ngModel"
+               name="final" id="final">
+        </mat-checkbox>
+        <mat-error *ngIf="(voteModel.value != null) && final">Can't assign vote to non-final paper</mat-error>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <button [disabled]="!paperForm.form.valid"
+            (click)="save()"
+            mat-raised-button
+            color="primary">
+      Save
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

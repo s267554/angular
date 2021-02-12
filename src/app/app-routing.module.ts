@@ -12,6 +12,8 @@ import {TeamTableContComponent} from './team/team-table-cont/team-table-cont.com
 import {MyTeamTabComponent} from './myteam/myteam-tab/myteam-tab.component';
 import {MyTeamTableContComponent} from './myteam/myteam-table-cont/myteam-table-cont.component';
 import {VmsStudTabComponent} from './vms/vms-stud-tab/vms-stud-tab.component';
+import {AssignTabComponent} from './assign/assign-tab/assign-tab.component';
+import {AssignTableContComponent} from './assign/assign-table-cont/assign-table-cont.component';
 
 
 const routes: Routes = [
@@ -39,6 +41,14 @@ const routes: Routes = [
           },
           {
             path: 'vms', component: VmsStudTabComponent
+          },
+          {
+            path: 'assign', component: AssignTabComponent,
+            children: [
+              {
+                path: '', component: AssignTableContComponent
+              }
+            ]
           }
         ]
       },

@@ -1,0 +1,9 @@
+<div class="table-container">
+  <div class="header-container">
+    <h3>Elenco delle consegne</h3>
+  </div>
+  <button *ngIf="admin" (click)="addAssignment()">Add assignment</button>
+  <app-assign-table [user]="user" [admin]="admin">
+  </app-assign-table>
+</div>
+

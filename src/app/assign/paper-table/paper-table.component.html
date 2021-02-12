@@ -1,0 +1,74 @@
+<mat-form-field *ngIf="admin">
+  <mat-label>Filter</mat-label>
+  <mat-select (selectionChange)="applyFilter($event)" #input>
+    <mat-option>Nessun filtro</mat-option>
+    <mat-option value="letto">LETTO</mat-option>
+    <mat-option value="consegnato">CONSEGNATO</mat-option>
+    <mat-option value="rivisto">RIVISTO</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.element.assignmentId}} </mat-cell>
+    </ng-container>
+
+    <!-- Student Column -->
+    <ng-container matColumnDef="student">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Student </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.element.student.surname}} {{row.element.student.name}} {{row.element.student.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.element.status}} </mat-cell>
+    </ng-container>
+
+    <!-- Vote Column -->
+    <ng-container matColumnDef="vote">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Vote </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.element.vote}} </mat-cell>
+    </ng-container>
+
+    <!-- Enabled Column -->
+    <ng-container matColumnDef="enabled">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Final </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.element.enabled ? 'N' : 'Y'}} </mat-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+      <mat-cell *matCellDef="let row"> <button (click)="revisePaper(row.element)" [disabled]="!isRevisable(row.element)">Revise Paper</button> </mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let detail">
+        <div class="cell-container">
+          <h4>Versions</h4>
+          <app-version-table [assignment]="assignment" [studentName]="detail.element.student.id" [admin]="admin"></app-version-table>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"
+             matRipple
+             class="element-row"
+             [class.expanded]="expandedElement == row.element"
+             (click)="expandedElement = row.element">
+    </mat-row>
+
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+             [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+             style="overflow: hidden">
+    </mat-row>
+
+  </mat-table>
+</div>

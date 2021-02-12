@@ -15,6 +15,10 @@ const ADMIN_TABS: Tab[] = [
   {
     title: 'Groups',
     path: '/groups'
+  },
+  {
+    title: 'Assignments',
+    path: '/assign'
   }
 ];
 
@@ -26,6 +30,10 @@ const USER_TABS: Tab[] = [
   {
     title: 'VMs',
     path: '/vms'
+  },
+  {
+    title: 'Assignments',
+    path: '/assign'
   }
 ];
 

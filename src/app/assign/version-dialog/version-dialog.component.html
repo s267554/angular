@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Paper Version</h1>
+<mat-dialog-content>
+  <form #assignForm="ngForm" class="form-container">
+    <div class="row-container">
+      <mat-form-field>
+        <mat-label>Url</mat-label>
+        <input #urlModel="ngModel" matInput type="url" [(ngModel)]="url"
+               name="url" id="url" required>
+        <mat-error *ngIf="urlModel.invalid">Not an url</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <button [disabled]="!assignForm.form.valid"
+            (click)="save()"
+            mat-raised-button
+            color="primary">
+      Save
+    </button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

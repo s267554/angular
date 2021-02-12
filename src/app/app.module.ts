@@ -59,6 +59,20 @@ import { VmDialogContComponent } from './vms/vm-dialog-cont/vm-dialog-cont.compo
 import { TeamResourcesComponent } from './vms/team-resources/team-resources.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
+import { AssignTabComponent } from './assign/assign-tab/assign-tab.component';
+import { AssignTableComponent } from './assign/assign-table/assign-table.component';
+import { AssignTableContComponent } from './assign/assign-table-cont/assign-table-cont.component';
+import { PaperTableComponent } from './assign/paper-table/paper-table.component';
+import {MatSelectModule} from '@angular/material/select';
+import { VersionTableComponent } from './assign/version-table/version-table.component';
+import { AssignDialogContComponent } from './assign/assign-dialog-cont/assign-dialog-cont.component';
+import { AssignDialogComponent } from './assign/assign-dialog/assign-dialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { VersionDialogContComponent } from './assign/version-dialog-cont/version-dialog-cont.component';
+import { VersionDialogComponent } from './assign/version-dialog/version-dialog.component';
+import { PaperDialogContComponent } from './assign/paper-dialog-cont/paper-dialog-cont.component';
+import { PaperDialogComponent } from './assign/paper-dialog/paper-dialog.component';
 
 @NgModule({
   declarations: [
@@ -95,32 +109,46 @@ import {MatCardModule} from '@angular/material/card';
     VmsStudTabComponent,
     VmDialogComponent,
     VmDialogContComponent,
-    TeamResourcesComponent
+    TeamResourcesComponent,
+    AssignTabComponent,
+    AssignTableComponent,
+    AssignTableContComponent,
+    PaperTableComponent,
+    VersionTableComponent,
+    AssignDialogContComponent,
+    AssignDialogComponent,
+    VersionDialogContComponent,
+    VersionDialogComponent,
+    PaperDialogContComponent,
+    PaperDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatListModule,
-    MatTabsModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatAutocompleteModule,
-    MatRippleModule,
-    MatProgressBarModule,
-    MatCardModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatListModule,
+        MatTabsModule,
+        MatCheckboxModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatAutocompleteModule,
+        MatRippleModule,
+        MatProgressBarModule,
+        MatCardModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
   entryComponents: [
     VlLoginDialogComponent,
     CourseDialogContComponent,

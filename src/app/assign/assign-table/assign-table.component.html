@@ -1,0 +1,54 @@
+<div class="full-width-table mat-elevation-z8">
+  <mat-table [dataSource]="dataSource">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Creation Column -->
+    <ng-container matColumnDef="creation">
+      <mat-header-cell *matHeaderCellDef>Creation Date</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.creationDate | date:'shortDate'}} </mat-cell>
+    </ng-container>
+
+    <!-- Expiration Column -->
+    <ng-container matColumnDef="expiration">
+      <mat-header-cell *matHeaderCellDef>Expiration</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.expiryDate | date:'short'}} </mat-cell>
+    </ng-container>
+
+    <!-- ContentUrl Column -->
+    <ng-container matColumnDef="url">
+      <mat-header-cell *matHeaderCellDef>Content Url</mat-header-cell>
+      <mat-cell *matCellDef="let row"> <a target="_blank" (auxclick)="readPaper(row)" href="{{row.contentUrl}}" (click)="readPaper(row)">Read Assignment</a></mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let detail">
+        <div class="cell-container">
+          <h4>Papers</h4>
+          <app-paper-table [admin]="admin" [assignment]="detail.element"></app-paper-table>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             matRipple
+             class="element-row"
+             [class.expanded]="expandedElement == row"
+             (click)="expandedElement = row">
+    </mat-row>
+
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+             [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+             style="overflow: hidden">
+    </mat-row>
+
+  </mat-table>
+</div>
+
