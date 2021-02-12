@@ -7,7 +7,7 @@ import {VlService} from '../../vl.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MyTeamService} from '../../myteam/myteam.service';
 import {VmDialogContComponent} from '../vm-dialog-cont/vm-dialog-cont.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Team} from '../../team/team.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -102,9 +102,12 @@ export class VmsTableContComponent implements OnInit {
   }
 
   updateVM($event: VirtualMachine) {
-    this.dialog.open(VmDialogContComponent, {data: $event}).afterClosed()
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = $event;
+    const dialogRef = this.dialog.open(VmDialogContComponent, dialogConfig);
+    dialogRef.afterClosed()
       .pipe(
-        filter(value => (value as VirtualMachine).vcpu !== undefined)
+        filter(value => (value as VirtualMachine) !== undefined)
       )
       .subscribe(result => this._vms$.next(this._vms$.value.map(old => {
         return old.id === result.id ? result : old;
@@ -112,9 +115,12 @@ export class VmsTableContComponent implements OnInit {
   }
 
   createVM() {
-    this.dialog.open(VmDialogContComponent, {data: null}).afterClosed()
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = null;
+    const dialogRef = this.dialog.open(VmDialogContComponent, dialogConfig);
+    dialogRef.afterClosed()
       .pipe(
-        filter(value => (value as VirtualMachine).vcpu !== undefined)
+        filter(value => (value as VirtualMachine) !== undefined)
       )
       .subscribe(result => {this._vms$.next(this._vms$.getValue().concat(result)); });
   }

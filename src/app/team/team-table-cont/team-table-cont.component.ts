@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {TeamStore} from '../team-store';
 import {Team} from '../team.model';
 import {TeamDialogContComponent} from '../team-dialog-cont/team-dialog-cont.component';
@@ -19,7 +19,9 @@ export class TeamTableContComponent implements OnInit {
   }
 
   update(team: Team) {
-    this.dialog.open(TeamDialogContComponent, {data: team});
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = team;
+    this.dialog.open(TeamDialogContComponent, dialogConfig);
   }
 
 }

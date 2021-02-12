@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MyTeamStore} from '../myteam-store';
 import {Team} from '../../team/team.model';
 import {AuthService} from '../../auth/auth.service';
@@ -31,6 +31,8 @@ export class MyTeamTableContComponent implements OnInit {
   }
 
   proposeAll($event: Student[]) {
-    this.dialog.open(ProposeDialogContComponent, {data: $event});
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = $event;
+    this.dialog.open(ProposeDialogContComponent, dialogConfig);
   }
 }

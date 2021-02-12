@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {CourseService} from '../course/course.service';
 import {AuthService} from '../auth/auth.service';
 import {Course} from '../course/course.model';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {CourseDialogContComponent} from '../course/course-dialog-cont.component';
 
@@ -15,6 +15,8 @@ import {CourseDialogContComponent} from '../course/course-dialog-cont.component'
 export class VlSidenavContComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
+
+  private dialogRef: MatDialogRef<CourseDialogContComponent>;
 
   constructor(private readonly dialog: MatDialog,
               private readonly snackBar: MatSnackBar,
@@ -58,7 +60,9 @@ export class VlSidenavContComponent implements OnInit, OnDestroy {
   }
 
   private openCourseDialog(conf: any) {
-    this.dialog.open(CourseDialogContComponent, conf);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = conf;
+    this.dialogRef = this.dialog.open(CourseDialogContComponent, dialogConfig);
   }
 
 }

@@ -11,7 +11,7 @@ import {Assignment} from '../assign.model';
 import {VersionDialogContComponent} from '../version-dialog-cont/version-dialog-cont.component';
 import {filter} from 'rxjs/operators';
 import {Version} from '../version.model';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PaperDialogContComponent} from '../paper-dialog-cont/paper-dialog-cont.component';
 
 @Component({
@@ -106,9 +106,12 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
 
   revisePaper(row: Paper) {
-    this.dialog.open(PaperDialogContComponent, {data: row}).afterClosed()
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = row;
+    const dialogRef = this.dialog.open(PaperDialogContComponent, dialogConfig);
+    dialogRef.afterClosed()
       .pipe(
-        filter(value => (value as Paper).assignmentId !== undefined)
+        filter(value => (value as Paper) !== undefined)
       )
       .subscribe(result => this.papers = this._papers.map(paper => {
         if (paper.student.id === result.student.id) {

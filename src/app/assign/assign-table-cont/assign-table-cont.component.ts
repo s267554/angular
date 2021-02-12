@@ -3,7 +3,7 @@ import {AssignStore} from '../assign-store';
 import {AuthService} from '../../auth/auth.service';
 import {isAdmin, User} from '../../auth/user.model';
 import {filter} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AssignDialogContComponent} from '../assign-dialog-cont/assign-dialog-cont.component';
 import {Assignment} from '../assign.model';
 
@@ -19,7 +19,7 @@ export class AssignTableContComponent implements OnInit {
 
   constructor(readonly assignStore: AssignStore,
               private readonly authService: AuthService,
-              private readonly dialog: MatDialog) {
+              public dialog: MatDialog) {
     this.authService.loginEvent$.subscribe(next => {this.user = next; this.admin = isAdmin(next); });
   }
 
@@ -27,10 +27,13 @@ export class AssignTableContComponent implements OnInit {
   }
 
   addAssignment() {
-    this.dialog.open(AssignDialogContComponent, {data: null}).afterClosed()
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = null;
+    const dialogRef = this.dialog.open(AssignDialogContComponent, dialogConfig);
+    dialogRef.afterClosed()
       .pipe(
-        filter(value => (value as Assignment).expiryDate !== undefined)
+        filter(value => (value as Assignment) !== undefined)
       )
-      .subscribe(result => this.assignStore.addAssignment(result));
+      .subscribe(result => {console.log(result); this.assignStore.addAssignment(result); });
   }
 }

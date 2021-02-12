@@ -15,7 +15,7 @@ export class AssignDialogContComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = null;
 
-  constructor(private readonly dialog: MatDialogRef<AssignDialogContComponent>,
+  constructor(public dialog: MatDialogRef<AssignDialogContComponent>,
               private readonly assignService: AssignService,
               private readonly assignStore: AssignStore,
               private readonly vlService: VlService,

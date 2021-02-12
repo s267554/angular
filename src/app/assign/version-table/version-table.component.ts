@@ -7,7 +7,7 @@ import {AssignService} from '../assign.service';
 import {Assignment} from '../assign.model';
 import {AssignDialogContComponent} from '../assign-dialog-cont/assign-dialog-cont.component';
 import {filter} from 'rxjs/operators';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {VersionDialogContComponent} from '../version-dialog-cont/version-dialog-cont.component';
 
 @Component({
@@ -38,9 +38,12 @@ export class VersionTableComponent implements OnInit, AfterViewInit {
   }
 
   addVersion() {
-    this.dialog.open(VersionDialogContComponent, {data: this.assignment.id}).afterClosed()
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = this.assignment.id;
+    const dialogRef = this.dialog.open(VersionDialogContComponent, dialogConfig);
+    dialogRef.afterClosed()
       .pipe(
-        filter(value => (value as Version).contentUrl !== undefined)
+        filter(value => (value as Version) !== undefined)
       )
       .subscribe(result => this.dataSource.data = this.dataSource.data.concat(result));
   }

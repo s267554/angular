@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {AuthService} from './auth/auth.service';
 import {Subscription} from 'rxjs';
 import {VlToolbarComponent} from './vl-toolbar/vl-toolbar.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {VlService} from './vl.service';
 import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
@@ -25,9 +25,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private openVlLoginDialog(url: string) {
-    const dialogRef = this.dialog.open(VlLoginDialogComponent, {
-      width: '25%'
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '25%';
+    const dialogRef = this.dialog.open(VlLoginDialogComponent, dialogConfig);
     dialogRef.afterClosed().toPromise().then((value) => {
       const user = value !== null && value !== undefined ? value : null;
       if (user !== null) {
