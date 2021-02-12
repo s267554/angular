@@ -5,7 +5,7 @@
   </button>
   <mat-nav-list>
     <mat-list-item class="list-item" *ngFor="let c of courses">
-      <a class="fill-remaining-space" matLine routerLink="./{{c.name}}/students">{{c.name}}</a>
+      <a (click)="toggleSidenav()" class="fill-remaining-space" matLine routerLink="./{{c.name}}/{{getRouterLink()}}">{{c.name}}</a>
       <button *ngIf="editable" (click)="update(c)" mat-icon-button>
         <mat-icon>create</mat-icon>
       </button>

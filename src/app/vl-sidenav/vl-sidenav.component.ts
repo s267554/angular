@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Course} from '../course/course.model';
 import {isAdmin, User} from '../auth/user.model';
+import {VlService} from '../vl.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-vl-sidenav',
@@ -25,11 +27,14 @@ export class VlSidenavComponent implements OnInit {
 
   @Input() set user(user: User | null) {
     this.editable = isAdmin(user);
+    this.admin = isAdmin(user);
   }
 
   @Input() editable = false;
+  admin: boolean;
 
-  constructor() {
+  constructor(private readonly vlService: VlService,
+              private readonly authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -45,6 +50,19 @@ export class VlSidenavComponent implements OnInit {
 
   delete(c: Course) {
     this._delete$.emit(c);
+  }
+
+  toggleSidenav() {
+    this.vlService.toggleSidenav();
+  }
+
+  getRouterLink() {
+    if (!this.admin){
+      return 'myteams';
+    }
+    else {
+      return 'students';
+    }
   }
 
 }
