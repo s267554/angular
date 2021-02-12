@@ -62,7 +62,7 @@
              matRipple
              class="element-row"
              [class.expanded]="expandedElement == row.element"
-             (click)="expandedElement = row.element">
+             (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
     </mat-row>
 
     <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
