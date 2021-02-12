@@ -1,3 +1,5 @@
+import {Student} from '../student/student.model';
+
 export interface VirtualMachine {
   id: number;
   url: string;
@@ -5,4 +7,5 @@ export interface VirtualMachine {
   space: number;
   ram: number;
   active: boolean;
+  owners: Student[];
 }

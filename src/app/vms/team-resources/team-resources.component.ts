@@ -11,6 +11,8 @@ export class TeamResourcesComponent implements OnInit {
   @Input() totcpu: number;
   @Input() totram: number;
   @Input() totspace: number;
+  @Input() totvms: number;
+  @Input() totvmsactive: number;
   @Input() team: Team;
 
   constructor() { }

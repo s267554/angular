@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {VirtualMachine} from '../virtual-machine';
+import {AuthService} from '../../auth/auth.service';
+import {Student} from '../../student/student.model';
 
 @Component({
   selector: 'app-vms-table',
@@ -11,6 +13,8 @@ export class VmsTableComponent implements OnInit {
   @Input() displayedColumns: string[] = ['id', 'status', 'url'];
 
   @Input() vms: VirtualMachine[] = [];
+
+  user: string;
 
   // tslint:disable-next-line:variable-name
   private readonly _selectVM$ = new EventEmitter<VirtualMachine>();
@@ -28,10 +32,11 @@ export class VmsTableComponent implements OnInit {
   private readonly _deleteVM$ = new EventEmitter<VirtualMachine>();
   @Output() readonly deleteVM$ = this._deleteVM$.asObservable();
 
-  constructor() {
+  constructor(private readonly authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.user = this.authService.getUserId();
   }
 
   selectVM(vm: VirtualMachine) {
@@ -50,4 +55,7 @@ export class VmsTableComponent implements OnInit {
     this._deleteVM$.emit(vm);
   }
 
+  isOwner(vm: VirtualMachine) {
+    return vm.owners.map(value => value.id).includes(this.user);
+  }
 }

@@ -20,22 +20,14 @@
     </ng-container>
 
 
-    <!-- Edit Column -->
-    <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-      <mat-cell *matCellDef="let row"><button (click)="updateVM(row)" >edit</button></mat-cell>
-    </ng-container>
-
-    <!-- Power Column -->
-    <ng-container matColumnDef="power">
-      <mat-header-cell *matHeaderCellDef>Power</mat-header-cell>
-      <mat-cell *matCellDef="let row"><button (click)="powerVM(row)" >power</button></mat-cell>
-    </ng-container>
-
-    <!-- Delete Column -->
-    <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-      <mat-cell *matCellDef="let row"><button (click)="deleteVM(row)" >delete</button></mat-cell>
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button (click)="updateVM(row)" [disabled]="!isOwner(row)" >edit</button>
+        <button (click)="powerVM(row)" [disabled]="!isOwner(row)" >power</button>
+        <button (click)="deleteVM(row)" [disabled]="!isOwner(row)" >delete</button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -2,9 +2,11 @@
   [totcpu]="totcpu$ | async"
   [totram]="totram$ | async"
   [totspace]="totspace$ | async"
+  [totvms]="totvms$ | async"
+  [totvmsactive]="totvmsactive$ | async"
   [team]="team">
 </app-team-resources>
-<button *ngIf="isUser" (click)="createVM()"> Crea VM</button>
+<button *ngIf="isUser" (click)="createVM()" [disabled]="(totvms$ | async) >= team.maxVMs"> Crea VM</button>
 <app-vms-table [vms]="this.vms$ | async"
                (selectVM$)="selectVM($event)"
                (updateVM$)="updateVM($event)"

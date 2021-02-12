@@ -6,5 +6,9 @@
     <mat-progress-bar mode="determinate" value="{{totram/team.ram*100}}"></mat-progress-bar>
     <h4>Space: {{totspace}}/{{team.space}}</h4>
     <mat-progress-bar mode="determinate" value="{{totspace/team.space*100}}"></mat-progress-bar>
+    <h4># VMs: {{totvms}}/{{team.maxVMs}}</h4>
+    <mat-progress-bar mode="determinate" value="{{totvms/team.maxVMs*100}}"></mat-progress-bar>
+    <h4># Active VMs: {{totvmsactive}}/{{team.maxVMsActive}}</h4>
+    <mat-progress-bar mode="determinate" value="{{totvmsactive/team.maxVMsActive*100}}"></mat-progress-bar>
   </mat-card-content>
 </mat-card>

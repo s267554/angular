@@ -9,6 +9,7 @@ import {MyTeamService} from '../../myteam/myteam.service';
 import {VmDialogContComponent} from '../vm-dialog-cont/vm-dialog-cont.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Team} from '../../team/team.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-vms-table-cont',
@@ -30,6 +31,9 @@ export class VmsTableContComponent implements OnInit {
   totcpu$: Observable<number>;
   totram$: Observable<number>;
   totspace$: Observable<number>;
+  totvms$: Observable<number>;
+  totvmsactive$: Observable<number>;
+  canPowerOn: boolean;
 
   isUser = false;
 
@@ -38,7 +42,8 @@ export class VmsTableContComponent implements OnInit {
               private readonly activatedRoute: ActivatedRoute,
               private readonly router: Router,
               private readonly teamService: MyTeamService,
-              private readonly dialog: MatDialog) {
+              private readonly dialog: MatDialog,
+              private readonly snackbar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -47,7 +52,7 @@ export class VmsTableContComponent implements OnInit {
       if ( team != null) {
         this.teamName = team.name;
       }
-      this.columns.push('edit', 'power', 'delete');
+      this.columns.push('action');
       this.team = this.teamService.myTeam;
       this.isUser = true;
     }
@@ -80,6 +85,13 @@ export class VmsTableContComponent implements OnInit {
         return 0;
       }
     }));
+    this.totvms$ = this.vms$.pipe(map(vms => {
+      return vms.length;
+    }));
+    this.totvmsactive$ = this.vms$.pipe(map(vms => {
+      return vms.filter(vm => vm.active).length;
+    }));
+    this.totvmsactive$.subscribe(value => this.canPowerOn = value < this.team.maxVMsActive);
   }
 
   selectVM(vm: VirtualMachine): Promise<boolean> {
@@ -104,10 +116,14 @@ export class VmsTableContComponent implements OnInit {
       .pipe(
         filter(value => (value as VirtualMachine).vcpu !== undefined)
       )
-      .subscribe(result => {console.log(result); this._vms$.next(this._vms$.getValue().concat(result)); });
+      .subscribe(result => {this._vms$.next(this._vms$.getValue().concat(result)); });
   }
 
   powerVM($event: VirtualMachine) {
+    if (!this.canPowerOn && !$event.active) {
+      this.snackbar.open('MaxVmsActive reached!');
+      return;
+    }
     // copy
     const vm = {...$event};
     vm.active = !vm.active;

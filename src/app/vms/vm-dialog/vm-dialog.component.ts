@@ -5,6 +5,9 @@ import {VmsService} from '../vms.service';
 import {VlService} from '../../vl.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MyTeamService} from '../../myteam/myteam.service';
+import {Student} from '../../student/student.model';
+import {SelectionModel} from '@angular/cdk/collections';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-vm-dialog',
@@ -29,7 +32,8 @@ export class VmDialogComponent implements OnInit {
               private readonly vlService: VlService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly router: Router,
-              private readonly teamService: MyTeamService) {
+              private readonly teamService: MyTeamService,
+              private readonly authService: AuthService) {
   }
 
   vcpu: number;
@@ -42,12 +46,19 @@ export class VmDialogComponent implements OnInit {
 
   id: number;
 
-  team: MyTeam;
+  owners: Student[];
+
+  selection: SelectionModel<string>;
+
+  url: string;
+
+  team: MyTeam = this.teamService.myTeam;
 
   private setupNew() {
     this.vcpu = 0;
     this.ram = 0;
     this.space = 0;
+    this.selection = new SelectionModel<string>(true, [this.authService.getUserId()]);
   }
 
   private setupVM(vm: VirtualMachine) {
@@ -55,6 +66,8 @@ export class VmDialogComponent implements OnInit {
     this.ram = vm.ram;
     this.space = vm.space;
     this.id = vm.id;
+    this.owners = vm.owners;
+    this.selection = new SelectionModel<string>(true, this.owners.map(value => value.id));
   }
 
   save() {
@@ -63,15 +76,13 @@ export class VmDialogComponent implements OnInit {
       ram: this.ram,
       space: this.space,
       id: this.id,
-      url: 'http://google.com',
-      active: true
+      url: 'https://google.com',
+      active: false,
+      owners: this.team.members.filter(value => this.selection.selected.includes(value.id)),
     };
     this._save$.emit(vm);
   }
 
   ngOnInit(): void {
-    this.team = this.teamService.myTeam;
   }
-
-
 }
