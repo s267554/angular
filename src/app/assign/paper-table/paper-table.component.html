@@ -14,31 +14,46 @@
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.element.assignmentId}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
+        {{row.element.assignmentId}}
+      </mat-cell>
     </ng-container>
 
     <!-- Student Column -->
     <ng-container matColumnDef="student">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Student </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.element.student.surname}} {{row.element.student.name}} {{row.element.student.id}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
+        {{row.element.student.surname}} {{row.element.student.name}} {{row.element.student.id}}
+      </mat-cell>
     </ng-container>
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.element.status}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
+        {{row.element.status}}
+      </mat-cell>
     </ng-container>
 
     <!-- Vote Column -->
     <ng-container matColumnDef="vote">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Vote </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.element.vote}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
+        {{row.element.vote}}
+      </mat-cell>
     </ng-container>
 
     <!-- Enabled Column -->
     <ng-container matColumnDef="enabled">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Final </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.element.enabled ? 'N' : 'Y'}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
+        {{row.element.enabled ? 'N' : 'Y'}}
+      </mat-cell>
     </ng-container>
 
     <!-- Action Column -->
@@ -61,8 +76,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"
              matRipple
              class="element-row"
-             [class.expanded]="expandedElement == row.element"
-             (click)="expandedElement == row.element ? expandedElement = null : expandedElement = row.element">
+             [class.expanded]="expandedElement == row.element">
     </mat-row>
 
     <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
