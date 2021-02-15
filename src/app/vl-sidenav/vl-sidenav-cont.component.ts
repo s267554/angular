@@ -48,15 +48,11 @@ export class VlSidenavContComponent implements OnInit, OnDestroy {
   }
 
   updateCourse(course: Course) {
-    this.openCourseDialog({
-      data: course
-    });
+    this.openCourseDialog(course);
   }
 
   createCourse() {
-    this.openCourseDialog({
-      data: null
-    });
+    this.openCourseDialog(null);
   }
 
   private openCourseDialog(conf: any) {
