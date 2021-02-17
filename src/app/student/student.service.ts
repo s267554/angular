@@ -42,4 +42,9 @@ export class StudentService {
     );
   }
 
+  enrollManyStudents(courseName: string, formData: FormData): Observable<any> {
+    const url = this.URL + courseName + '/enrollMany';
+    return this.httpClient.post<any>(url, formData);
+  }
+
 }

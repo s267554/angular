@@ -14,7 +14,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dia
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {AuthInterceptor} from './auth/auth.interceptor';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {VlSidenavComponent} from './vl-sidenav/vl-sidenav.component';
 import {MatListModule} from '@angular/material/list';
 import {VlSidenavContComponent} from './vl-sidenav/vl-sidenav-cont.component';
@@ -73,6 +73,7 @@ import { VersionDialogContComponent } from './assign/version-dialog-cont/version
 import { VersionDialogComponent } from './assign/version-dialog/version-dialog.component';
 import { PaperDialogContComponent } from './assign/paper-dialog-cont/paper-dialog-cont.component';
 import { PaperDialogComponent } from './assign/paper-dialog/paper-dialog.component';
+import { FileuploadComponent } from './student/fileupload/fileupload.component';
 
 @NgModule({
   declarations: [
@@ -120,35 +121,37 @@ import { PaperDialogComponent } from './assign/paper-dialog/paper-dialog.compone
     VersionDialogContComponent,
     VersionDialogComponent,
     PaperDialogContComponent,
-    PaperDialogComponent
+    PaperDialogComponent,
+    FileuploadComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatListModule,
-        MatTabsModule,
-        MatCheckboxModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatAutocompleteModule,
-        MatRippleModule,
-        MatProgressBarModule,
-        MatCardModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatListModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatAutocompleteModule,
+    MatRippleModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
+  ],
   entryComponents: [
     VlLoginDialogComponent,
     CourseDialogContComponent,
