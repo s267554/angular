@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
 
+## Docker
+
+1. Update `private readonly ROOT_URL = 'http://localhost:8080/';` host to match Spring container
+2. Run `docker build -t angular-9-app` to build image from Dockerfile
+3. Run `docker run --name ng-app-container -d -p 80:80 angular-9-app` to start container
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
