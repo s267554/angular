@@ -4,19 +4,28 @@
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row ? expandedElement = null : expandedElement = row">
+        {{row.id}}
+      </mat-cell>
     </ng-container>
 
     <!-- Creation Column -->
     <ng-container matColumnDef="creation">
       <mat-header-cell *matHeaderCellDef>Creation Date</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.creationDate | date:'shortDate'}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row ? expandedElement = null : expandedElement = row">
+        {{row.creationDate | date:'shortDate'}}
+      </mat-cell>
     </ng-container>
 
     <!-- Expiration Column -->
     <ng-container matColumnDef="expiration">
       <mat-header-cell *matHeaderCellDef>Expiration</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.expiryDate | date:'short'}} </mat-cell>
+      <mat-cell *matCellDef="let row"
+                (click)="expandedElement == row ? expandedElement = null : expandedElement = row">
+        {{row.expiryDate | date:'short'}}
+      </mat-cell>
     </ng-container>
 
     <!-- ContentUrl Column -->
@@ -40,8 +49,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"
              matRipple
              class="element-row"
-             [class.expanded]="expandedElement == row"
-             (click)="expandedElement == row ? expandedElement = null : expandedElement = row">
+             [class.expanded]="expandedElement == row">
     </mat-row>
 
     <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
