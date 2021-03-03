@@ -4,6 +4,7 @@
   </div>
   <app-student-table [students]="this.myTeamStore.myStudents$ | async"
                      [columns]="['select', 'id', 'name', 'surname']"
+                     [actionName]="'Propose'"
                      (deleteAll)="proposeAll($event)">
   </app-student-table>
 </div>
