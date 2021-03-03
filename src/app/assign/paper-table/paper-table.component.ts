@@ -8,9 +8,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {AssignService} from '../assign.service';
 import {Subscription} from 'rxjs';
 import {Assignment} from '../assign.model';
-import {VersionDialogContComponent} from '../version-dialog-cont/version-dialog-cont.component';
 import {filter} from 'rxjs/operators';
-import {Version} from '../version.model';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PaperDialogContComponent} from '../paper-dialog-cont/paper-dialog-cont.component';
 
@@ -20,24 +18,12 @@ import {PaperDialogContComponent} from '../paper-dialog-cont/paper-dialog-cont.c
   styleUrls: ['./paper-table.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed',
-        style({
-          height: '0px',
-          minHeight: '0',
-          visibility: 'hidden'
-        })
-      ),
-      state('expanded',
-        style({
-          height: '*',
-          visibility: 'visible'
-        })
-      ),
-      transition('expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      )
+      state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ])
-  ]
+  ],
 })
 export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
@@ -57,13 +43,8 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   private _papers: Paper[];
 
   set papers(p: Paper[]) {
-    const rows = [];
-    p.forEach(element => rows.push({detailRow: false, element}, {detailRow: true, element}));
-    this.dataSource.data = rows;
-  }
-
-  isExpansionDetailRow(i: number, row: any) {
-    return row.detailRow;
+    this._papers = p;
+    this.dataSource.data = p;
   }
 
   constructor(private readonly assignStore: AssignStore,
@@ -72,25 +53,20 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
     this.readSub = assignService.assignmentRead$.subscribe(
       a => {
         if (this.assignment.id === a.id && this._papers.find(paper => paper.status === 'NULL')) {
-          this.assignService.readPaper(a.id).subscribe(result => {
-            this.papers = [result];
-          });
+          this.assignService.readPaper(a.id).subscribe(result => this.papers = [result]);
         }
       }
     );
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.dataSource.filterPredicate = (data, filter) => {
-      const obj = data as unknown as {detailRow: boolean, element: Paper};
-      return obj.element.status.toLowerCase().includes(filter);
+    this.dataSource.filterPredicate = (data, filterString) => {
+      return data.status.toLowerCase().includes(filterString);
     };
   }
 
   ngAfterViewInit() {
     this.assignStore.papers$(this.assignment.id).subscribe(data => {
-      this._papers = data;
       this.papers = data;
     });
     this.dataSource.sort = this.sort;
@@ -113,10 +89,9 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         filter(value => (value as Paper) !== undefined)
       )
-      .subscribe(result => this.papers = this._papers.map(paper => {
-        if (paper.student.id === result.student.id) {
-          return result; } else { return paper; }
-    }));
+      .subscribe(newPaper => this.papers = this._papers.map(oldPaper => {
+        return oldPaper.student.id === newPaper.student.id ? newPaper : oldPaper;
+      }));
   }
 
   isRevisable(row: Paper) {

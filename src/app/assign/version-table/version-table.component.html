@@ -1,22 +1,22 @@
-<button *ngIf="!admin" (click)="addVersion()" >Carica paper</button>
+<button *ngIf="!admin" (click)="addVersion()" mat-raised-button color="primary">Carica paper</button>
 
 <div class="full-width-table mat-elevation-z8">
-  <mat-table [dataSource]="dataSource">
+  <mat-table [dataSource]="dataSource" matSort>
 
     <!-- Id Column -->
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
     </ng-container>
 
     <!-- Submission Column -->
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef>Submitted</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Submitted</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.date | date:'short'}} </mat-cell>
     </ng-container>
 
     <!-- Content Column -->
-    <ng-container matColumnDef="url">
+    <ng-container matColumnDef="contentUrl">
       <mat-header-cell *matHeaderCellDef>Content Url</mat-header-cell>
       <mat-cell *matCellDef="let row"> <a target="_blank" href="{{row.url}}"> Open </a></mat-cell>
     </ng-container>

@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Assignment} from '../assign.model';
 import {AssignService} from '../assign.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {AuthService} from '../../auth/auth.service';
-import {isAdmin, User} from '../../auth/user.model';
+import {User} from '../../auth/user.model';
 import {Observable, Subscription} from 'rxjs';
 import {AssignStore} from '../assign-store';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-assign-table',
@@ -14,37 +14,29 @@ import {AssignStore} from '../assign-store';
   styleUrls: ['./assign-table.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed',
-        style({
-          height: '0px',
-          minHeight: '0',
-          visibility: 'hidden'
-        })
-      ),
-      state('expanded',
-        style({
-          height: '*',
-          visibility: 'visible'
-        })
-      ),
-      transition('expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      )
+      state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ])
-  ]
+  ],
 })
-export class AssignTableComponent implements OnInit, OnDestroy {
+export class AssignTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() displayedColumns = ['id', 'creation', 'expiration', 'url'];
+  @Input() displayedColumns = ['id', 'creationDate', 'expiryDate', 'url'];
 
 
   dataSource: MatTableDataSource<Assignment> = new MatTableDataSource<Assignment>();
 
   // tslint:disable-next-line:variable-name
   private _assignments = [];
+
   @Input() user: User;
   @Input() admin: boolean;
-  sub: Subscription;
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  private sub: Subscription;
 
   assignments: Observable<Assignment[]>;
 
@@ -54,19 +46,17 @@ export class AssignTableComponent implements OnInit, OnDestroy {
               private readonly assignStore: AssignStore) {
     this.assignments = assignStore.assign$;
     this.sub = this.assignments.subscribe(next => {
-      const rows = [];
-      const ref = next !== null ? next : [];
-      ref.forEach(element => rows.push(element, {detailRow: true, element}));
       this._assignments = next;
-      this.dataSource.data = rows;
+      this.dataSource.data = next;
     });
   }
 
-  isExpansionDetailRow(i: number, row: any) {
-    return row.hasOwnProperty('detailRow');
+  ngOnInit(): void {
+
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   readPaper(row: Assignment) {

@@ -1,29 +1,30 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {AssignStore} from '../assign-store';
 import {Version} from '../version.model';
 import {Subscription} from 'rxjs';
-import {AssignService} from '../assign.service';
 import {Assignment} from '../assign.model';
-import {AssignDialogContComponent} from '../assign-dialog-cont/assign-dialog-cont.component';
 import {filter} from 'rxjs/operators';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {VersionDialogContComponent} from '../version-dialog-cont/version-dialog-cont.component';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-version-table',
   templateUrl: './version-table.component.html',
   styleUrls: ['./version-table.component.css']
 })
-export class VersionTableComponent implements OnInit, AfterViewInit {
+export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns: string[] = ['id', 'date', 'url'];
+  displayedColumns: string[] = ['id', 'date', 'contentUrl'];
   dataSource: MatTableDataSource<Version> = new MatTableDataSource<Version>();
 
   @Input() assignment: Assignment;
   @Input() studentName: string;
   @Input() admin: boolean;
+  @ViewChild(MatSort) sort: MatSort;
 
+  private subs: Subscription;
 
   constructor(private readonly assignStore: AssignStore,
               private readonly dialog: MatDialog) {  }
@@ -32,9 +33,14 @@ export class VersionTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.assignStore.version$(this.assignment.id, this.studentName).subscribe(data => {
+    this.subs = this.assignStore.version$(this.assignment.id, this.studentName).subscribe(data => {
       this.dataSource.data = data;
     });
+    this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
   addVersion() {
