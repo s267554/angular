@@ -12,6 +12,7 @@ import {switchMap} from 'rxjs/operators';
 export class FileuploadComponent implements OnInit {
 
   uploadForm: FormGroup;
+  canUpload = false;
   private readonly parentRoute: ActivatedRoute;
 
   constructor(private formBuilder: FormBuilder,
@@ -30,6 +31,7 @@ export class FileuploadComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file: File = event.target.files[0];
       this.uploadForm.get('profile').setValue(file);
+      this.canUpload = true;
     }
   }
 

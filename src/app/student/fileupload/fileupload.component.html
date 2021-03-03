@@ -5,7 +5,7 @@
       <input type="file" name="profile" (change)="onFileSelect($event)" />
     </div>
     <div>
-      <button type="submit">Upload</button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
     </div>
   </form>
 </div>
