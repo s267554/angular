@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
 import {User} from './user.model';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
 
   private timerSub: Subscription = null;
 
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly router: Router) {
   }
 
   register(request: any): Observable<any> {
@@ -43,6 +45,7 @@ export class AuthService {
   logout() {
     this.stopTimer();
     this._loginEvent$.next(null);
+    this.router.navigate(['home']);
   }
 
   getToken(): string | null {
