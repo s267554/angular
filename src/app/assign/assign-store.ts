@@ -19,7 +19,11 @@ export class AssignStore {
 
   constructor(private readonly assignService: AssignService,
               private readonly vlService: VlService) {
-    this.assignService.getAssignments(vlService.getCourse()).subscribe(as => this._assign$.next(as));
+    this.getAssignments();
+  }
+
+  getAssignments() {
+    this.assignService.getAssignments(this.vlService.getCourse()).subscribe(as => this._assign$.next(as));
   }
 
   addAssignment(assignment: Assignment) {

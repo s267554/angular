@@ -45,6 +45,7 @@ export class AssignTableComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private readonly assignService: AssignService,
               private readonly assignStore: AssignStore) {
     this.assignments = assignStore.assign$;
+    assignStore.getAssignments();
     this.sub = this.assignments.subscribe(next => {
       this._assignments = next;
       this.dataSource.data = next;
