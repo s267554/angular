@@ -29,10 +29,11 @@
           </mat-checkbox>
         </li>
       </ul>
+      <mat-error *ngIf="selection.isEmpty()">Need at least one owner</mat-error>
     </div>
   </form>
   <mat-dialog-actions>
-    <button [disabled]="!teamForm.form.valid"
+    <button [disabled]="!teamForm.form.valid || selection.isEmpty()"
             (click)="save()"
             mat-raised-button
             color="primary">
