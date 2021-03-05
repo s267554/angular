@@ -15,11 +15,24 @@ export class AssignService {
   private assignmentRead = new Subject<Assignment>();
   assignmentRead$ = this.assignmentRead.asObservable();
 
+  private assignmentExpand = new Subject<Assignment>();
+  assignmentExpand$ = this.assignmentExpand.asObservable();
+
+  private paperExpand = new Subject<Paper>();
+  paperExpand$ = this.paperExpand.asObservable();
 
   private readonly URL = 'api/courses/';
 
   readAssignment(assign: Assignment) {
     this.assignmentRead.next(assign);
+  }
+
+  expandAssignment(assign: Assignment) {
+    this.assignmentExpand.next(assign);
+  }
+
+  expandPaper(paper: Paper) {
+    this.paperExpand.next(paper);
   }
 
   createVersion(assignmentId: number, version: Version) {

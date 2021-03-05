@@ -69,4 +69,11 @@ export class AssignTableComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
+
+  expandRow(row: Assignment) {
+    this.expandedElement === row ? this.expandedElement = null : this.expandedElement = row;
+    if (this.expandedElement === row) {
+      this.assignService.expandAssignment(row);
+    }
+  }
 }

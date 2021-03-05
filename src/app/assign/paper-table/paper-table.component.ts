@@ -38,6 +38,10 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   expandedElement: any;
 
   readSub: Subscription;
+  expandSub: Subscription;
+  paperSub: Subscription;
+
+  loaded = false;
 
   // tslint:disable-next-line:variable-name
   private _papers: Paper[];
@@ -50,25 +54,32 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(private readonly assignStore: AssignStore,
               private assignService: AssignService,
               private readonly dialog: MatDialog) {
-    this.readSub = assignService.assignmentRead$.subscribe(
+  }
+
+  ngOnInit() {
+    this.readSub = this.assignService.assignmentRead$.subscribe(
       a => {
         if (this.assignment.id === a.id && this._papers.find(paper => paper.status === 'NULL')) {
           this.assignService.readPaper(a.id).subscribe(result => this.papers = [result]);
         }
       }
     );
-  }
-
-  ngOnInit() {
+    this.expandSub = this.assignService.assignmentExpand$.subscribe(
+      a => {
+        if (this.assignment.id === a.id && !this.loaded && this.paperSub === undefined) {
+          this.paperSub = this.assignStore.papers$(this.assignment.id).subscribe(data => {
+            this.papers = data;
+            this.loaded = true;
+          });
+        }
+      }
+    );
     this.dataSource.filterPredicate = (data, filterString) => {
       return data.status.toLowerCase().includes(filterString);
     };
   }
 
   ngAfterViewInit() {
-    this.assignStore.papers$(this.assignment.id).subscribe(data => {
-      this.papers = data;
-    });
     this.dataSource.sort = this.sort;
   }
 
@@ -78,6 +89,8 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.readSub.unsubscribe();
+    this.expandSub.unsubscribe();
+    this.paperSub?.unsubscribe();
   }
 
 
@@ -96,5 +109,12 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   isRevisable(row: Paper) {
     return row.status === 'CONSEGNATO';
+  }
+
+  expandRow(row: Paper) {
+    this.expandedElement === row ? this.expandedElement = null : this.expandedElement = row;
+    if (this.expandedElement === row) {
+      this.assignService.expandPaper(row);
+    }
   }
 }

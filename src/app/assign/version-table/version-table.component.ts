@@ -8,6 +8,7 @@ import {filter} from 'rxjs/operators';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {VersionDialogContComponent} from '../version-dialog-cont/version-dialog-cont.component';
 import {MatSort} from '@angular/material/sort';
+import {AssignService} from '../assign.service';
 
 @Component({
   selector: 'app-version-table',
@@ -24,23 +25,35 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() admin: boolean;
   @ViewChild(MatSort) sort: MatSort;
 
-  private subs: Subscription;
+  expandSub: Subscription;
+  paperSub: Subscription;
+
+  loaded = false;
 
   constructor(private readonly assignStore: AssignStore,
+              private readonly assignService: AssignService,
               private readonly dialog: MatDialog) {  }
 
   ngOnInit() {
+    this.expandSub = this.assignService.paperExpand$.subscribe(
+      p => {
+        if (this.assignment.id === p.assignmentId && this.studentName === p.student.id && !this.loaded && this.paperSub === undefined) {
+          this.paperSub = this.assignStore.version$(p.assignmentId, p.student.id).subscribe(data => {
+            this.dataSource.data = data;
+            this.loaded = true;
+          });
+        }
+      }
+    );
   }
 
   ngAfterViewInit() {
-    this.subs = this.assignStore.version$(this.assignment.id, this.studentName).subscribe(data => {
-      this.dataSource.data = data;
-    });
     this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.expandSub.unsubscribe();
+    this.paperSub?.unsubscribe();
   }
 
   addVersion() {
@@ -49,7 +62,7 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(VersionDialogContComponent, dialogConfig);
     dialogRef.afterClosed()
       .pipe(
-        filter(value => (value as Version) !== undefined)
+        filter(value => value as Version !== undefined)
       )
       .subscribe(result => this.dataSource.data = this.dataSource.data.concat(result));
   }

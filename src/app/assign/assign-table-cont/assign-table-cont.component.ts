@@ -34,6 +34,6 @@ export class AssignTableContComponent implements OnInit {
       .pipe(
         filter(value => (value as Assignment) !== undefined)
       )
-      .subscribe(result => {console.log(result); this.assignStore.addAssignment(result); });
+      .subscribe(result => this.assignStore.addAssignment(result));
   }
 }
