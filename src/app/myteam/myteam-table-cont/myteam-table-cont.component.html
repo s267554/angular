@@ -1,9 +1,9 @@
-<div class="table-container">
+<!-- render if current student has no active participation-->
+<div class="table-container" *ngIf="!activeParticipation">
   <div class="header-container">
     <h3>Crea un gruppo</h3>
   </div>
-  <app-student-table [students]="this.myTeamStore.myStudents$ | async"
-                     [columns]="['select', 'id', 'name', 'surname']"
+  <app-student-table [columns]="['select', 'id', 'name', 'surname']"
                      [actionName]="'Propose'"
                      (deleteAll)="proposeAll($event)">
   </app-student-table>
@@ -14,7 +14,6 @@
   </div>
   <app-myteam-table
     (action$)="action($event.teamName, $event.actionName)"
-    [myTeams]="myTeamStore.myTeams$ | async"
     [userId]="username">
   </app-myteam-table>
 </div>

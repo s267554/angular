@@ -3,6 +3,7 @@ import {Course} from './course.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {shareReplay, tap} from 'rxjs/operators';
+import {VlService} from '../vl.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,13 @@ export class CourseService {
   private readonly _courses$ = new BehaviorSubject<Course[]>([]);
   readonly courses$ = this._courses$.asObservable();
 
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly vlService: VlService) {
+  }
+
+  // need full Course object as VlService.getCourse returns string
+  getCourse(coursename: string): Course {
+    return this._courses$.getValue().find((c) => c.name === coursename);
   }
 
   getCourses(): Observable<Course[]> {
