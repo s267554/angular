@@ -1,16 +1,19 @@
-<app-team-resources
-  [totcpu]="totcpu$ | async"
-  [totram]="totram$ | async"
-  [totspace]="totspace$ | async"
-  [totvms]="totvms$ | async"
-  [totvmsactive]="totvmsactive$ | async"
-  [team]="team">
-</app-team-resources>
-<button *ngIf="isUser" (click)="createVM()" [disabled]="(totvms$ | async) >= team.maxVMs"> Crea VM</button>
-<app-vms-table [vms]="this.vms$ | async"
-               (selectVM$)="selectVM($event)"
-               (updateVM$)="updateVM($event)"
-               (powerVM$)="powerVM($event)"
-               (deleteVM$)="deleteVM($event)"
-               [displayedColumns]="columns">
-</app-vms-table>
+<h4 *ngIf="noTeam">You are not part of any team</h4>
+<div *ngIf="!noTeam">
+  <app-team-resources
+    [totcpu]="totcpu$ | async"
+    [totram]="totram$ | async"
+    [totspace]="totspace$ | async"
+    [totvms]="totvms$ | async"
+    [totvmsactive]="totvmsactive$ | async"
+    [team]="team">
+  </app-team-resources>
+  <button *ngIf="isUser" (click)="createVM()" [disabled]="(totvms$ | async) >= team.maxVMs"> Crea VM</button>
+  <app-vms-table [vms]="this.vms$ | async"
+                 (selectVM$)="selectVM($event)"
+                 (updateVM$)="updateVM($event)"
+                 (powerVM$)="powerVM($event)"
+                 (deleteVM$)="deleteVM($event)"
+                 [displayedColumns]="columns">
+  </app-vms-table>
+</div>

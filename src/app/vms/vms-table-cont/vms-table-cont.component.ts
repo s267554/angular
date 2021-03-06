@@ -24,6 +24,8 @@ export class VmsTableContComponent implements OnInit {
 
   @Input() team: Team;
 
+  noTeam = true;
+
   // tslint:disable-next-line:variable-name
   _vms$ = new BehaviorSubject<VirtualMachine[]>([]);
   readonly vms$ = this._vms$.asObservable();
@@ -51,11 +53,17 @@ export class VmsTableContComponent implements OnInit {
       const team = this.teamService.myTeam;
       if ( team != null) {
         this.teamName = team.name;
+        this.columns.push('action');
+        this.team = this.teamService.myTeam;
+        this.isUser = true;
       }
-      this.columns.push('action');
-      this.team = this.teamService.myTeam;
-      this.isUser = true;
+      else {
+        return;
+      }
     }
+
+    this.noTeam = false;
+
     if (this.teamName != null) {
       this.vlService.course$.pipe(
         switchMap(name => this.vmsService.getVms(name, this.teamName)),
