@@ -29,6 +29,7 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
   paperSub: Subscription;
 
   loaded = false;
+  empty = true;
 
   constructor(private readonly assignStore: AssignStore,
               private readonly assignService: AssignService,
@@ -41,6 +42,9 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
           this.paperSub = this.assignStore.version$(p.assignmentId, p.student.id).subscribe(data => {
             this.dataSource.data = data;
             this.loaded = true;
+            if (data.length > 0) {
+              this.empty = false;
+            }
           });
         }
       }

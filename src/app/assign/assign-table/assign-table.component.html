@@ -1,4 +1,4 @@
-<div class="full-width-table mat-elevation-z8">
+<div>
   <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
     <!-- Id Column -->
@@ -39,7 +39,6 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <h4>Papers</h4>
           <app-paper-table [admin]="admin" [assignment]="element"></app-paper-table>
         </div>
       </td>

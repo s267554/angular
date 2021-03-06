@@ -1,6 +1,8 @@
 <button *ngIf="!admin" (click)="addVersion()" mat-raised-button color="primary">Carica paper</button>
 
-<div class="full-width-table mat-elevation-z8">
+<h4 *ngIf="empty">No versions here</h4>
+
+<div *ngIf="!empty">
   <mat-table [dataSource]="dataSource" matSort>
 
     <!-- Id Column -->

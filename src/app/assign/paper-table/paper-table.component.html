@@ -1,4 +1,8 @@
-<mat-form-field *ngIf="admin">
+<mat-spinner *ngIf="!loaded"></mat-spinner>
+
+<h4 *ngIf="empty && loaded">No papers here</h4>
+
+<mat-form-field *ngIf="admin && !empty && loaded">
   <mat-label>Filter</mat-label>
   <mat-select (selectionChange)="applyFilter($event)" #input>
     <mat-option>Nessun filtro</mat-option>
@@ -8,7 +12,7 @@
   </mat-select>
 </mat-form-field>
 
-<div class="full-width-table mat-elevation-z8">
+<div *ngIf="!empty">
   <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
     <!-- ID Column -->
@@ -69,7 +73,6 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <h4>Versions</h4>
           <app-version-table #versionTable [assignment]="assignment" [studentName]="element.student.id" [admin]="admin"></app-version-table>
         </div>
       </td>

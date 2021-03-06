@@ -42,6 +42,7 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   paperSub: Subscription;
 
   loaded = false;
+  empty = true;
 
   // tslint:disable-next-line:variable-name
   private _papers: Paper[];
@@ -49,6 +50,9 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   set papers(p: Paper[]) {
     this._papers = p;
     this.dataSource.data = p;
+    if (p.length > 0) {
+      this.empty = false;
+    }
   }
 
   constructor(private readonly assignStore: AssignStore,
