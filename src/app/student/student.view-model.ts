@@ -140,8 +140,12 @@ function filter(list?: Student[] | null | undefined, query?: string | null | und
   if (list === null || list === undefined) {
     return students;
   }
-  list.forEach((s) => {
-    if (s.name.startsWith(query) || s.surname.startsWith(query) || s.id.startsWith(query)) {
+
+  // split queries sperated by space and see if they are contained within surname, name or id
+  const queries = query.split(' ');
+  list.forEach(s => {
+    const test = (s.name + s.id + s.surname).toLowerCase();
+    if (queries.find(q => test.includes(q))) {
       students.push(s);
     }
   });
