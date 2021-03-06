@@ -74,6 +74,7 @@ import { VersionDialogComponent } from './assign/version-dialog/version-dialog.c
 import { PaperDialogContComponent } from './assign/paper-dialog-cont/paper-dialog-cont.component';
 import { PaperDialogComponent } from './assign/paper-dialog/paper-dialog.component';
 import { FileuploadComponent } from './student/fileupload/fileupload.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import { FileuploadComponent } from './student/fileupload/fileupload.component';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     VlLoginDialogComponent,
