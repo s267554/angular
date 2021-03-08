@@ -8,8 +8,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 @Component({
   selector: 'app-vl-main',
   templateUrl: './vl-main.component.html',
-  styleUrls: ['./vl-main.component.css'],
-  providers: [CourseService]
+  styleUrls: ['./vl-main.component.css']
 })
 export class VlMainComponent implements OnInit, OnDestroy, AfterViewInit {
 
