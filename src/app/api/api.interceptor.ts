@@ -18,7 +18,8 @@ export class ApiInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // temp workaround for file upload that need multipart content type
-    if (!request.url.includes('enrollMany')) {
+    // TODO: match multipart request in a decent way
+    if (!request.url.includes('enrollMany') && !request.url.includes('image')) {
       return next.handle(request.clone({
         url: this.ROOT_URL + request.url,
         ...this.OPTIONS
