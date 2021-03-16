@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {User} from './auth/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,11 @@ export class VlService {
   uploadImage(formData: FormData): any {
     const url = 'images';
     return this.httpClient.post<any>(url, formData);
+  }
+
+  getUserProfile(userId: string): Observable<User> {
+    const url = 'api/users/' + userId;
+    return this.httpClient.get<User>(url);
   }
 
 }

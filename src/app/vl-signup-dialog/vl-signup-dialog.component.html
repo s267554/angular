@@ -1,0 +1,90 @@
+<h1 mat-dialog-title>Signup</h1>
+<mat-dialog-content>
+  <form #loginForm="ngForm" (keyup.enter)="loginForm.form.valid ? signup() : null">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input #nameModel="ngModel" matInput type="text" [(ngModel)]="name"
+             name="name" id="name" required>
+      <mat-error *ngIf="nameModel.invalid">Not a valid name</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Surname</mat-label>
+      <input #surnameModel="ngModel" matInput type="text" [(ngModel)]="surname"
+             name="surname" id="surname" required>
+      <mat-error *ngIf="surnameModel.invalid">Not a valid surname</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input #idModel="ngModel" matInput type="text" [(ngModel)]="id"
+             name="id" id="id" required>
+      <mat-error *ngIf="idModel.invalid">Not a valid id</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input #emailModel="ngModel" matInput type="email" [(ngModel)]="email"
+             name="email" id="email" required>
+      <mat-error *ngIf="emailModel.invalid">Not a valid email</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input #passwordModel="ngModel" matInput name="password" id="password"
+             required
+             [type]="hide ? 'password' : 'text'"
+             [(ngModel)]="password">
+      <button mat-icon-button matSuffix
+              type="button"
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordModel.invalid">Insert a valid password</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input #confirmModel="ngModel" matInput name="confirm" id="confirm"
+             required
+             [type]="hide ? 'password' : 'text'"
+             [(ngModel)]="confirm">
+      <button mat-icon-button matSuffix
+              type="button"
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div *ngIf="password !== confirm && confirmModel.valid">
+      Passwords must be equal!
+    </div>
+    <br>
+    <div>
+      <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
+        <div>
+          <input type="file" name="profile" (change)="onFileSelect($event)" />
+        </div>
+        <div>
+          <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
+        </div>
+      </form>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!loginForm.form.valid || password !== confirm"
+          (click)="signup()"
+          mat-raised-button
+          color="primary">
+    Login
+  </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+<div *ngIf="loginError !== ''">
+  <br>
+  <mat-error>{{loginError}}</mat-error>
+</div>

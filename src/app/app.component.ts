@@ -6,6 +6,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {VlService} from './vl.service';
 import {VlLoginDialogComponent} from './vl-login-dialog/vl-login-dialog.component';
+import {VlSignupDialogComponent} from './vl-signup-dialog/vl-signup-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  toggleSignup() {
+    this.dialog.open(VlSignupDialogComponent, new MatDialogConfig());
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((s) => {
       s.unsubscribe();
@@ -67,4 +72,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.vlService.toggleSidenav();
   }
 
+  toggleProfile() {
+    this.authService.toggleProfile();
+  }
 }

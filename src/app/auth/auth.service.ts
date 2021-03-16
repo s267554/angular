@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {retry, tap} from 'rxjs/operators';
 import {User} from './user.model';
 import {Router} from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {VlProfileDialogComponent} from '../vl-profile-dialog/vl-profile-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class AuthService {
   private timerSub: Subscription = null;
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private dialog: MatDialog) {
   }
 
   register(request: any): Observable<any> {
@@ -38,7 +41,7 @@ export class AuthService {
       tap((u) => {
         this.setupTimeout(u.expiry);
         this._loginEvent$.next(u);
-      })
+      }),
     );
   }
 
@@ -72,4 +75,9 @@ export class AuthService {
     });
   }
 
+  toggleProfile() {
+    const config = new MatDialogConfig();
+    config.data = this._loginEvent$.getValue();
+    this.dialog.open(VlProfileDialogComponent, config);
+  }
 }

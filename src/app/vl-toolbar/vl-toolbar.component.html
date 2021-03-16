@@ -4,6 +4,12 @@
   </button>
   <a class="title-text" (click)="titleClick($event)">Virtual Labs</a>
   <span class="fill-remaining-space"></span>
+  <button *ngIf="login" mat-button (click)="toggleProfile()">
+    My Profile
+  </button>
+  <button *ngIf="!login" mat-button (click)="toggleSignup()">
+    Signup
+  </button>
   <button mat-button (click)="toggleLogin()">
     {{login ? 'Logout' : 'Login'}}
   </button>

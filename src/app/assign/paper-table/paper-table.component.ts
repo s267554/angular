@@ -63,7 +63,7 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit() {
     this.readSub = this.assignService.assignmentRead$.subscribe(
       a => {
-        if (this.assignment.id === a.id && this._papers.find(paper => paper.status === 'NULL')) {
+        if (this.assignment.id === a.id && this._papers?.find(paper => paper.status === 'NULL')) {
           this.assignService.readPaper(a.id).subscribe(result => this.papers = [result]);
         }
       }
