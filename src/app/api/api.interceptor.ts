@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
-  private readonly ROOT_URL = 'http://localhost:8080/';
+  private readonly ROOT_URL = 'http://localhost:80/';
   private readonly OPTIONS = {
     responseType: 'json' as const,
     setHeaders: {
