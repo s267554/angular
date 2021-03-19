@@ -63,24 +63,18 @@
       Passwords must be equal!
     </div>
     <br>
-    <div>
-      <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
-        <div>
-          <input type="file" name="profile" (change)="onFileSelect($event)" />
-        </div>
-        <div>
-          <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
-        </div>
-      </form>
-    </div>
+    <h4>Upload Profile Photo</h4>
+    <form [formGroup]="uploadForm">
+      <input type="file" name="profile" (change)="onFileSelect($event)">
+    </form>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button [disabled]="!loginForm.form.valid || password !== confirm"
+  <button [disabled]="!loginForm.form.valid || password !== confirm || !canUpload"
           (click)="signup()"
           mat-raised-button
           color="primary">
-    Login
+    Signup
   </button>
   <button mat-raised-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>
