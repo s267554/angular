@@ -10,13 +10,18 @@
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.active ? 'ON' : 'OFF'}} </mat-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-icon *ngIf="row.active">power</mat-icon>
+        <mat-icon *ngIf="!row.active">power_off</mat-icon>
+      </mat-cell>
     </ng-container>
 
     <!-- Url Column -->
     <ng-container matColumnDef="url">
       <mat-header-cell *matHeaderCellDef>Url</mat-header-cell>
-      <mat-cell *matCellDef="let row"><a target="_blank" href="{{row.url}}">connect</a></mat-cell>
+      <mat-cell *matCellDef="let row">
+        <a target="_blank" href="{{row.url}}"><mat-icon>computer</mat-icon></a>
+      </mat-cell>
     </ng-container>
 
 
@@ -24,9 +29,15 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button (click)="updateVM(row)" [disabled]="!isOwner(row)" >edit</button>
-        <button (click)="powerVM(row)" [disabled]="!isOwner(row)" >power</button>
-        <button (click)="deleteVM(row)" [disabled]="!isOwner(row)" >delete</button>
+        <button (click)="updateVM(row)" [disabled]="!isOwner(row)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="powerVM(row)" [disabled]="!isOwner(row)" mat-icon-button>
+          <mat-icon>power_settings_new</mat-icon>
+        </button>
+        <button (click)="deleteVM(row)" [disabled]="!isOwner(row)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
