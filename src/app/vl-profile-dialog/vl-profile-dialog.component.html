@@ -1,24 +1,24 @@
 <h1 mat-dialog-title>My Profile</h1>
 <div mat-dialog-content>
   <mat-spinner *ngIf="loading"></mat-spinner>
-  <div *ngIf="!loading">
-    <img [src]="profile.photoUrl" alt="profile picture">
-    <ul>
-      <li>
-        Name: {{profile.name}}
-      </li>
-      <li>
-        Surname: {{profile.surname}}
-      </li>
-      <li>
-        Id: {{profile.username.split('@')[0]}}
-      </li>
-      <li>
-        Email: {{profile.username}}
-      </li>
-      <li>
-        Roles: {{data.roles.join(', ')}}
-      </li>
-    </ul>
+  <div *ngIf="!loading" class="container">
+      <img [src]="profile.photoUrl" alt="profile picture" class="propic">
+      <mat-list>
+        <mat-list-item>
+          {{profile.name}}
+        </mat-list-item>
+        <mat-list-item>
+          {{profile.surname}}
+        </mat-list-item>
+        <mat-list-item>
+          {{profile.username.split('@')[0]}}
+        </mat-list-item>
+        <mat-list-item>
+          {{profile.username}}
+        </mat-list-item>
+        <mat-list-item>
+          {{data.roles.join(', ')}}
+        </mat-list-item>
+      </mat-list>
   </div>
 </div>
