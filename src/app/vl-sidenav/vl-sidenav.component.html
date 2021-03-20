@@ -4,6 +4,9 @@
     <mat-icon>add</mat-icon>
   </button>
   <mat-nav-list>
+    <div *ngIf="courses.length < 1">
+      You are not enrolled in any course
+    </div>
     <mat-list-item class="list-item" *ngFor="let c of courses">
       <a (click)="toggleSidenav()" class="fill-remaining-space" matLine routerLink="./{{c.name}}/{{getRouterLink()}}">{{c.name}}</a>
       <button *ngIf="editable" (click)="update(c)" mat-icon-button>
