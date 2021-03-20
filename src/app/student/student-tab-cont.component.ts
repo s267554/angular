@@ -68,4 +68,10 @@ export class StudentTabContComponent implements OnInit, OnDestroy {
     );
   }
 
+  enrollMany(formData: any) {
+    this.subs.push(
+      this.studentViewModel.enrollMany(formData).subscribe()
+    );
+  }
+
 }

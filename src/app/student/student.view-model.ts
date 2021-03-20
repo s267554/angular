@@ -99,6 +99,26 @@ export class StudentViewModel {
     );
   }
 
+  enrollMany(formData: any): Observable<any> {
+    const courseName = this.courseName;
+    if (courseName === null) {
+      return EMPTY;
+    }
+
+    const newEnrolledList = this._enrolledStudents$.getValue();
+
+    this._enrolledStudents$.next(null);
+
+    return this.studentService.enrollManyStudents(courseName, formData).pipe(
+      tap(
+        (newStudents: Student[]) => {
+          newEnrolledList.push(...newStudents);
+          this._enrolledStudents$.next(newEnrolledList);
+        }
+      )
+    );
+  }
+
   dropOutAll(students: Student[]) {
 
     const courseName = this.courseName;

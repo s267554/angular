@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {StudentService} from '../student.service';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-fileupload',
@@ -14,6 +13,10 @@ export class FileuploadComponent implements OnInit {
   uploadForm: FormGroup;
   canUpload = false;
   private readonly parentRoute: ActivatedRoute;
+
+  // tslint:disable-next-line:variable-name
+  private readonly _enroll$ = new EventEmitter<any>();
+  @Output() readonly enroll$ = this._enroll$.asObservable();
 
   constructor(private formBuilder: FormBuilder,
               private readonly studentService: StudentService,
@@ -38,11 +41,7 @@ export class FileuploadComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('profile').value);
-    this.parentRoute.params.pipe(
-      switchMap((p) => {
-        return this.studentService.enrollManyStudents(p.courseName, formData);
-      })
-    ).subscribe();
+    this._enroll$.emit(formData);
   }
 
 }

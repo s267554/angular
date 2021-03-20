@@ -1,7 +1,7 @@
 <div class="table-container">
   <div class="header-container">
     <h3>Elenco studenti iscritti al corso</h3>
-    <app-fileupload></app-fileupload>
+    <app-fileupload (enroll$)="enrollMany($event)"></app-fileupload>
     <app-student-autocomplete [students]="searchResult"
                               (search$)="search($event)"
                               (add$)="enrollOne($event)">
