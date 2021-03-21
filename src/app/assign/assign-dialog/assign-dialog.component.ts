@@ -1,9 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {VirtualMachine} from '../../vms/virtual-machine';
 import {Assignment} from '../assign.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {switchMap} from 'rxjs/operators';
-import {VlService} from '../../vl.service';
 
 @Component({
   selector: 'app-assign-dialog',
@@ -13,28 +10,30 @@ import {VlService} from '../../vl.service';
 export class AssignDialogComponent implements OnInit {
 
 // tslint:disable-next-line:variable-name
-  private readonly _save$ = new EventEmitter<Assignment>();
+  private readonly _save$ = new EventEmitter<any>();
   @Output() readonly save$ = this._save$.asObservable();
 
   uploadForm: FormGroup;
   canUpload = false;
 
-  constructor(private formBuilder: FormBuilder,
-              private readonly vlSerivce: VlService) {
+  constructor(private formBuilder: FormBuilder) {
   }
 
   expiry: Date;
-
-  url: string;
 
   save() {
     const a: Assignment = {
       creationDate: this.expiry,
       expiryDate: this.expiry,
       id: 0,
-      contentUrl: this.url,
+      contentUrl: '',
     };
-    this._save$.emit(a);
+
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('profile').value);
+    formData.append('request', JSON.stringify(a));
+
+    this._save$.emit(formData);
   }
 
   onFileSelect(event) {
@@ -43,15 +42,6 @@ export class AssignDialogComponent implements OnInit {
       this.uploadForm.get('profile').setValue(file);
       this.canUpload = true;
     }
-  }
-
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('profile').value);
-
-    this.vlSerivce.uploadImage(formData).subscribe(link => {
-      this.url = link;
-    });
   }
 
   ngOnInit(): void {

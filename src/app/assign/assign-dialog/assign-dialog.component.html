@@ -10,29 +10,19 @@
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="expiryModel.invalid">Not a date</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Url</mat-label>
-        <input #urlModel="ngModel" matInput type="url" [(ngModel)]="url"
-               name="url" id="url" required disabled>
-        <mat-error *ngIf="urlModel.invalid">Not an url</mat-error>
-      </mat-form-field>
     </div>
   </form>
-  <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
-    <div>
-      <input type="file" name="profile" (change)="onFileSelect($event)" />
-    </div>
-    <div>
-      <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
-    </div>
+  <h4>Upload Assignment</h4>
+  <form [formGroup]="uploadForm">
+    <input type="file" name="profile" (change)="onFileSelect($event)">
   </form>
-  <mat-dialog-actions>
-    <button [disabled]="!assignForm.form.valid || url === undefined"
-            (click)="save()"
-            mat-raised-button
-            color="primary">
-      Save
-    </button>
-    <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
-  </mat-dialog-actions>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!assignForm.form.valid || !canUpload"
+          (click)="save()"
+          mat-raised-button
+          color="primary">
+    Upload
+  </button>
+  <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
+</mat-dialog-actions>

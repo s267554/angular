@@ -25,7 +25,7 @@ export class AssignDialogContComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  submit(assign: any) {
+  submit(assign: FormData) {
     let observable: Observable<any>;
     observable = this.assignService.addAssignment(this.vlService.getCourse(), assign);
     this.sub = observable.subscribe(

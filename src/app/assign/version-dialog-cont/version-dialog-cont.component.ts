@@ -30,9 +30,9 @@ export class VersionDialogContComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  submit(version: Version) {
+  submit(formData: FormData) {
     let observable: Observable<any>;
-    observable = this.assignService.createVersion(this.assignmentId, version);
+    observable = this.assignService.createVersion(this.assignmentId, formData);
     this.sub = observable.pipe(retry(3)).subscribe(
       (value) => {
         this.dialog.close(value);
