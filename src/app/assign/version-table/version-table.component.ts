@@ -71,4 +71,8 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(result => this.dataSource.data = this.dataSource.data.concat(result));
   }
 
+  isExpired(): boolean {
+    return new Date(this.assignment.expiryDate).getTime() < Date.now();
+  }
+
 }

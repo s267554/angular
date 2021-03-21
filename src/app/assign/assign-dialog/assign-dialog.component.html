@@ -4,7 +4,7 @@
     <div class="row-container">
       <mat-form-field>
         <mat-label>Expiration Date</mat-label>
-        <input matInput [matDatepicker]="picker" #expiryModel="ngModel" [(ngModel)]="expiry"
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" #expiryModel="ngModel" [(ngModel)]="expiry"
                name="expiry" id="expiry" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

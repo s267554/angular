@@ -44,6 +44,12 @@ export class AssignDialogComponent implements OnInit {
     }
   }
 
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date());
+    const today = new Date();
+    return day > today;
+  }
+
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
       profile: ['']
