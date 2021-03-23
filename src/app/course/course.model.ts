@@ -5,4 +5,11 @@ export interface Course {
   readonly max: number;
   readonly min: number;
   readonly enabled: boolean;
+  readonly virtualMachineModel: VMmodel;
+}
+
+export interface VMmodel {
+  id: number;
+  name: string;
+  url: string;
 }

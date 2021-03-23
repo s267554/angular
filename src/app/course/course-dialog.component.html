@@ -28,6 +28,28 @@
       </mat-form-field>
     </div>
     <mat-checkbox name="enabled" id="enabled" [(ngModel)]="enabled">Enable/disable course</mat-checkbox>
+    <h4>Select a VM model or create one</h4>
+    <mat-form-field>
+      <input matInput type="text" name="modelName" [(ngModel)]="modelName">
+    </mat-form-field>
+    <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
+      <div>
+        <input type="file" name="profile" (change)="onFileSelect($event)" />
+      </div>
+      <div>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Create</button>
+      </div>
+    </form>
+    <mat-form-field>
+      <mat-label>VM Model</mat-label>
+      <mat-select [(ngModel)]="model" name="model" required>
+        <mat-option *ngFor="let m of models" [value]="m">
+          {{m.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- put in a box -->
+    <img *ngIf="model" [src]="model.url" alt="img">
   </form>
   <mat-dialog-actions>
     <button [disabled]="!courseForm.form.valid"

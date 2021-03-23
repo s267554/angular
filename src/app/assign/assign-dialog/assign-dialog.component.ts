@@ -23,7 +23,10 @@ export class AssignDialogComponent implements OnInit {
 
   save() {
     const a: Assignment = {
+      // TODO: riguardare formato date
+      // @ts-ignore
       creationDate: this.expiry,
+      // @ts-ignore
       expiryDate: this.expiry,
       id: 0,
       contentUrl: '',
