@@ -1,7 +1,10 @@
-<div class="table-container">
+<div class="table-container" *ngIf="enabled; else notEnabled">
   <div class="header-container">
     <h3>Le mie VMs</h3>
   </div>
   <app-vms-table-cont>
   </app-vms-table-cont>
 </div>
+<ng-template #notEnabled>
+  <h3>Course is not enabled right now</h3>
+</ng-template>

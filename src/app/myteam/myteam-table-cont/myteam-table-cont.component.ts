@@ -67,7 +67,7 @@ export class MyTeamTableContComponent implements OnInit, OnDestroy {
 
   proposeAll($event: Student[]) {
     // check proposal members size within course range
-    const size = $event.length;
+    const size = $event.length + 1;
     const minus = this.myCourse.min - size;
     const plus = size - this.myCourse.max;
 
