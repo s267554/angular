@@ -32,13 +32,13 @@
       <mat-error *ngIf="selection.isEmpty()">Need at least one owner</mat-error>
     </div>
   </form>
-  <mat-dialog-actions>
-    <button [disabled]="!teamForm.form.valid || selection.isEmpty()"
-            (click)="save()"
-            mat-raised-button
-            color="primary">
-      Save
-    </button>
-    <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
-  </mat-dialog-actions>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!teamForm.form.valid || selection.isEmpty()"
+          (click)="save()"
+          mat-raised-button
+          color="primary">
+    Save
+  </button>
+  <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
+</mat-dialog-actions>

@@ -22,13 +22,13 @@
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
-  <mat-dialog-actions>
-    <button [disabled]="!teamForm.form.valid"
-            (click)="propose()"
-            mat-raised-button
-            color="primary">
-      Propose
-    </button>
-    <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
-  </mat-dialog-actions>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!teamForm.form.valid"
+          (click)="propose()"
+          mat-raised-button
+          color="primary">
+    Propose
+  </button>
+  <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
+</mat-dialog-actions>

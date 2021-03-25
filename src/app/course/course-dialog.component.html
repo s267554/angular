@@ -51,13 +51,13 @@
     <!-- put in a box -->
     <img *ngIf="model" [src]="model.url" alt="img">
   </form>
-  <mat-dialog-actions>
-    <button [disabled]="!courseForm.form.valid"
-            (click)="save()"
-            mat-raised-button
-            color="primary">
-      Save
-    </button>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
-  </mat-dialog-actions>
 </mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!courseForm.form.valid"
+          (click)="save()"
+          mat-raised-button
+          color="primary">
+    Save
+  </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
