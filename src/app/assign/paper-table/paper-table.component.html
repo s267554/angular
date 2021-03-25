@@ -64,7 +64,9 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row">
-        <button *ngIf="admin" (click)="revisePaper(row)" [disabled]="!isRevisable(row)" mat-raised-button color="primary">Revise Paper</button>
+        <button *ngIf="admin" (click)="revisePaper(row)" [disabled]="!isRevisable(row)" mat-icon-button>
+          <mat-icon>rate_review</mat-icon>
+        </button>
       </td>
     </ng-container>
 
