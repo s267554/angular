@@ -22,13 +22,13 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button (click)="element.isExpanded = !element.isExpanded">Dettagli</button>
-      <div *ngIf="!element.enabled">
-        <div *ngIf="!element.invalid && element.creator != _userId">
-          <button (click)="action(element.name, 'confirm')">Accetta</button>
-          <button (click)="action(element.name, 'reject')">Rifiuta</button>
+      <button mat-icon-button (click)="element.isExpanded = !element.isExpanded"><mat-icon>people</mat-icon></button>
+      <div *ngIf="!element.enabled && element != activeTeam">
+        <div *ngIf="!element.invalid && !element.confirmedIds.includes(_userId) && !activeTeam">
+          <button mat-icon-button (click)="action(element.name, 'confirm')"><mat-icon>check</mat-icon></button>
+          <button mat-icon-button (click)="action(element.name, 'reject')"><mat-icon>close</mat-icon></button>
         </div>
-        <button (click)="action(element.name, 'delete')">Elimina</button>
+        <button mat-icon-button (click)="action(element.name, 'delete')"><mat-icon>delete</mat-icon></button>
       </div>
     </mat-cell>
   </ng-container>
@@ -42,7 +42,7 @@
           <mat-list-item *ngFor="let student of element.members">
             <div mat-line>{{student.id}}</div>
             <div mat-line> {{student.name}} {{student.surname}}</div>
-            <div mat-line> {{element.confirmedIds.includes(student.id) ? 'accepted' : (element.rejectedIds.includes(student.id) ? 'rejected' : 'pending')}}</div>
+            <div mat-line> {{element.confirmedIds?.includes(student.id) ? 'accepted' : (element.rejectedIds?.includes(student.id) ? 'rejected' : 'pending')}}</div>
             <mat-divider></mat-divider>
           </mat-list-item>
         </mat-list>

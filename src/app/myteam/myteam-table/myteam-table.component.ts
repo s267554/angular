@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MyTeam} from '../myteam.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Team} from '../../team/team.model';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-myteam-table',
@@ -30,10 +31,6 @@ import {Team} from '../../team/team.model';
 })
 export class MyTeamTableComponent implements OnInit {
 
-  @Input() set userId(value: string) {
-    this._userId = value;
-  }
-
   // tslint:disable-next-line:variable-name
   private readonly _action$ = new EventEmitter<any>();
   @Output() readonly action$ = this._action$.asObservable();
@@ -41,34 +38,32 @@ export class MyTeamTableComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   _userId: string;
 
+  activeTeam: MyTeam;
+
   get myTeams(): MyTeam[] {
     return this._myTeams;
   }
 
-  @Input() set myTeams(myTeams: MyTeam[] | null) {
-    // fix this there is no need to add anything to the response
-    const rows = [];
-    const ref = myTeams !== null ? myTeams : [];
-    ref.forEach(element => {
+  set myTeams(myTeams: MyTeam[]) {
+    myTeams.forEach(element => {
       if (element.enabled || element.invalid) {
         element.expiryDate = '';
       }
       else {
         element.expiryDate = this.calcExpiration(element.expiryDate);
       }
-      rows.push(element);
-    }
-    );
-    this._myTeams = rows;
+    });
+    this._myTeams = myTeams;
   }
 
-  constructor() {
+  constructor(private readonly authService: AuthService) {
+    this._userId = this.authService.getUserId();
   }
 
   @Input() displayedColumns = ['name', 'creator', 'expiryDate', 'actions'];
 
   // tslint:disable-next-line:variable-name
-  private _myTeams = [];
+  _myTeams = [];
 
   ngOnInit(): void {
   }

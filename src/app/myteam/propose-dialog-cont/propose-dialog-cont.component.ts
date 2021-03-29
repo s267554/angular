@@ -34,7 +34,7 @@ export class ProposeDialogContComponent implements OnInit, OnDestroy {
 
   propose(proposal: Proposal) {
     this.sub = this.myTeamStore.proposeTeam(proposal).subscribe(
-      () => this.dialog.close()
+      result => this.dialog.close(result)
     );
   }
 

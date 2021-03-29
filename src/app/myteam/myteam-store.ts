@@ -14,10 +14,6 @@ import {Team} from '../team/team.model';
 })
 export class MyTeamStore {
 
-  // tslint:disable-next-line:variable-name
-  private readonly _update$ = new Subject<string>();
-  readonly update$ = this._update$.asObservable();
-
   readonly myTeams$: Observable<MyTeam[]>;
   readonly myStudents$: Observable<Student[]>;
 
@@ -25,12 +21,12 @@ export class MyTeamStore {
               private readonly vlService: VlService,
               private readonly authService: AuthService) {
 
-    this.myStudents$ = merge(this.vlService.course$, this.update$).pipe(
+    this.myStudents$ = this.vlService.course$.pipe(
       map(() => this.vlService.getCourse()),
       switchMap(name => this._myStudents(name))
     );
 
-    this.myTeams$ = merge(this.vlService.course$, this.update$).pipe(
+    this.myTeams$ = this.vlService.course$.pipe(
       map(() => this.vlService.getCourse()),
       switchMap(name => this._myTeams(name, authService.getUserId()))
     );
@@ -68,11 +64,7 @@ export class MyTeamStore {
     }
 
     return this.teamService.actionTeam(courseName, teamName, action).pipe(
-      executeIf(
-        () => courseName === this.vlService.getCourse(),
-        () => this._update$.next(teamName)
-      ),
-      shareReplay(1)
+      shareReplay()
     );
 
   }
