@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+}
+
+.propic {
+  width: 240px;
+  align-self: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}

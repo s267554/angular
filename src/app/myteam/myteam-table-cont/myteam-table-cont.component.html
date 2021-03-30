@@ -13,8 +13,7 @@
     <h3>I miei gruppi</h3>
   </div>
   <app-myteam-table
-    (action$)="action($event.teamName, $event.actionName)"
-    [userId]="username">
+    (action$)="action($event.teamName, $event.actionName)">
   </app-myteam-table>
 </div>
 

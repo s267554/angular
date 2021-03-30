@@ -17,6 +17,7 @@ export class VersionDialogContComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = null;
   assignmentId: number;
+  errorMsg: any;
 
   constructor(private readonly dialog: MatDialogRef<VersionDialogContComponent>,
               @Inject(MAT_DIALOG_DATA) readonly data: number,
@@ -30,15 +31,15 @@ export class VersionDialogContComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  submit(version: Version) {
+  submit(formData: FormData) {
     let observable: Observable<any>;
-    observable = this.assignService.createVersion(this.assignmentId, version);
+    observable = this.assignService.createVersion(this.assignmentId, formData);
     this.sub = observable.pipe(retry(3)).subscribe(
       (value) => {
         this.dialog.close(value);
       },
-      () => {
-        this.snackBar.open('Something went wrong');
+      (error) => {
+        this.errorMsg = error.error.message;
       }
     );
   }

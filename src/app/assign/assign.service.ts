@@ -35,9 +35,9 @@ export class AssignService {
     this.paperExpand.next(paper);
   }
 
-  createVersion(assignmentId: number, version: Version) {
+  createVersion(assignmentId: number, formData: FormData) {
     const url = 'api/assignments/' + assignmentId + '/papers/create';
-    return this.httpClient.post<Version>(url, version);
+    return this.httpClient.post<Version>(url, formData);
   }
 
   getAssignments(courseName: string): Observable<Assignment[]> {
@@ -60,9 +60,9 @@ export class AssignService {
     return this.httpClient.get<Paper>(url);
   }
 
-  addAssignment(courseName: string, assignment: Assignment): Observable<Assignment> {
+  addAssignment(courseName: string, formData: FormData): Observable<Assignment> {
     const url = 'api/courses/' + courseName + '/assignments';
-    return this.httpClient.post<Assignment>(url, assignment);
+    return this.httpClient.post<Assignment>(url, formData);
   }
 
   updatePaper(paper: Paper) {

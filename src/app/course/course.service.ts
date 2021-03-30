@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Course} from './course.model';
+import {Course, VMmodel} from './course.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {shareReplay, tap} from 'rxjs/operators';
+import {retry, shareReplay, tap} from 'rxjs/operators';
 import {VlService} from '../vl.service';
 
 @Injectable({
@@ -32,6 +32,20 @@ export class CourseService {
         this._courses$.next(c);
       }),
       shareReplay()
+    );
+  }
+
+  getVMmodels(): Observable<VMmodel[]> {
+    const vmUrl = 'api/vms/models';
+    return this.httpClient.get<VMmodel[]>(vmUrl).pipe(
+      retry(3)
+    );
+  }
+
+  createVMmodel(formData: FormData): Observable<VMmodel> {
+    const vmUrl = 'api/vms/models';
+    return this.httpClient.post<VMmodel>(vmUrl, formData).pipe(
+      retry(3)
     );
   }
 

@@ -14,6 +14,7 @@ import {AssignStore} from '../assign-store';
 export class AssignDialogContComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = null;
+  errorMsg: any;
 
   constructor(public dialog: MatDialogRef<AssignDialogContComponent>,
               private readonly assignService: AssignService,
@@ -25,15 +26,15 @@ export class AssignDialogContComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  submit(assign: any) {
+  submit(assign: FormData) {
     let observable: Observable<any>;
     observable = this.assignService.addAssignment(this.vlService.getCourse(), assign);
     this.sub = observable.subscribe(
       (value) => {
         this.dialog.close(value);
       },
-      () => {
-        this.snackBar.open('Something went wrong');
+      (error) => {
+        this.errorMsg = error.error.message;
       }
     );
   }

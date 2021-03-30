@@ -15,6 +15,7 @@ import {MyTeamService} from '../../myteam/myteam.service';
 export class VmDialogContComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = null;
+  errorMsg: string;
 
   constructor(private readonly dialog: MatDialogRef<VmDialogContComponent>,
               @Inject(MAT_DIALOG_DATA) readonly data: VirtualMachine | null,
@@ -38,8 +39,9 @@ export class VmDialogContComponent implements OnInit, OnDestroy {
       (value) => {
         this.dialog.close(value);
       },
-      () => {
-        this.snackBar.open('Something went wrong');
+      (error) => {
+        this.errorMsg = error.error.message;
+        // this.snackBar.open('Something went wrong');
       }
     );
   }

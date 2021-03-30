@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {AuthService} from '../auth/auth.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {VlService} from '../vl.service';
 
 @Component({
   selector: 'app-vl-signup-dialog',
@@ -14,8 +13,7 @@ export class VlSignupDialogComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private readonly dialogRef: MatDialogRef<VlSignupDialogComponent>,
-    private readonly authService: AuthService,
-    private readonly vlService: VlService
+    private readonly authService: AuthService
   ) {
 
   }
@@ -69,11 +67,5 @@ export class VlSignupDialogComponent implements OnInit {
       this.uploadForm.get('profile').setValue(file);
       this.canUpload = true;
     }
-  }
-
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('profile').value);
-
   }
 }

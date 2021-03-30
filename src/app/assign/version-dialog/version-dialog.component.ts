@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Version} from '../version.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {VlService} from '../../vl.service';
+import {Assignment} from '../assign.model';
 
 @Component({
   selector: 'app-version-dialog',
@@ -11,25 +12,27 @@ import {VlService} from '../../vl.service';
 export class VersionDialogComponent implements OnInit {
 
 // tslint:disable-next-line:variable-name
-  private readonly _save$ = new EventEmitter<Version>();
+  private readonly _save$ = new EventEmitter<any>();
   @Output() readonly save$ = this._save$.asObservable();
 
   uploadForm: FormGroup;
   canUpload = false;
 
-  constructor(private formBuilder: FormBuilder,
-              private readonly vlSerivce: VlService) {
+  constructor(private formBuilder: FormBuilder) {
   }
-
-  url: string;
 
   save() {
     const v: Version = {
       date: new Date(),
-      contentUrl: this.url,
+      contentUrl: '',
       id: 0
     };
-    this._save$.emit(v);
+
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('profile').value);
+    formData.append('request', JSON.stringify(v));
+
+    this._save$.emit(formData);
   }
 
   onFileSelect(event) {
@@ -38,15 +41,6 @@ export class VersionDialogComponent implements OnInit {
       this.uploadForm.get('profile').setValue(file);
       this.canUpload = true;
     }
-  }
-
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.uploadForm.get('profile').value);
-
-    this.vlSerivce.uploadImage(formData).subscribe(link => {
-      this.url = link;
-    });
   }
 
   ngOnInit(): void {

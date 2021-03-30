@@ -13,6 +13,10 @@ export class StudentTabComponent implements OnInit {
   @Output() readonly enrollOne$ = this._enrollOne$.asObservable();
 
   // tslint:disable-next-line:variable-name
+  private readonly _enrollMany$ = new EventEmitter<any>();
+  @Output() readonly enrollMany$ = this._enrollMany$.asObservable();
+
+  // tslint:disable-next-line:variable-name
   private readonly _dropOutAll$ = new EventEmitter<Student[]>();
   @Output() readonly dropOutAll$ = this._dropOutAll$.asObservable();
 
@@ -37,6 +41,10 @@ export class StudentTabComponent implements OnInit {
 
   enrollOne(student: Student) {
     this._enrollOne$.emit(student);
+  }
+
+  enrollMany(formdata: any) {
+    this._enrollMany$.emit(formdata);
   }
 
   search(query: string) {

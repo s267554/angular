@@ -1,4 +1,4 @@
-<button *ngIf="!admin" (click)="addVersion()" mat-raised-button color="primary">Carica paper</button>
+<button *ngIf="!admin" [disabled]="isExpired() || !paperEnabled" (click)="addVersion()" mat-raised-button color="primary">Carica paper</button>
 
 <h4 *ngIf="empty">No versions here</h4>
 
@@ -14,13 +14,13 @@
     <!-- Submission Column -->
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Submitted</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.date | date:'medium'}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.date | date:'dd MMM y'}} </mat-cell>
     </ng-container>
 
     <!-- Content Column -->
     <ng-container matColumnDef="contentUrl">
       <mat-header-cell *matHeaderCellDef>Content Url</mat-header-cell>
-      <mat-cell *matCellDef="let row"> <a target="_blank" href="{{row.url}}"> Open </a></mat-cell>
+      <mat-cell *matCellDef="let row"> <a target="_blank" href="{{row.contentUrl}}"> Open </a></mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

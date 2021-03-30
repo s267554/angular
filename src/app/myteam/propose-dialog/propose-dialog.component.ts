@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Team} from '../../team/team.model';
 import {Student} from '../../student/student.model';
 import {Proposal} from '../myteam.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-propose-dialog',
@@ -20,8 +22,10 @@ export class ProposeDialogComponent implements OnInit {
     this._students = students;
   }
 
-  teamName: string;
-  timeout: number;
+  proposeForm = new FormGroup({
+    name: new FormControl(''),
+    time: new FormControl(3600, [Validators.min(3600), Validators.required]),
+  });
 
   constructor() {
   }
@@ -33,8 +37,8 @@ export class ProposeDialogComponent implements OnInit {
     const list: string[] = [];
     this._students.forEach(s => list.push(s.id));
     const proposal: Proposal = {
-      name: this.teamName,
-      timeout: this.timeout,
+      name: this.proposeForm.get('name').value,
+      timeout: this.proposeForm.get('time').value,
       ids: list
     };
     this._propose$.emit(proposal);

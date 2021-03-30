@@ -1,5 +1,6 @@
 <app-student-tab (search$)="search($event)"
                  (enrollOne$)="enrollOne($event)"
+                 (enrollMany$)="enrollMany($event)"
                  (dropOutAll$)="dropOutAll($event)"
                  [searchResult]="studentViewModel.search$ | async"
                  [enrolled]="studentViewModel.enrolledStudents$ | async">

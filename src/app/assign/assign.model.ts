@@ -1,6 +1,6 @@
 export interface Assignment {
   id: number;
-  creationDate: Date;
-  expiryDate: Date;
+  creationDate: string;
+  expiryDate: string;
   contentUrl: string;
 }
