@@ -24,7 +24,7 @@ export class ProposeDialogComponent implements OnInit {
 
   proposeForm = new FormGroup({
     name: new FormControl(''),
-    time: new FormControl(0, [Validators.min(3600), Validators.required]),
+    time: new FormControl(3600, [Validators.min(3600), Validators.required]),
   });
 
   constructor() {

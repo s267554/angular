@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {AssignStore} from '../assign-store';
 import {Version} from '../version.model';
 import {Subscription} from 'rxjs';
@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {VersionDialogContComponent} from '../version-dialog-cont/version-dialog-cont.component';
 import {MatSort} from '@angular/material/sort';
 import {AssignService} from '../assign.service';
+import {Paper} from '../paper.model';
 
 @Component({
   selector: 'app-version-table',
@@ -23,10 +24,13 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() assignment: Assignment;
   @Input() studentName: string;
   @Input() admin: boolean;
+  @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
 
   expandSub: Subscription;
   paperSub: Subscription;
+
+  paperEnabled = false;
 
   loaded = false;
   empty = true;
@@ -39,6 +43,7 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.expandSub = this.assignService.paperExpand$.subscribe(
       p => {
         if (this.assignment.id === p.assignmentId && this.studentName === p.student.id && !this.loaded && this.paperSub === undefined) {
+          this.paperEnabled = p.enabled;
           this.paperSub = this.assignStore.version$(p.assignmentId, p.student.id).subscribe(data => {
             this.dataSource.data = data;
             this.loaded = true;
@@ -68,7 +73,10 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(
         filter(value => value as Version !== undefined)
       )
-      .subscribe(result => this.dataSource.data = this.dataSource.data.concat(result));
+      .subscribe(result => {
+        this.dataSource.data.push(result);
+        this.table.renderRows();
+      });
   }
 
   isExpired(): boolean {

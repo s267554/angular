@@ -16,6 +16,8 @@ export class ProposeDialogContComponent implements OnInit, OnDestroy {
 
 // tslint:disable-next-line:variable-name
   private _sub: Subscription = null;
+  errorMsg: string
+
   private set sub(sub: Subscription | null) {
     if (this._sub !== null) {
       this._sub.unsubscribe();
@@ -34,7 +36,8 @@ export class ProposeDialogContComponent implements OnInit, OnDestroy {
 
   propose(proposal: Proposal) {
     this.sub = this.myTeamStore.proposeTeam(proposal).subscribe(
-      result => this.dialog.close(result)
+      result => this.dialog.close(result),
+      error => this.errorMsg = error.error.message
     );
   }
 

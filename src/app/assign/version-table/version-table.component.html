@@ -1,4 +1,4 @@
-<button *ngIf="!admin" [disabled]="isExpired()" (click)="addVersion()" mat-raised-button color="primary">Carica paper</button>
+<button *ngIf="!admin" [disabled]="isExpired() || !paperEnabled" (click)="addVersion()" mat-raised-button color="primary">Carica paper</button>
 
 <h4 *ngIf="empty">No versions here</h4>
 

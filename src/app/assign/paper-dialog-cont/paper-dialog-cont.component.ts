@@ -15,6 +15,7 @@ import {Paper} from '../paper.model';
 export class PaperDialogContComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = null;
+  errorMsg: any;
 
   constructor(private readonly dialog: MatDialogRef<PaperDialogContComponent>,
               @Inject(MAT_DIALOG_DATA) readonly data: Paper,
@@ -34,8 +35,8 @@ export class PaperDialogContComponent implements OnInit, OnDestroy {
       (value) => {
         this.dialog.close(value);
       },
-      () => {
-        this.snackBar.open('Something went wrong');
+      (error) => {
+        this.errorMsg = error.error.message;
       }
     );
   }

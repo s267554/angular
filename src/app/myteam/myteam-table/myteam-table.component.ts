@@ -46,7 +46,7 @@ export class MyTeamTableComponent implements OnInit {
 
   set myTeams(myTeams: MyTeam[]) {
     myTeams.forEach(element => {
-      if (element.enabled || element.invalid) {
+      if (element.enabled || element.invalid || element === this.activeTeam) {
         element.expiryDate = '';
       }
       else {

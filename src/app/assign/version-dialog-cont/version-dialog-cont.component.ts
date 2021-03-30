@@ -17,6 +17,7 @@ export class VersionDialogContComponent implements OnInit, OnDestroy {
 
   private sub: Subscription = null;
   assignmentId: number;
+  errorMsg: any;
 
   constructor(private readonly dialog: MatDialogRef<VersionDialogContComponent>,
               @Inject(MAT_DIALOG_DATA) readonly data: number,
@@ -37,8 +38,8 @@ export class VersionDialogContComponent implements OnInit, OnDestroy {
       (value) => {
         this.dialog.close(value);
       },
-      () => {
-        this.snackBar.open('Something went wrong');
+      (error) => {
+        this.errorMsg = error.error.message;
       }
     );
   }

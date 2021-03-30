@@ -13,6 +13,8 @@ export class TeamDialogContComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:variable-name
   private _sub: Subscription = null;
+  errorMsg: string;
+
   private set sub(sub: Subscription | null) {
     if (this._sub !== null) {
       this._sub.unsubscribe();
@@ -31,7 +33,8 @@ export class TeamDialogContComponent implements OnInit, OnDestroy {
 
   update(team: Team) {
     this.sub = this.teamStore.updateTeam(team).subscribe(
-      () => this.dialog.close()
+      () => this.dialog.close(),
+      error => this.errorMsg = error.error.message
     );
   }
 

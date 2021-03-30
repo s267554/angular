@@ -24,7 +24,7 @@
     <mat-cell *matCellDef="let element">
       <button mat-icon-button (click)="element.isExpanded = !element.isExpanded"><mat-icon>people</mat-icon></button>
       <div *ngIf="!element.enabled && element != activeTeam">
-        <div *ngIf="!element.invalid && !element.confirmedIds.includes(_userId) && !activeTeam">
+        <div *ngIf="!element.invalid && !element.confirmedIds.includes(_userId) && !activeTeam && !element.expiryDate?.includes('ago')">
           <button mat-icon-button (click)="action(element.name, 'confirm')"><mat-icon>check</mat-icon></button>
           <button mat-icon-button (click)="action(element.name, 'reject')"><mat-icon>close</mat-icon></button>
         </div>
