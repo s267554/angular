@@ -1,17 +1,17 @@
 <h1 mat-dialog-title>Propose Team</h1>
 <mat-dialog-content>
-  <form #teamForm="ngForm">
-    <mat-form-field class="fit-size-input" appearance="legacy">
-      <mat-label>Name</mat-label>
-      <input #nameModel="ngModel" matInput type="text" [(ngModel)]="teamName"
-             name="name" id="name" required>
-      <mat-error *ngIf="nameModel.invalid">Not a name</mat-error>
+  <form [formGroup]="proposeForm">
+    <mat-form-field>
+      <mat-label>
+        Team Name:
+      </mat-label>
+        <input matInput type="text" formControlName="name" required>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Timeout</mat-label>
-      <input #timeoutModel="ngModel" matInput type="number" [(ngModel)]="timeout"
-             name="timeout" id="timeout" required>
-      <mat-error *ngIf="timeoutModel.invalid">Not a number</mat-error>
+      <mat-label>
+        Timeout in seconds:
+      </mat-label>
+        <input matInput type="number" formControlName="time" required>
     </mat-form-field>
   </form>
   <p>Current size: {{_students.length + 1}}</p>
@@ -24,11 +24,6 @@
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button [disabled]="!teamForm.form.valid"
-          (click)="propose()"
-          mat-raised-button
-          color="primary">
-    Propose
-  </button>
+  <button mat-raised-button color="primary" type="submit" (click)="propose()" [disabled]="!proposeForm.valid">Propose</button>
   <button mat-raised-button mat-dialog-close [matDialogClose]="undefined">Cancel</button>
 </mat-dialog-actions>
