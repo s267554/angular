@@ -1,4 +1,4 @@
-<mat-table [dataSource]="myTeams" multiTemplateDataRows>
+<mat-table [dataSource]="myTeams" class="mat-elevation-z8" multiTemplateDataRows>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
@@ -54,7 +54,6 @@
   <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
 
   <mat-row *matRowDef="let element; columns: displayedColumns;"
-           matRipple
            class="element-row"></mat-row>
 
   <!-- Extra row to show detail content column -->

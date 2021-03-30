@@ -8,8 +8,8 @@
     [totvmsactive]="totvmsactive$ | async"
     [team]="team">
   </app-team-resources>
-  <button *ngIf="isUser" (click)="createVM()" [disabled]="(totvms$ | async) >= team.maxVMs" mat-fab color="primary">
-    <mat-icon>add</mat-icon>
+  <button *ngIf="isUser" mat-raised-button color="primary" (click)="createVM()" [disabled]="(totvms$ | async) >= team.maxVMs">
+    Crea VM
   </button>
   <app-vms-table [vms]="this.vms$ | async"
                  (selectVM$)="selectVM($event)"
