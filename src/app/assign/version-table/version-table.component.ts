@@ -74,7 +74,7 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
         filter(value => value as Version !== undefined)
       )
       .subscribe(result => {
-        this.dataSource.data.push(result);
+        this.dataSource.data = this.dataSource.data.concat(result);
         this.table.renderRows();
       });
   }
