@@ -1,35 +1,35 @@
 <h1 mat-dialog-title>Signup</h1>
 <mat-dialog-content>
   <form #loginForm="ngForm" (keyup.enter)="loginForm.form.valid ? signup() : null">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input #nameModel="ngModel" matInput type="text" [(ngModel)]="name"
-             name="name" id="name" required>
-      <mat-error *ngIf="nameModel.invalid">Not a valid name</mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Surname</mat-label>
-      <input #surnameModel="ngModel" matInput type="text" [(ngModel)]="surname"
-             name="surname" id="surname" required>
-      <mat-error *ngIf="surnameModel.invalid">Not a valid surname</mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
+    <div class="row-container">
+      <mat-form-field class="left-container">
+        <mat-label>Name</mat-label>
+        <input #nameModel="ngModel" matInput type="text" [(ngModel)]="name"
+               name="name" id="name" required>
+        <mat-error *ngIf="nameModel.invalid">Not a valid name</mat-error>
+      </mat-form-field>
+      <mat-form-field class="right-container">
+        <mat-label>Surname</mat-label>
+        <input #surnameModel="ngModel" matInput type="text" [(ngModel)]="surname"
+               name="surname" id="surname" required>
+        <mat-error *ngIf="surnameModel.invalid">Not a valid surname</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="fit-size-input">
       <mat-label>Id</mat-label>
       <input #idModel="ngModel" matInput type="text" [(ngModel)]="id"
              name="id" id="id" required>
       <mat-error *ngIf="idModel.invalid">Not a valid id</mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="fit-size-input">
       <mat-label>Email</mat-label>
       <input #emailModel="ngModel" matInput type="email" [(ngModel)]="email"
              name="email" id="email" required>
       <mat-error *ngIf="emailModel.invalid">Not a valid email</mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="fit-size-input">
       <mat-label>Password</mat-label>
       <input #passwordModel="ngModel" matInput name="password" id="password"
              required
@@ -45,7 +45,7 @@
       <mat-error *ngIf="passwordModel.invalid">Insert a valid password</mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="fit-size-input">
       <mat-label>Confirm Password</mat-label>
       <input #confirmModel="ngModel" matInput name="confirm" id="confirm"
              required

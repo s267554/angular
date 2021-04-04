@@ -1,11 +1,8 @@
 <div>
   <h4>Inserisci studenti da file</h4>
-  <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
-    <div>
-      <input type="file" name="profile" (change)="onFileSelect($event)" />
-    </div>
-    <div>
-      <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
-    </div>
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <input class="row-button" type="file" name="profile" (change)="onFileSelect($event)"/>
+    <br>
+    <button class="row-button" type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
   </form>
 </div>
