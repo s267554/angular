@@ -65,7 +65,17 @@
     <br>
     <h4>Upload Profile Photo</h4>
     <form [formGroup]="uploadForm">
-      <input type="file" name="profile" (change)="onFileSelect($event)">
+      <input type="file" class="file-input" name="profile"
+             (change)="onFileSelect($event)" #fileUpload>
+
+      <div class="file-upload">
+        <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+
+        {{uploadForm.get('profile').value.name || "No file uploaded yet."}}
+      </div>
     </form>
   </form>
 </mat-dialog-content>
