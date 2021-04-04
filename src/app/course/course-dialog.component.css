@@ -5,7 +5,7 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+
 }
 
 .row-container {
@@ -21,5 +21,21 @@
 
 .min-container {
   width: 100%;
+  margin-right: 10px;
+}
+
+#enabled {
+  margin-top: 10px;
+}
+
+
+.file-input {
+  display: none;
+  align-self: center;
+}
+
+.upload-btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-right: 10px;
 }
