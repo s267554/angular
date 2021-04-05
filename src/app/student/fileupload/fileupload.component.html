@@ -1,11 +1,18 @@
 <div>
   <h4>Inserisci studenti da file</h4>
-  <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
-    <div>
-      <input type="file" name="profile" (change)="onFileSelect($event)" />
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <input type="file" class="file-input" name="profile"
+           (change)="onFileSelect($event)" #fileUpload>
+
+    <div class="file-upload">
+      <button mat-mini-fab color="primary" class="upload-btn"
+              (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+
+      {{uploadForm.get('profile').value.name || "No file uploaded yet."}}
     </div>
-    <div>
-      <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
-    </div>
+
+    <button class="row-button" type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Upload</button>
   </form>
 </div>
