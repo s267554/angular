@@ -5,7 +5,8 @@
                             (add$)="putInCharge($event)">
   </app-student-autocomplete>
   <app-student-table [students]="professorViewModel.inChargeProfessors$ | async"
-                     (deleteAll)="discharge($event)">
+                     (deleteAll)="discharge($event)"
+                     [columns]="['select', 'id', 'name', 'surname']">
   </app-student-table>
   <br>
   <mat-error>{{errorMsg}}</mat-error>
