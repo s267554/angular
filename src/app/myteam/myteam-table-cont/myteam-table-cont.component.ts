@@ -52,6 +52,7 @@ export class MyTeamTableContComponent implements AfterViewInit, OnDestroy {
           this.activeParticipation = true;
       }
       else {
+        this.activeParticipation = false;
         this.studentSub = this.myTeamStore.myStudents$.subscribe(studs => {
           this.studentTable.students = studs;
         });
