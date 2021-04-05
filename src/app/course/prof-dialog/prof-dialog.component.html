@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Edit Professors in charge</h1>
+<mat-dialog-content>
+  <app-student-autocomplete [students]="professorViewModel.search$ | async"
+                            (search$)="search($event)"
+                            (add$)="putInCharge($event)">
+  </app-student-autocomplete>
+  <app-student-table [students]="professorViewModel.inChargeProfessors$ | async"
+                     (deleteAll)="discharge($event)">
+  </app-student-table>
+  <br>
+  <mat-error>{{errorMsg}}</mat-error>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="!professorViewModel.checkSize()" (click)="save()"
+          mat-raised-button
+          color="primary">
+    Save
+  </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

@@ -78,6 +78,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { VlSignupDialogComponent } from './vl-signup-dialog/vl-signup-dialog.component';
 import { VlProfileDialogComponent } from './vl-profile-dialog/vl-profile-dialog.component';
 import { VmsTabComponent } from './vms/vms-tab/vms-tab.component';
+import { ProfDialogComponent } from './course/prof-dialog/prof-dialog.component';
 
 @NgModule({
   declarations: [
@@ -129,7 +130,8 @@ import { VmsTabComponent } from './vms/vms-tab/vms-tab.component';
     FileuploadComponent,
     VlSignupDialogComponent,
     VlProfileDialogComponent,
-    VmsTabComponent
+    VmsTabComponent,
+    ProfDialogComponent
   ],
   imports: [
     BrowserModule,

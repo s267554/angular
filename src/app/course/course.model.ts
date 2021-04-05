@@ -6,6 +6,7 @@ export interface Course {
   readonly min: number;
   readonly enabled: boolean;
   readonly virtualMachineModel: VMmodel;
+  professorsIds: string[];
 }
 
 export interface VMmodel {

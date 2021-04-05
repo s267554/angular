@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {retry, shareReplay, tap} from 'rxjs/operators';
 import {VlService} from '../vl.service';
+import {Student} from '../student/student.model';
 
 @Injectable({
   providedIn: 'root'
@@ -114,4 +115,17 @@ export class CourseService {
     );
   }
 
+  getInChargeProfessors(courseName: string) {
+    const url = this.URL + courseName + '/inCharge';
+    return this.httpClient.get<Student[]>(url).pipe(
+      shareReplay()
+    );
+  }
+
+  getNotInChargeProfessors(courseName: string) {
+    const url = this.URL + courseName + '/notInCharge';
+    return this.httpClient.get<Student[]>(url).pipe(
+      shareReplay()
+    );
+  }
 }
