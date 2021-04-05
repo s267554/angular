@@ -23,6 +23,10 @@ export class VlSidenavComponent implements OnInit {
   private readonly _update$ = new EventEmitter<Course>();
   @Output() readonly update$ = this._update$.asObservable();
 
+  // tslint:disable-next-line:variable-name
+  private readonly _inCharge$ = new EventEmitter<Course>();
+  @Output() readonly inCharge$ = this._inCharge$.asObservable();
+
   @Input() courses: Course[] = [];
 
   @Input() set user(user: User | null) {
@@ -65,4 +69,7 @@ export class VlSidenavComponent implements OnInit {
     }
   }
 
+  inCharge(c: Course) {
+    this._inCharge$.emit(c);
+  }
 }

@@ -84,7 +84,8 @@ export class CourseDialogComponent implements OnInit {
       enabled: this.enabled,
       max: this.max,
       min: this.min,
-      virtualMachineModel: this.model
+      virtualMachineModel: this.model,
+      professorsIds: []
     };
     this._save$.emit(course);
   }

@@ -27,20 +27,7 @@
         <mat-error *ngIf="maxModel.invalid">Not a number</mat-error>
       </mat-form-field>
     </div>
-    <mat-checkbox name="enabled" id="enabled" [(ngModel)]="enabled">Enable/disable course</mat-checkbox>
-    <h4>Select a VM model or create one</h4>
-    <mat-form-field>
-      <input matInput type="text" name="modelName" [(ngModel)]="modelName">
-    </mat-form-field>
-    <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
-      <div>
-        <input type="file" name="profile" (change)="onFileSelect($event)" />
-      </div>
-      <div>
-        <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Create</button>
-      </div>
-    </form>
-    <mat-form-field>
+    <mat-form-field class="fit-size-input">
       <mat-label>VM Model</mat-label>
       <mat-select [(ngModel)]="model" name="model" required>
         <mat-option *ngFor="let m of models" [value]="m">
@@ -48,6 +35,26 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-checkbox name="enabled" id="enabled" [(ngModel)]="enabled">Enable/disable course</mat-checkbox>
+    <h4>Create VM Model</h4>
+    <mat-form-field class="fit-size-input">
+      <mat-label>VM Model Name</mat-label>
+      <input matInput type="text" name="modelName" [(ngModel)]="modelName">
+    </mat-form-field>
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+      <input type="file" class="file-input" name="profile"
+             (change)="onFileSelect($event)" #fileUpload>
+
+      <div class="file-upload">
+        <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+
+        {{uploadForm.get('profile').value.name || "No file uploaded yet."}}
+      </div>
+      <button type="submit" mat-raised-button color="primary" [disabled]="!canUpload">Create</button>
+    </form>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

@@ -1,5 +1,5 @@
-<!-- render if current student has no active participation-->
-<div class="table-container" *ngIf="!activeParticipation">
+<!-- show if current student has no active participation-->
+<div class="table-container" [hidden]="activeParticipation">
   <div class="header-container">
     <h3>Crea un gruppo</h3>
   </div>

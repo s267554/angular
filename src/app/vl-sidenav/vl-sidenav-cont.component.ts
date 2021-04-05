@@ -6,6 +6,7 @@ import {Course} from '../course/course.model';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {CourseDialogContComponent} from '../course/course-dialog-cont.component';
+import {ProfDialogComponent} from '../course/prof-dialog/prof-dialog.component';
 
 @Component({
   selector: 'app-vl-sidenav-cont',
@@ -16,7 +17,7 @@ export class VlSidenavContComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  private dialogRef: MatDialogRef<CourseDialogContComponent>;
+  private dialogRef: MatDialogRef<any>;
 
   constructor(private readonly dialog: MatDialog,
               private readonly snackBar: MatSnackBar,
@@ -61,4 +62,9 @@ export class VlSidenavContComponent implements OnInit, OnDestroy {
     this.dialogRef = this.dialog.open(CourseDialogContComponent, dialogConfig);
   }
 
+  inChargeCourse(course: Course) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = course;
+    this.dialogRef = this.dialog.open(ProfDialogComponent, dialogConfig);
+  }
 }
