@@ -76,6 +76,7 @@ export class VersionTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(result => {
         this.dataSource.data = this.dataSource.data.concat(result);
         this.table.renderRows();
+        this.assignService.submitPaper(this.assignment.id);
       });
   }
 

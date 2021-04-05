@@ -21,6 +21,9 @@ export class AssignService {
   private paperExpand = new Subject<Paper>();
   paperExpand$ = this.paperExpand.asObservable();
 
+  private paperSubmit = new Subject<number>();
+  paperSubmit$ = this.paperSubmit.asObservable();
+
   private readonly URL = 'api/courses/';
 
   readAssignment(assign: Assignment) {
@@ -33,6 +36,10 @@ export class AssignService {
 
   expandPaper(paper: Paper) {
     this.paperExpand.next(paper);
+  }
+
+  submitPaper(assignId: number) {
+    this.paperSubmit.next(assignId);
   }
 
   createVersion(assignmentId: number, formData: FormData) {

@@ -40,12 +40,13 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
   readSub: Subscription;
   expandSub: Subscription;
   paperSub: Subscription;
+  submitSub: Subscription;
 
   loaded = false;
   empty = true;
 
   // tslint:disable-next-line:variable-name
-  private _papers: Paper[];
+  private _papers: Paper[] = [];
 
   set papers(p: Paper[]) {
     this._papers = p;
@@ -75,6 +76,14 @@ export class PaperTableComponent implements AfterViewInit, OnInit, OnDestroy {
             this.papers = data;
             this.loaded = true;
           });
+        }
+      }
+    );
+    this.submitSub = this.assignService.paperSubmit$.subscribe(
+      assignId => {
+        if (assignId === this.assignment.id) {
+          // tanto succede solo da studente quando ho solo un paper per assignment
+          this._papers.forEach(p => p.status = 'CONSEGNATO');
         }
       }
     );
